@@ -63,6 +63,20 @@
 	"content": "项目 "
 },
 {
+	"uri": "http://example.org/cpp/",
+	"title": "CPP",
+	"tags": [],
+	"description": "",
+	"content": "C++ "
+},
+{
+	"uri": "http://example.org/cpp/basic/",
+	"title": "CPP基础",
+	"tags": [],
+	"description": "",
+	"content": "C++ "
+},
+{
 	"uri": "http://example.org/bigdata/hadoop/",
 	"title": "Hadoop",
 	"tags": [],
