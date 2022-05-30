@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+
+    <title>Hadoop :: 刘顿的博客</title>
+
+    
+    <link href="/css/nucleus.css?1653908280" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1653908280" rel="stylesheet">
+    <link href="/css/hybrid.css?1653908280" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1653908280" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1653908280" rel="stylesheet">
+    <link href="/css/auto-complete.css?1653908280" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1653908280" rel="stylesheet">
+    <link href="/css/theme.css?1653908280" rel="stylesheet">
+    <link href="/css/tabs.css?1653908280" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1653908280" rel="stylesheet">
+    
+    <link href="/css/theme-blue.css?1653908280" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1653908280"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/bigdata/hadoop/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <img src="/images/keeprush.png">
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1653908280"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1653908280"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/example.org\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1653908280"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='/'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/resume/" title="个人简历" class="dd-item
+        
+        
+        
+        ">
+      <a href="/resume/">
+          <b></b>个人简历
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/photograph/" title="摄影" class="dd-item
+        
+        
+        
+        ">
+      <a href="/photograph/">
+          <b></b>摄影
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/machinelearning/" title="机器学习" class="dd-item
+        
+        
+        
+        ">
+      <a href="/machinelearning/">
+          <b></b>机器学习
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/deeplearning/" title="深度学习" class="dd-item
+        
+        
+        
+        ">
+      <a href="/deeplearning/">
+          <b></b>深度学习
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/algorithm/" title="算法" class="dd-item
+        
+        
+        
+        ">
+      <a href="/algorithm/">
+          <b></b>算法
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vehicle/" title="车车" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vehicle/">
+          <b></b>车车
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/piano/" title="钢琴" class="dd-item
+        
+        
+        
+        ">
+      <a href="/piano/">
+          <b></b>钢琴
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/programs/" title="项目" class="dd-item
+        
+        
+        
+        ">
+      <a href="/programs/">
+          <b></b>项目
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/programs/bodyassessment/" title="BodyAssessment" class="dd-item
+        
+        
+        
+        ">
+      <a href="/programs/bodyassessment/">
+          BodyAssessment
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/bigdata/" title="大数据" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/bigdata/">
+          <b></b>大数据
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/bigdata/hadoop/" title="Hadoop" class="dd-item
+        parent
+        active
+        
+        ">
+      <a href="/bigdata/hadoop/">
+          Hadoop
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/bigdata/spark/" title="Spark" class="dd-item
+        
+        
+        
+        ">
+      <a href="/bigdata/spark/">
+          Spark
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/bigdata/'>大数据</a> > Hadoop
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#hadoop系统简介">Hadoop系统简介</a></li>
+        <li><a href="#hadoop-生态圈">Hadoop 生态圈</a></li>
+        <li><a href="#hdfs">HDFS</a></li>
+        <li><a href="#mapreduce">MapReduce</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Hadoop
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="hadoop系统简介">Hadoop系统简介</h3>
+<p>      Hadoop 是一种分析和处理大数据的软件平台，是一个用 Java 语言实现的 Apache 的开源软件框架，在大量计算机组成的集群中实现了对海量数据的分布式计算。</p>
+<p>      Hadoop 采用 MapReduce 分布式计算框架，根据 GFS 原理开发了 HDFS（分布式文件系统），并根据 BigTable 原理开发了 HBase 数据存储系统。</p>
+<p>      Hadoop 和 Google 内部使用的分布式计算系统原理相同，其开源特性使其成为分布式计算系统的事实上的国际标准。</p>
+<p>      Yahoo、Facebook、Amazon，以及国内的百度、阿里巴巴等众多互联网公司都以 Hadoop 为基础搭建了自己的分布式计算系统。</p>
+<p>      Hadoop 是一个基础框架，允许用简单的编程模型在计算机集群上对大型数据集进行分布式处理。它的设计规模从单一服务器到数千台机器，每个服务器都能提供本地计算和存储功能，框架本身提供的是计算机集群高可用的服务，不依靠硬件来提供高可用性。用户可以在不了解分布式底层细节的情况下，轻松地在 Hadoop 上开发和运行处理海量数据的应用程序。低成本、高可靠、高扩展、高有效、高容错等特性让 hadoop 成为最流行的大数据分析系统。</p>
+<br>
+<h3 id="hadoop-生态圈">Hadoop 生态圈</h3>
+<img src="/images/hadoop.png">
+<p>其中，HDFS是一个提供高可用的获取应用数据的分布式文件系统；MapReduce是一个并行处理大数据集的编程模型。</p>
+<h3 id="hdfs">HDFS</h3>
+<h3 id="mapreduce">MapReduce</h3>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/bigdata/" title="大数据"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/bigdata/spark/" title="Spark" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1653908280"></script>
+    <script src="/js/perfect-scrollbar.min.js?1653908280"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1653908280"></script>
+    <script src="/js/jquery.sticky.js?1653908280"></script>
+    <script src="/js/featherlight.min.js?1653908280"></script>
+    <script src="/js/highlight.pack.js?1653908280"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1653908280"></script>
+    <script src="/js/learn.js?1653908280"></script>
+    <script src="/js/hugo-learn.js?1653908280"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1653908280"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
