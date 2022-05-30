@@ -29,9 +29,9 @@
     <loc>http://example.org/programs/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/cpp/</loc>
-  </url><url>
     <loc>http://example.org/cpp/basic/</loc>
+  </url><url>
+    <loc>http://example.org/cpp/</loc>
   </url><url>
     <loc>http://example.org/bigdata/hadoop/</loc>
   </url><url>

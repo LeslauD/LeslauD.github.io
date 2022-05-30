@@ -9,25 +9,25 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>CPP基础 :: 刘顿的博客</title>
+    <title>C&#43;&#43; :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1653925425" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1653925425" rel="stylesheet">
-    <link href="/css/hybrid.css?1653925425" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1653925425" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1653925425" rel="stylesheet">
-    <link href="/css/auto-complete.css?1653925425" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1653925425" rel="stylesheet">
-    <link href="/css/theme.css?1653925425" rel="stylesheet">
-    <link href="/css/tabs.css?1653925425" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1653925425" rel="stylesheet">
+    <link href="/css/nucleus.css?1653926558" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1653926558" rel="stylesheet">
+    <link href="/css/hybrid.css?1653926558" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1653926558" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1653926558" rel="stylesheet">
+    <link href="/css/auto-complete.css?1653926558" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1653926558" rel="stylesheet">
+    <link href="/css/theme.css?1653926558" rel="stylesheet">
+    <link href="/css/tabs.css?1653926558" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1653926558" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1653925425" rel="stylesheet">
+    <link href="/css/theme-blue.css?1653926558" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1653925425"></script>
+    <script src="/js/jquery-3.3.1.min.js?1653926558"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1653925425"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1653925425"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1653926558"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1653926558"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1653925425"></script>
+<script type="text/javascript" src="/js/search.js?1653926558"></script>
 
     
   </div>
@@ -347,13 +347,13 @@
  
   
     
-    <li data-nav-id="/cpp/basic/" title="CPP基础" class="dd-item
+    <li data-nav-id="/cpp/basic/" title="C&#43;&#43;" class="dd-item
         parent
         active
         
         ">
       <a href="/cpp/basic/">
-          CPP基础
+          C&#43;&#43;
           
       </a>
       
@@ -508,7 +508,7 @@
             
           
           
-            <a href='/'></a> > <a href='/cpp/'>CPP</a> > CPP基础
+            <a href='/'></a> > <a href='/cpp/'>CPP</a> > C++
           
         
           
@@ -525,7 +525,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#c">C++</a></li>
+        <li><a href="#c基础">C++基础</a></li>
+        <li><a href="#类和对象">类和对象</a></li>
+        <li><a href="#模板">模板</a></li>
+        <li><a href="#异常">异常</a></li>
+        <li><a href="#编程技巧">编程技巧</a></li>
+        <li><a href="#继承和多态">继承和多态</a></li>
+        <li><a href="#动态内存管理">动态内存管理</a></li>
       </ul>
     </li>
   </ul>
@@ -545,7 +551,7 @@
           
             <h1>
               
-              CPP基础
+              C&#43;&#43;
             </h1>
           
 
@@ -553,7 +559,44 @@
 
 
 
-	<h3 id="c">C++</h3>
+	<h3 id="c基础">C++基础</h3>
+<h4 id="c语言">C语言</h4>
+<h4 id="函数">函数</h4>
+<h4 id="引用">引用</h4>
+<br>
+<h3 id="类和对象">类和对象</h3>
+<h4 id="类的默认成员函数">类的默认成员函数</h4>
+<h4 id="this指针">this指针</h4>
+<h4 id="静态成员">静态成员</h4>
+<h4 id="友元">友元</h4>
+<h4 id="const成员函数">const成员函数</h4>
+<br>
+<h3 id="模板">模板</h3>
+<h4 id="函数模板">函数模板</h4>
+<h4 id="非类型模板参数">非类型模板参数</h4>
+<h4 id="类模板">类模板</h4>
+<h4 id="分离编译">分离编译</h4>
+<h4 id="模板的特化">模板的特化</h4>
+<br>
+<h3 id="异常">异常</h3>
+<h4 id="异常对象">异常对象</h4>
+<h4 id="异常产生-throw">异常产生 throw</h4>
+<h4 id="异常处理-try与catch">异常处理 try与catch</h4>
+<br>
+<h3 id="编程技巧">编程技巧</h3>
+<h4 id="浅拷贝深拷贝写时拷贝">浅拷贝/深拷贝/写时拷贝</h4>
+<h4 id="类型萃取">类型萃取</h4>
+<h4 id="泛型编程">泛型编程</h4>
+<br>
+<h3 id="继承和多态">继承和多态</h3>
+<h4 id="继承">继承</h4>
+<h4 id="多态">多态</h4>
+<br>
+<h3 id="动态内存管理">动态内存管理</h3>
+<h4 id="new和delete">new和delete</h4>
+<h4 id="new和delete-1">new[]和delete[]</h4>
+<h4 id="相比于c语言的动态内存管理c的动态内存管理">相比于C语言的动态内存管理，C++的动态内存管理</h4>
+<h4 id="定位new表达式">定位new表达式</h4>
 
 
 
@@ -849,19 +892,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1653925425"></script>
-    <script src="/js/perfect-scrollbar.min.js?1653925425"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1653925425"></script>
-    <script src="/js/jquery.sticky.js?1653925425"></script>
-    <script src="/js/featherlight.min.js?1653925425"></script>
-    <script src="/js/highlight.pack.js?1653925425"></script>
+    <script src="/js/clipboard.min.js?1653926558"></script>
+    <script src="/js/perfect-scrollbar.min.js?1653926558"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1653926558"></script>
+    <script src="/js/jquery.sticky.js?1653926558"></script>
+    <script src="/js/featherlight.min.js?1653926558"></script>
+    <script src="/js/highlight.pack.js?1653926558"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1653925425"></script>
-    <script src="/js/learn.js?1653925425"></script>
-    <script src="/js/hugo-learn.js?1653925425"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1653926558"></script>
+    <script src="/js/learn.js?1653926558"></script>
+    <script src="/js/hugo-learn.js?1653926558"></script>
     
         
-            <script src="/mermaid/mermaid.js?1653925425"></script>
+            <script src="/mermaid/mermaid.js?1653926558"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

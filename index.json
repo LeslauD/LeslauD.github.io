@@ -63,15 +63,15 @@
 	"content": "项目 "
 },
 {
-	"uri": "http://example.org/cpp/",
-	"title": "CPP",
+	"uri": "http://example.org/cpp/basic/",
+	"title": "C++",
 	"tags": [],
 	"description": "",
-	"content": "C++ "
+	"content": "C++基础 C语言 函数 引用 类和对象 类的默认成员函数 this指针 静态成员 友元 const成员函数 模板 函数模板 非类型模板参数 类模板 分离编译 模板的特化 异常 异常对象 异常产生 throw 异常处理 try与catch 编程技巧 浅拷贝/深拷贝/写时拷贝 类型萃取 泛型编程 继承和多态 继承 多态 动态内存管理 new和delete new[]和delete[] 相比于C语言的动态内存管理，C++的动态内存管理 定位new表达式 "
 },
 {
-	"uri": "http://example.org/cpp/basic/",
-	"title": "CPP基础",
+	"uri": "http://example.org/cpp/",
+	"title": "CPP",
 	"tags": [],
 	"description": "",
 	"content": "C++ "
