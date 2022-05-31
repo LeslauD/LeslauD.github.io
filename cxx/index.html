@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>BodyAssessment :: 刘顿的博客</title>
+    <title>CPP :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1653966638" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/programs/bodyassessment/">
+  <body class="" data-url="/cxx/">
     <nav id="sidebar" class="">
 
 
@@ -257,7 +257,7 @@
   
     
     <li data-nav-id="/programs/" title="项目" class="dd-item
-        parent
+        
         
         
         ">
@@ -286,8 +286,8 @@
   
     
     <li data-nav-id="/programs/bodyassessment/" title="BodyAssessment" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/programs/bodyassessment/">
@@ -319,8 +319,8 @@
   
     
     <li data-nav-id="/cxx/" title="CPP" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/cxx/">
@@ -518,8 +518,6 @@
                         </a>
                     </span>
                   
-                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
-                  
                   <span class="links">
                  
                  
@@ -530,13 +528,7 @@
             
           
           
-            
-            
-          
-          
-            <a href='/'></a> > <a href='/programs/'>项目</a> > BodyAssessment
-          
-        
+            <a href='/'></a> > CPP
           
         
           
@@ -545,21 +537,6 @@
                   </span>
                 </div>
                 
-                    <div class="progress">
-    <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#图像预处理">图像预处理</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-    </div>
-</div>
-
-                
               </div>
             </div>
             
@@ -567,284 +544,16 @@
         
         </div>
         
+          <div id="chapter">
+        
         <div id="body-inner">
-          
-            <h1>
-              
-              BodyAssessment
-            </h1>
           
 
         
 
 
 
-	<p><strong>基于深度学习的产后妇女形体评估系统</strong></p>
-<h3 id="图像预处理">图像预处理</h3>
-<h4 id="滤波">滤波</h4>
-<p>采用双边滤波平滑人体内部</p>
-<br>
-<h4 id="水平集">水平集</h4>
-<h5 id="1localizing-region-based-active-contourshttpsieeexploreieeeorgdocument4636741">1、<a href="https://ieeexplore.ieee.org/document/4636741">Localizing Region-Based Active Contours</a></h5>
-<p><strong>2022-03-12 ——  2022-04-09</strong></p>
-<br>
-<ul>
-<li>
-<p>代码流程：</p>
-<ul>
-<li>
-<p>初始化轮廓为一个包含人体的矩形，内部为+c，外部为-c。（c=2）</p>
-</li>
-<li>
-<p>开始演化</p>
-<ul>
-<li>
-<p>计算狄拉克函数</p>
-<p>作用是表明轮廓曲线周围的区域</p>
-<img src="/images/LRBAC_dirac.png">
-<p>从上到下依次是：边界，远离边界的区域，和边界附近的区域</p>
-</li>
-<li>
-<p>计算曲率</p>
-<p>一阶导：<img src="photos/_index/clip_image002.png" alt="img"> , <img src="photos/_index/clip_image004.png" alt="img">  |<img src="photos/_index/clip_image006.png" alt="img">| = <img src="photos/_index/clip_image008.png" alt="img"></p>
-<p>先对一阶导数单位化，再求二阶导数</p>
-<p>曲率curvature = <img src="photos/_index/clip_image002-16539180377466.png" alt="img"> + <img src="photos/_index/clip_image004-16539180377467.png" alt="img"></p>
-<p>即<img src="/images/curvature.png"></p>
-</li>
-<li>
-<p>计算前景与背景均值</p>
-<ul>
-<li>
-<p>先计算Heaviside函数，标识水平集的内部和外部（内部为1，外部为0，边界为0~1）</p>
-<img src="/images/LRBAC_heaviside.png">
-</li>
-<li>
-<p>计算前景均值</p>
-<img src="/images/LRBAC_u.png">
-</li>
-<li>
-<p>计算背景均值</p>
-<img src="/images/LRBAC_v.png">
-</li>
-</ul>
-</li>
-<li>
-<p>计算惩罚项</p>
-<img src="/images/LRBAC_penality.png">
-<p>将phi与一个拉普拉斯算子做卷积运算，以突出phi的边缘</p>
-<img src="/images/LRBAC_laplacian.png">
-</li>
-<li>
-<p>更新phi的每个点的值</p>
-<img src="/images/LRBAC_updatePhi.png">
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>实验：</p>
-<ul>
-<li>
-<p>参数</p>
-<img src="/images/LRBAC_params1.png">
-<img src="/images/LRBAC_params2.png">
-<p>c为水平集内部点的初值</p>
-<img src="/images/LRBAC_params3.png">
-</li>
-<li>
-<p>结果</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>​				<img src="/images/LRBAC_res1.png"></p>
-<p>​				<img src="/images/LRBAC_res2.png"></p>
-<p>​				左图为最终的轮廓，右图为最终的水平集phi可以看到都没有平滑，调整迭代次数，时间步长，λ，μ，ν，都没有明显的效果（220326周报-全局调参）。</p>
-<p>​	220402—统计时间（microseconds），尝试初始轮廓换成椭圆</p>
-<table>
-<thead>
-<tr>
-<th>方法    患者ID</th>
-<th>矩形水平集20轮</th>
-<th>椭圆水平集30轮</th>
-<th>椭圆水平集  20轮</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>409061</td>
-<td>632310</td>
-<td>396968</td>
-</tr>
-<tr>
-<td>2</td>
-<td>410979</td>
-<td>592415</td>
-<td>359038</td>
-</tr>
-<tr>
-<td>3</td>
-<td>415397</td>
-<td>575459</td>
-<td>360009</td>
-</tr>
-<tr>
-<td>4</td>
-<td>414089</td>
-<td>596375</td>
-<td>356047</td>
-</tr>
-<tr>
-<td>5</td>
-<td>399128</td>
-<td>566481</td>
-<td>358014</td>
-</tr>
-<tr>
-<td>6</td>
-<td>391003</td>
-<td>560502</td>
-<td>363057</td>
-</tr>
-<tr>
-<td>7</td>
-<td>385457</td>
-<td>585406</td>
-<td>363056</td>
-</tr>
-<tr>
-<td>8</td>
-<td>403885</td>
-<td>561497</td>
-<td>355049</td>
-</tr>
-<tr>
-<td>9</td>
-<td>389965</td>
-<td>547533</td>
-<td>370980</td>
-</tr>
-<tr>
-<td>10</td>
-<td>385965</td>
-<td>527591</td>
-<td>355050</td>
-</tr>
-<tr>
-<td>11</td>
-<td>389469</td>
-<td>508668</td>
-<td>358071</td>
-</tr>
-<tr>
-<td>12</td>
-<td>396982</td>
-<td>501630</td>
-<td>363055</td>
-</tr>
-<tr>
-<td>13</td>
-<td>395966</td>
-<td>496705</td>
-<td>365023</td>
-</tr>
-<tr>
-<td>14</td>
-<td>395943</td>
-<td>505646</td>
-<td>361034</td>
-</tr>
-<tr>
-<td>15</td>
-<td>389438</td>
-<td>502631</td>
-<td>351089</td>
-</tr>
-<tr>
-<td>16</td>
-<td>400473</td>
-<td>497695</td>
-<td>349039</td>
-</tr>
-<tr>
-<td>17</td>
-<td>391429</td>
-<td>516645</td>
-<td>358040</td>
-</tr>
-<tr>
-<td>18</td>
-<td>381009</td>
-<td>503682</td>
-<td>361034</td>
-</tr>
-<tr>
-<td>19</td>
-<td>429991</td>
-<td>506644</td>
-<td>354081</td>
-</tr>
-<tr>
-<td>均值</td>
-<td>398717.3158</td>
-<td>541342.8947</td>
-<td>360933.3684</td>
-</tr>
-</tbody>
-</table>
-<p>考虑到初始轮廓也可能会影响水平集方法的效果，所以尝试了用椭圆作为初始轮廓</p>
-<p>水平集方法按照初步调参后效果比较好的参数进行时间统计</p>
-<p>矩形：迭代20次，演化步长m_timestep为0.01，m_lambda=0.01，m_mu=1.0. m_nu=1.0</p>
-<p>椭圆：迭代30次，演化步长m_timestep为0.01，m_lambda=0.01，m_mu=1.0. m_nu=1.0</p>
-<p>都没有明显的平滑效果。</p>
-<br>
-<h5 id="2distance-regularized-level-set-evolution-and-its-application-to-image-segmentation----nbspnbspnbspnbspnbspdrlsehttpsieeexploreieeeorgdocument5557813">2、<a href="https://ieeexplore.ieee.org/document/5557813">Distance Regularized Level Set Evolution and Its Application to Image Segmentation         DRLSE</a></h5>
-<p><strong>2022-04-09 ——  2022-05-14</strong></p>
-<br>
-<ul>
-<li>
-<p>代码流程</p>
-<ul>
-<li>
-<p>深度图转换成灰度图</p>
-<img src="/images/DRLSE_depthToGray.png">
-<p>low和high分别为深度值的最小和最大值</p>
-</li>
-<li>
-<p>去除srcImg中灰度大于100的部分，以去除相对人体较亮的背景</p>
-<img src="/images/DRLSE_grayThreshold100.png">
-</li>
-<li>
-<p>求edge indicator g</p>
-<p>先对srcImg进行高斯滤波得到gbImg</p>
-<p>对gbImg求梯度dx,dy,得到<img src="file:///C:/Users/63103/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"></p>
-<p>计算g</p>
-<p>​	<img src="photos/_index/clip_image002-165392020077139.png" alt="img"></p>
-<p>目标边界的g值通常比其他区域要小</p>
-</li>
-<li>
-<p>初始化轮廓为人体内部的两个矩形</p>
-</li>
-<li>
-<p>开始演化</p>
-</li>
-</ul>
-</li>
-<li>
-<p>实验</p>
-<ul>
-<li>参数</li>
-<li>结果</li>
-</ul>
-</li>
-</ul>
-<br>
-<h5 id="3fast-global-minimization-of-the-active-contoursnake-model--------nbspnbspnbspnbspnbspgmachttpslinkspringercomarticle101007s10851-007-0002-0">3、<a href="https://link.springer.com/article/10.1007/s10851-007-0002-0">Fast Global Minimization of the Active Contour/Snake Model             GMAC</a></h5>
-<p><strong>2022-05-14 ——  2022-05-28</strong></p>
-<br>
-<h5 id="4尝试结合前面的三种模型">4、尝试结合前面的三种模型</h5>
+	<h3 id="c">C++</h3>
 
 
 
@@ -854,6 +563,8 @@
 	
 </footer>
 
+        
+            </div> 
         
         </div>
         
@@ -1000,7 +711,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -1015,7 +725,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -1036,8 +745,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -1053,6 +760,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1143,10 +853,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/programs/" title="项目"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/programs/bodyassessment/" title="BodyAssessment"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/cxx/" title="CPP" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/cxx/clang/" title="C language" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

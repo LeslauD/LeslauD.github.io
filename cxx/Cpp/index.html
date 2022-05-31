@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>BodyAssessment :: 刘顿的博客</title>
+    <title>C&#43;&#43; :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1653966638" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/programs/bodyassessment/">
+  <body class="" data-url="/cxx/cpp/">
     <nav id="sidebar" class="">
 
 
@@ -257,7 +257,7 @@
   
     
     <li data-nav-id="/programs/" title="项目" class="dd-item
-        parent
+        
         
         
         ">
@@ -286,8 +286,8 @@
   
     
     <li data-nav-id="/programs/bodyassessment/" title="BodyAssessment" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/programs/bodyassessment/">
@@ -319,7 +319,7 @@
   
     
     <li data-nav-id="/cxx/" title="CPP" class="dd-item
-        
+        parent
         
         
         ">
@@ -374,8 +374,8 @@
   
     
     <li data-nav-id="/cxx/cpp/" title="C&#43;&#43;" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/cxx/cpp/">
@@ -534,7 +534,7 @@
             
           
           
-            <a href='/'></a> > <a href='/programs/'>项目</a> > BodyAssessment
+            <a href='/'></a> > <a href='/cxx/'>CPP</a> > C++
           
         
           
@@ -551,7 +551,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#图像预处理">图像预处理</a></li>
+        <li><a href="#c基础">C++基础</a></li>
+        <li><a href="#类和对象">类和对象</a></li>
+        <li><a href="#模板">模板</a></li>
+        <li><a href="#异常">异常</a></li>
+        <li><a href="#编程技巧">编程技巧</a></li>
+        <li><a href="#继承和多态">继承和多态</a></li>
+        <li><a href="#动态内存管理">动态内存管理</a></li>
       </ul>
     </li>
   </ul>
@@ -571,7 +577,7 @@
           
             <h1>
               
-              BodyAssessment
+              C&#43;&#43;
             </h1>
           
 
@@ -579,272 +585,253 @@
 
 
 
-	<p><strong>基于深度学习的产后妇女形体评估系统</strong></p>
-<h3 id="图像预处理">图像预处理</h3>
-<h4 id="滤波">滤波</h4>
-<p>采用双边滤波平滑人体内部</p>
-<br>
-<h4 id="水平集">水平集</h4>
-<h5 id="1localizing-region-based-active-contourshttpsieeexploreieeeorgdocument4636741">1、<a href="https://ieeexplore.ieee.org/document/4636741">Localizing Region-Based Active Contours</a></h5>
-<p><strong>2022-03-12 ——  2022-04-09</strong></p>
-<br>
+	<h3 id="c基础">C++基础</h3>
+<h4 id="c语言">C语言</h4>
+<h4 id="函数">函数</h4>
 <ul>
-<li>
-<p>代码流程：</p>
+<li>函数的默认参数    在函数声明或定义的形参列表中，为形参提供默认值</li>
+<li>函数重载
 <ul>
-<li>
-<p>初始化轮廓为一个包含人体的矩形，内部为+c，外部为-c。（c=2）</p>
-</li>
-<li>
-<p>开始演化</p>
-<ul>
-<li>
-<p>计算狄拉克函数</p>
-<p>作用是表明轮廓曲线周围的区域</p>
-<img src="/images/LRBAC_dirac.png">
-<p>从上到下依次是：边界，远离边界的区域，和边界附近的区域</p>
-</li>
-<li>
-<p>计算曲率</p>
-<p>一阶导：<img src="photos/_index/clip_image002.png" alt="img"> , <img src="photos/_index/clip_image004.png" alt="img">  |<img src="photos/_index/clip_image006.png" alt="img">| = <img src="photos/_index/clip_image008.png" alt="img"></p>
-<p>先对一阶导数单位化，再求二阶导数</p>
-<p>曲率curvature = <img src="photos/_index/clip_image002-16539180377466.png" alt="img"> + <img src="photos/_index/clip_image004-16539180377467.png" alt="img"></p>
-<p>即<img src="/images/curvature.png"></p>
-</li>
-<li>
-<p>计算前景与背景均值</p>
-<ul>
-<li>
-<p>先计算Heaviside函数，标识水平集的内部和外部（内部为1，外部为0，边界为0~1）</p>
-<img src="/images/LRBAC_heaviside.png">
-</li>
-<li>
-<p>计算前景均值</p>
-<img src="/images/LRBAC_u.png">
-</li>
-<li>
-<p>计算背景均值</p>
-<img src="/images/LRBAC_v.png">
-</li>
+<li>同一个作用域内，函数的形参不同，函数名相同，则这些函数构成重载函数(与返回值类型无关)</li>
+<li>函数如何构成重载：编译器在编译时对函数进行了重命名</li>
 </ul>
 </li>
-<li>
-<p>计算惩罚项</p>
-<img src="/images/LRBAC_penality.png">
-<p>将phi与一个拉普拉斯算子做卷积运算，以突出phi的边缘</p>
-<img src="/images/LRBAC_laplacian.png">
-</li>
-<li>
-<p>更新phi的每个点的值</p>
-<img src="/images/LRBAC_updatePhi.png">
-</li>
+<li>内联函数
+<ul>
+<li>定义在类内的函数会自动成为内联函数</li>
+<li>内联函数只是对编译器的一种建议，编译器可以选择忽略这种建议</li>
+<li>内联函数相比普通函数没有函数压栈的开销，提升了程序运行效率</li>
+<li>内联是一种以空间换取时间的做法，省去了调用函数的开销，代码很长的函数不适合作为内联函数</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>
-<p>实验：</p>
+<h4 id="引用">引用</h4>
 <ul>
-<li>
-<p>参数</p>
-<img src="/images/LRBAC_params1.png">
-<img src="/images/LRBAC_params2.png">
-<p>c为水平集内部点的初值</p>
-<img src="/images/LRBAC_params3.png">
-</li>
-<li>
-<p>结果</p>
-</li>
+<li>引用变量是所引用变量的别名，地址与原变量的地址相同</li>
+<li>引用与指针
+<ul>
+<li>引用必须在定义时就要初始化</li>
+<li>引用变量和指针变量的自增自减运算</li>
+<li>引用和指针变量的大小</li>
 </ul>
 </li>
-</ul>
-<p>​				<img src="/images/LRBAC_res1.png"></p>
-<p>​				<img src="/images/LRBAC_res2.png"></p>
-<p>​				左图为最终的轮廓，右图为最终的水平集phi可以看到都没有平滑，调整迭代次数，时间步长，λ，μ，ν，都没有明显的效果（220326周报-全局调参）。</p>
-<p>​	220402—统计时间（microseconds），尝试初始轮廓换成椭圆</p>
-<table>
-<thead>
-<tr>
-<th>方法    患者ID</th>
-<th>矩形水平集20轮</th>
-<th>椭圆水平集30轮</th>
-<th>椭圆水平集  20轮</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>409061</td>
-<td>632310</td>
-<td>396968</td>
-</tr>
-<tr>
-<td>2</td>
-<td>410979</td>
-<td>592415</td>
-<td>359038</td>
-</tr>
-<tr>
-<td>3</td>
-<td>415397</td>
-<td>575459</td>
-<td>360009</td>
-</tr>
-<tr>
-<td>4</td>
-<td>414089</td>
-<td>596375</td>
-<td>356047</td>
-</tr>
-<tr>
-<td>5</td>
-<td>399128</td>
-<td>566481</td>
-<td>358014</td>
-</tr>
-<tr>
-<td>6</td>
-<td>391003</td>
-<td>560502</td>
-<td>363057</td>
-</tr>
-<tr>
-<td>7</td>
-<td>385457</td>
-<td>585406</td>
-<td>363056</td>
-</tr>
-<tr>
-<td>8</td>
-<td>403885</td>
-<td>561497</td>
-<td>355049</td>
-</tr>
-<tr>
-<td>9</td>
-<td>389965</td>
-<td>547533</td>
-<td>370980</td>
-</tr>
-<tr>
-<td>10</td>
-<td>385965</td>
-<td>527591</td>
-<td>355050</td>
-</tr>
-<tr>
-<td>11</td>
-<td>389469</td>
-<td>508668</td>
-<td>358071</td>
-</tr>
-<tr>
-<td>12</td>
-<td>396982</td>
-<td>501630</td>
-<td>363055</td>
-</tr>
-<tr>
-<td>13</td>
-<td>395966</td>
-<td>496705</td>
-<td>365023</td>
-</tr>
-<tr>
-<td>14</td>
-<td>395943</td>
-<td>505646</td>
-<td>361034</td>
-</tr>
-<tr>
-<td>15</td>
-<td>389438</td>
-<td>502631</td>
-<td>351089</td>
-</tr>
-<tr>
-<td>16</td>
-<td>400473</td>
-<td>497695</td>
-<td>349039</td>
-</tr>
-<tr>
-<td>17</td>
-<td>391429</td>
-<td>516645</td>
-<td>358040</td>
-</tr>
-<tr>
-<td>18</td>
-<td>381009</td>
-<td>503682</td>
-<td>361034</td>
-</tr>
-<tr>
-<td>19</td>
-<td>429991</td>
-<td>506644</td>
-<td>354081</td>
-</tr>
-<tr>
-<td>均值</td>
-<td>398717.3158</td>
-<td>541342.8947</td>
-<td>360933.3684</td>
-</tr>
-</tbody>
-</table>
-<p>考虑到初始轮廓也可能会影响水平集方法的效果，所以尝试了用椭圆作为初始轮廓</p>
-<p>水平集方法按照初步调参后效果比较好的参数进行时间统计</p>
-<p>矩形：迭代20次，演化步长m_timestep为0.01，m_lambda=0.01，m_mu=1.0. m_nu=1.0</p>
-<p>椭圆：迭代30次，演化步长m_timestep为0.01，m_lambda=0.01，m_mu=1.0. m_nu=1.0</p>
-<p>都没有明显的平滑效果。</p>
-<br>
-<h5 id="2distance-regularized-level-set-evolution-and-its-application-to-image-segmentation----nbspnbspnbspnbspnbspdrlsehttpsieeexploreieeeorgdocument5557813">2、<a href="https://ieeexplore.ieee.org/document/5557813">Distance Regularized Level Set Evolution and Its Application to Image Segmentation         DRLSE</a></h5>
-<p><strong>2022-04-09 ——  2022-05-14</strong></p>
-<br>
-<ul>
-<li>
-<p>代码流程</p>
-<ul>
-<li>
-<p>深度图转换成灰度图</p>
-<img src="/images/DRLSE_depthToGray.png">
-<p>low和high分别为深度值的最小和最大值</p>
-</li>
-<li>
-<p>去除srcImg中灰度大于100的部分，以去除相对人体较亮的背景</p>
-<img src="/images/DRLSE_grayThreshold100.png">
-</li>
-<li>
-<p>求edge indicator g</p>
-<p>先对srcImg进行高斯滤波得到gbImg</p>
-<p>对gbImg求梯度dx,dy,得到<img src="file:///C:/Users/63103/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"></p>
-<p>计算g</p>
-<p>​	<img src="photos/_index/clip_image002-165392020077139.png" alt="img"></p>
-<p>目标边界的g值通常比其他区域要小</p>
-</li>
-<li>
-<p>初始化轮廓为人体内部的两个矩形</p>
-</li>
-<li>
-<p>开始演化</p>
-</li>
-</ul>
-</li>
-<li>
-<p>实验</p>
-<ul>
-<li>参数</li>
-<li>结果</li>
-</ul>
-</li>
+<li>引用作为函数参数：参数传递时不会产生临时变量</li>
 </ul>
 <br>
-<h5 id="3fast-global-minimization-of-the-active-contoursnake-model--------nbspnbspnbspnbspnbspgmachttpslinkspringercomarticle101007s10851-007-0002-0">3、<a href="https://link.springer.com/article/10.1007/s10851-007-0002-0">Fast Global Minimization of the Active Contour/Snake Model             GMAC</a></h5>
-<p><strong>2022-05-14 ——  2022-05-28</strong></p>
+<h3 id="类和对象">类和对象</h3>
+<h4 id="类的默认成员函数">类的默认成员函数</h4>
+<ul>
+<li>构造函数
+<ul>
+<li>调用场景：类的对象在被创建时自动调用构造函数</li>
+<li>构造函数一般完成构造对象以及初始化工作</li>
+<li>如果没有显式定义，编译器会自动产生一个缺省的默认构造函数</li>
+<li>无参的构造函数和全缺省值的构造函数都被认为是缺省构造函数，一个类中，缺省的构造函数只能有一个</li>
+<li>构造函数没有返回值，可以重载，函数名与类名相同</li>
+<li>构造函数的参数列表：
+<ul>
+<li>更高效(两次构造函数变成一次拷贝构造函数)</li>
+<li>const、引用、没有默认参数的构造函数的类对象必须在构造函数的初始化列表中进行初始化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>析构函数
+<ul>
+<li>调用场景：类对象的生命周期结束会自动调用析构函数</li>
+<li>析构函数主要完成的是内存的释放以及对象的销毁等工作</li>
+<li>析构函数的函数名是在类名前面加上~</li>
+<li>如果没有显式的提供析构函数，编译器会自动生成一个默认的析构函数</li>
+</ul>
+</li>
+<li>拷贝构造函数
+<ul>
+<li>调用场景：用一个已经存在的对象创建一个新对象</li>
+<li>拷贝构造函数其实是构造函数的重载</li>
+<li>拷贝构造函数的参数必须是引用传参，其他传参方式会引起无穷递归</li>
+<li>如果没有显式提供拷贝构造函数，编译器会自动生成一个默认的拷贝构造函数，在默认的拷贝构造函数中采用了浅拷贝的方式</li>
+</ul>
+</li>
+<li>赋值运算符重载</li>
+<li>取地址运算符重载</li>
+<li>const修饰的取地址运算符重载</li>
+</ul>
+<h4 id="this指针">this指针</h4>
+<ul>
+<li>指向类的对象的地址</li>
+<li>构造函数和静态成员函数中不存在this指针</li>
+<li>this隐式地存在在类的成员函数中，但可以进行显式访问</li>
+</ul>
+<h4 id="静态成员">静态成员</h4>
+<ul>
+<li>静态成员属于类，不属于对象</li>
+<li>静态成员变量和函数需要在类外进行定义和初始化</li>
+</ul>
+<h4 id="友元">友元</h4>
+<ul>
+<li>友元类
+<ul>
+<li>一个类被friend class在另一个类中，这另一个类可以访问这个类的对象的成员</li>
+</ul>
+</li>
+<li>友元函数
+<ul>
+<li>友元函数可以访问类的成员</li>
+</ul>
+</li>
+</ul>
+<h4 id="const成员函数">const成员函数</h4>
+<ul>
+<li>this指针指向的内容不能被修改</li>
+</ul>
 <br>
-<h5 id="4尝试结合前面的三种模型">4、尝试结合前面的三种模型</h5>
+<h3 id="模板">模板</h3>
+<h4 id="函数模板">函数模板</h4>
+<ul>
+<li>template&lt;模板参数&gt;</li>
+<li>实例化函数模板       通过函数实参推演模板实参，并绑定到模板参数上</li>
+</ul>
+<h4 id="非类型模板参数">非类型模板参数</h4>
+<h4 id="类模板">类模板</h4>
+<ul>
+<li>使用了类模板后，用类模板创建一个对象时必须显式地提供类型</li>
+<li>当类中的成员函数在类外定义时，必须加上template后接模板参数列表</li>
+<li>返回值，类名作为形参  需要加上模板参数列表</li>
+</ul>
+<h4 id="分离编译">分离编译</h4>
+<ul>
+<li>类的定义和类中函数的定义放在一个文件中</li>
+</ul>
+<h4 id="模板的特化">模板的特化</h4>
+<ul>
+<li>重新定义模板时在模板参数列表中显式地指定类型</li>
+</ul>
+<br>
+<h3 id="异常">异常</h3>
+<h4 id="异常对象">异常对象</h4>
+<ul>
+<li>编译器使用throw抛出去的表达式</li>
+</ul>
+<h4 id="异常产生-throw">异常产生 throw</h4>
+<h4 id="异常处理-try与catch">异常处理 try与catch</h4>
+<ul>
+<li>一个异常如果没有被捕获，则会提前终止程序</li>
+<li>栈展开的过程中对象被自动销毁(例如在构造函数中抛出异常)</li>
+<li>如果析构函数中要抛出异常      try语句和catch语句应写在析构函数内部</li>
+</ul>
+<br>
+<h3 id="编程技巧">编程技巧</h3>
+<h4 id="浅拷贝深拷贝写时拷贝">浅拷贝/深拷贝/写时拷贝</h4>
+<h4 id="类型萃取">类型萃取</h4>
+<h4 id="泛型编程">泛型编程</h4>
+<br>
+<h3 id="继承和多态">继承和多态</h3>
+<h4 id="继承">继承</h4>
+<ul>
+<li>继承是面向对象的重要复用手段</li>
+<li>三种继承关系
+<ul>
+<li>公有继承：public
+<ul>
+<li>基类的非私有成员在子类访问属性不变</li>
+<li>is-a原则</li>
+</ul>
+</li>
+<li>私有继承：private
+<ul>
+<li>基类的非私有成员都变为子类的私有成员</li>
+</ul>
+</li>
+<li>保护继承：protected
+<ul>
+<li>基类的非私有成员都变为子类的protected成员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注：基类的私有成员在派生类中不能访问</li>
+<li>赋值兼容规则
+<ul>
+<li>可以用一个子类对象给一个父类对象赋值</li>
+<li>父类对象的指针或引用可以指向子类对象</li>
+<li>上面两条反转过来不能实现，虽然可以进行强制类型转换，但这样非常容易出现访问错误的情况</li>
+</ul>
+</li>
+<li>派生类的6个默认构造函数</li>
+<li>菱形继承
+<ul>
+<li>在孙子类的对象中存在两份父类的成员(二义性、数据冗余)       解决方法：虚拟继承</li>
+<li>虚拟继承
+<ul>
+<li>专门用来解决菱形继承中存在的二义性和数据冗余的问题</li>
+<li>使用虚拟继承会带来性能上的损耗</li>
+<li>采用的偏移量的方式来解决二义性的问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>纯虚函数
+<ul>
+<li>在函数形参列表后写上“=0”叫做纯虚函数</li>
+<li>包含纯虚函数的类叫做抽象类，抽象类不能实例化，只有在派生类中重新定义后才能实例化出对象</li>
+</ul>
+</li>
+<li>把析构函数写成虚函数      不会造成内存泄漏(编译器在这一块做了特殊处理)</li>
+</ul>
+<h4 id="多态">多态</h4>
+<ul>
+<li>什么是多态
+<ul>
+<li>一个接口，多种方法</li>
+</ul>
+</li>
+<li>多态的实现条件
+<ul>
+<li>继承关系</li>
+<li>只有在父类定义了虚函数，并且子类重写虚函数的情况下多态才能被实现</li>
+<li>必须是父类的指针/引用指向子类或者父类的对象</li>
+</ul>
+</li>
+<li>多态的实现原因&mdash;虚函数列表
+<ul>
+<li>虚函数列表是用一块连续的内存来存储虚函数的地址</li>
+<li>虚函数表怎么解决虚函数的重写问题
+<ul>
+<li>父类中的虚函数如果在子类中被重新定义，则构成重写，虚函数表中的父类函数的弟子被子类函数所覆盖</li>
+<li>子类重写父类的虚函数形参和函数名以及返回类型必须相同</li>
+<li>上述规则对一条无效：斜变(函数返回值类型为类本身的指针或引用时函数重写仍然发生)：父类与子类必须对应</li>
+<li>final关键字      定义在函数的形参列表后面，不允许派生类的子类的虚构函数进行重写</li>
+<li>override关键字      会匹配子类与父类函数名相同的函数形参和类型是否一致，不一致则会报错</li>
+</ul>
+</li>
+<li>单继承      只会出现一张虚函数表，虚函数表先存放父类的虚函数，再存放子类的虚函数</li>
+<li>多继承      会出现多个虚函数表，子类的虚函数会放在第一个虚函数表中</li>
+</ul>
+</li>
+<li>静态多态      函数重载      静态多态主要再编译期间发生，例如函数重载在编译期间对函数名进行了重命名</li>
+</ul>
+<br>
+<h3 id="动态内存管理">动态内存管理</h3>
+<h4 id="new和delete">new和delete</h4>
+<ul>
+<li>new开辟空间可以进行初始化      eg: new int(10)</li>
+</ul>
+<h4 id="new和delete-1">new[]和delete[]</h4>
+<ul>
+<li>new int[10]()也可以进行初始化，但只能是上面这种形式，开辟的数组被初始化为0</li>
+</ul>
+<h4 id="相比于c语言的动态内存管理c的动态内存管理">相比于C语言的动态内存管理，C++的动态内存管理</h4>
+<ul>
+<li>new new[] delete delete[]是操作符，不是函数</li>
+<li>new和new[]在开辟空间后还调用了类的构造函数</li>
+<li>delete和delete[]先调用析构函数，再释放内存空间</li>
+<li>new和new[]不需要进行强制类型转换</li>
+</ul>
+<h4 id="定位new表达式">定位new表达式</h4>
+<ul>
+<li>定位new表达式是在已分配的内存空间中调用构造函数初始化一个对象</li>
+<li>new(pA)type(init-list):其中pA是指向初始化这个类并且开辟了内存空间的指针</li>
+</ul>
 
 
 
@@ -1000,6 +987,40 @@
             
                 
                     
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -1010,6 +1031,25 @@
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -1038,56 +1078,6 @@
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1143,10 +1133,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/programs/" title="项目"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/cxx/clang/" title="C language"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/cxx/" title="CPP" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/bigdata/" title="大数据" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

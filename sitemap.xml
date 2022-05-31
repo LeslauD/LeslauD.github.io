@@ -29,11 +29,11 @@
     <loc>http://example.org/programs/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/cpp/clang/</loc>
+    <loc>http://example.org/cxx/clang/</loc>
   </url><url>
-    <loc>http://example.org/cpp/cpp/</loc>
+    <loc>http://example.org/cxx/cpp/</loc>
   </url><url>
-    <loc>http://example.org/cpp/</loc>
+    <loc>http://example.org/cxx/</loc>
   </url><url>
     <loc>http://example.org/bigdata/hadoop/</loc>
   </url><url>
