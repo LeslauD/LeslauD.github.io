@@ -12,22 +12,22 @@
     <title>Spark :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1653985397" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1653985397" rel="stylesheet">
-    <link href="/css/hybrid.css?1653985397" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1653985397" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1653985397" rel="stylesheet">
-    <link href="/css/auto-complete.css?1653985397" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1653985397" rel="stylesheet">
-    <link href="/css/theme.css?1653985397" rel="stylesheet">
-    <link href="/css/tabs.css?1653985397" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1653985397" rel="stylesheet">
+    <link href="/css/nucleus.css?1654001112" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654001112" rel="stylesheet">
+    <link href="/css/hybrid.css?1654001112" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654001112" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654001112" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654001112" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654001112" rel="stylesheet">
+    <link href="/css/theme.css?1654001112" rel="stylesheet">
+    <link href="/css/tabs.css?1654001112" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654001112" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1653985397" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654001112" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1653985397"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654001112"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1653985397"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1653985397"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654001112"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654001112"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1653985397"></script>
+<script type="text/javascript" src="/js/search.js?1654001112"></script>
 
     
   </div>
@@ -551,7 +551,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#spark环境搭建">Spark环境搭建</a></li>
+        <li><a href="#spark环境搭建linux">Spark环境搭建(Linux)</a></li>
+        <li><a href="#spark简介">Spark简介</a></li>
+        <li><a href="#rdd">RDD</a></li>
+        <li><a href="#spark总体架构">Spark总体架构</a></li>
+        <li><a href="#spark运行流程">Spark运行流程</a></li>
+        <li><a href="#windows配置spark">Windows配置Spark</a></li>
+        <li><a href="#pyspark_wordcount">PySpark_Wordcount</a></li>
       </ul>
     </li>
   </ul>
@@ -579,7 +585,7 @@
 
 
 
-	<h3 id="spark环境搭建">Spark环境搭建</h3>
+	<h3 id="spark环境搭建linux">Spark环境搭建(Linux)</h3>
 <p>      在Linux上搭建spark环境，使用<a href="https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html">VMWare</a>,安装<a href="https://cn.ubuntu.com/download/desktop">Ubuntu22.04</a>系统</p>
 <br>
 <h4 id="1安装jdk">1、安装JDK</h4>
@@ -643,6 +649,267 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
 <img src="/images/py4j.png">
 <p>启动python,调用pyspark</p>
 <img src="/images/pyspark.png">
+<br>
+<br>
+<h3 id="spark简介">Spark简介</h3>
+<br>
+<p>根据 Hadoop MapReduce 的工作流程，可以分析出 Hadoop MapRedcue 的一些缺点。</p>
+<p><strong>1）Hadoop MapRedue 的表达能力有限</strong>。</p>
+<p>所有计算都需要转换成 Map 和 Reduce 两个操作，不能适用于所有场景，对于复杂的数据处理过程难以描述。</p>
+<p><strong>2）磁盘 I/O 开销大</strong>。</p>
+<p>Hadoop MapReduce 要求每个步骤间的数据序列化到磁盘，所以 I/O 成本很高，导致交互分析和迭代算法开销很大，而几乎所有的最优化和机器学习都是迭代的。所以，Hadoop MapReduce 不适合于交互分析和机器学习。</p>
+<p><strong>3）计算延迟高</strong>。</p>
+<p>如果想要完成比较复杂的工作，就必须将一系列的 MapReduce 作业串联起来然后顺序执行这些作业。每一个作业都是高时延的，而且只有在前一个作业完成之后下一个作业才能开始启动。因此，Hadoop MapReduce 不能胜任比较复杂的、多阶段的计算服务。</p>
+<br>
+<p>Spark 是借鉴了 Hadoop MapReduce 技术发展而来的，继承了其分布式并行计算的优点并改进了 MapReduce 明显的缺陷。</p>
+<p>Spark 使用 Scala 语言进行实现，它是一种面向对象的函数式编程语言，能够像操作本地集合对象一样轻松地操作分布式数据集。它具有运行速度快、易用性好、通用性强和随处运行等特点，具体优势如下。</p>
+<p><strong>1）<strong>Spark 提供了</strong>内存计算，把中间结果放到内存中，带来了更高的迭代运算效率</strong>。通过支持有向无环图（DAG）的分布式并行计算的编程框架，Spark 减少了迭代过程中数据需要写入磁盘的需求，提高了处理效率。</p>
+<p>**2）**Spark 为我们提供了一个全面、统一的框架，用于管理各种有着不同性质（文本数据、图表数据等）的数据集和数据源（批量数据或实时的流数据）的大数据处理的需求。</p>
+<p>Spark 使用函数式编程范式扩展了 MapReduce 模型以支持更多计算类型，可以涵盖广泛的工作流，这些工作流之前被实现为 Hadoop 之上的特殊系统。</p>
+<p>Spark 使用内存缓存来提升性能，因此进行交互式分析也足够快速，缓存同时提升了迭代算法的性能，这使得 Spark 非常适合数据理论任务，特别是机器学习。</p>
+<p>**3）Spark 比 Hadoop 更加通用。**Hadoop 只提供了 Map 和 Reduce 两种处理操作，而 Spark 提供的数据集操作类型更加丰富，从而可以支持更多类型的应用。</p>
+<p>Spark 的计算模式也属于 MapReduce 类型，但提供的操作不仅包括 Map 和 Reduce，还提供了包括 Map、Filter、FlatMap、Sample、GroupByKey、ReduceByKey、Union、Join、Cogroup、MapValues、Sort、PartionBy 等多种转换操作，以及 Count、Collect、Reduce、Lookup、Save 等行为操作。</p>
+<p><strong>4）Spark 基于 DAG 的任务调度执行机制比 Hadoop MapReduce 的迭代执行机制更优越。</strong></p>
+<p>Spark 各个处理结点之间的通信模型不再像 Hadoop 一样只有 Shuffle 一种模式，程序开发者可以使用 DAG 开发复杂的多步数据管道，控制中间结果的存储、分区等。</p>
+<br>
+<h3 id="rdd">RDD</h3>
+<br>
+<p>Spark 的核心是建立在统一的抽象弹性分布式数据集（Resiliennt Distributed Datasets，RDD）之上的</p>
+<h4 id="rdd基本概念">RDD基本概念</h4>
+<p>通俗点来讲，可以将 RDD 理解为一个分布式对象集合，本质上是一个只读的分区记录集合。每个 RDD 可以分成多个分区，每个分区就是一个数据集片段。一个 RDD 的不同分区可以保存到集群中的不同结点上，从而可以在集群中的不同结点上进行并行计算。</p>
+<p>RDD 的分区及分区与工作结点（Worker Node）的分布关系：</p>
+<img src="/images/RDD.png">
+<p>RDD 具有容错机制，并且只读不能修改，可以执行确定的转换操作创建新的 RDD。具体来讲，RDD 具有以下几个属性。</p>
+<ul>
+<li>只读：不能修改，只能通过转换操作生成新的 RDD。</li>
+<li>分布式：可以分布在多台机器上进行并行处理。</li>
+<li>弹性：计算过程中内存不够时它会和磁盘进行数据交换。</li>
+<li>基于内存：可以全部或部分缓存在内存中，在多次计算间重用。</li>
+</ul>
+<br>
+<h4 id="rdd基本操作"><strong>RDD基本操作</strong></h4>
+<p>RDD 的操作分为转化（<strong>Transformation</strong>）操作和行动（<strong>Action</strong>）操作。转化操作就是从一个 RDD 产生一个新的 RDD，而行动操作就是进行<strong>实际的计算</strong>。</p>
+<p>RDD 的操作是惰性的，当 RDD 执行转化操作的时候，实际计算并没有被执行，只有当 RDD 执行行动操作时才会促发计算任务提交，从而执行相应的计算操作。</p>
+<p><strong>1、构建RDD</strong></p>
+<ul>
+<li>
+<p>从内存里直接读取数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> rdd01 <span style="color:#66d9ef">=</span> sc<span style="color:#f92672">.</span>makeRDD<span style="color:#f92672">(</span><span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>l<span style="color:#f92672">,</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span><span style="color:#ae81ff">3</span><span style="color:#f92672">,</span><span style="color:#ae81ff">4</span><span style="color:#f92672">,</span><span style="color:#ae81ff">5</span><span style="color:#f92672">,</span><span style="color:#ae81ff">6</span><span style="color:#f92672">))</span>
+</span></span></code></pre></div></li>
+<li>
+<p>从文件系统里读取数据（HDFS、本地文件系统等）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> rdd<span style="color:#66d9ef">:</span><span style="color:#66d9ef">RDD</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#f92672">==</span> sc<span style="color:#f92672">.</span>textFile<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;file:///D:/sparkdata.txt&#34;</span><span style="color:#f92672">,</span><span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div></li>
+</ul>
+<p><strong>2、转换操作transformation</strong></p>
+<p>RDD转换操作（rdd1={1, 2, 3, 3}，rdd2={3,4,5})</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map()</td>
+<td>将函数应用于 RDD 的每个元素，返回值是新的 RDD</td>
+<td>rdd1.map(x=&gt;x+l)</td>
+<td>{2,3,4,4}</td>
+</tr>
+<tr>
+<td>flatMap()</td>
+<td>将函数应用于 RDD 的每个元素，将元素数据进行拆分，变成迭代器，返回值是新的 RDD</td>
+<td>rdd1.flatMap(x=&gt;x.to(3))</td>
+<td>{1,2,3,2,3,3,3}</td>
+</tr>
+<tr>
+<td>filter()</td>
+<td>函数会过滤掉不符合条件的元素，返回值是新的 RDD</td>
+<td>rdd1.filter(x=&gt;x!=1)</td>
+<td>{2,3,3}</td>
+</tr>
+<tr>
+<td>distinct()</td>
+<td>将 RDD 里的元素进行去重操作</td>
+<td>rdd1.distinct()</td>
+<td>(1,2,3)</td>
+</tr>
+<tr>
+<td>union()</td>
+<td>生成包含两个 RDD 所有元素的新的 RDD</td>
+<td>rdd1.union(rdd2)</td>
+<td>{1,2,3,3,3,4,5}</td>
+</tr>
+<tr>
+<td>intersection()</td>
+<td>求出两个 RDD 的共同元素</td>
+<td>rdd1.intersection(rdd2)</td>
+<td>{3}</td>
+</tr>
+<tr>
+<td>subtract()</td>
+<td>将原 RDD 里和参数 RDD 里相同的元素去掉</td>
+<td>rdd1.subtract(rdd2)</td>
+<td>{1,2}</td>
+</tr>
+<tr>
+<td>cartesian()</td>
+<td>求两个 RDD 的笛卡儿积</td>
+<td>rdd1.cartesian(rdd2)</td>
+<td>{(1,3),(1,4)&hellip;&hellip;(3,5)}</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p><strong>3、行动操作action</strong></p>
+<p>RDD 行动操作（rdd={1,2,3,3}）</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collect()</td>
+<td>返回 RDD 的所有元素</td>
+<td>rdd.collect()</td>
+<td>{1,2,3,3}</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>RDD 里元素的个数</td>
+<td>rdd.count()</td>
+<td>4</td>
+</tr>
+<tr>
+<td>countByValue()</td>
+<td>各元素在 RDD 中的出现次数</td>
+<td>rdd.countByValue()</td>
+<td>{(1,1),(2,1),(3,2})}</td>
+</tr>
+<tr>
+<td>take(num)</td>
+<td>从 RDD 中返回 num 个元素</td>
+<td>rdd.take(2)</td>
+<td>{1,2}</td>
+</tr>
+<tr>
+<td>top(num)</td>
+<td>从 RDD 中，按照默认（降序）或者指定的排序返回最前面的 num 个元素</td>
+<td>rdd.top(2)</td>
+<td>{3,3}</td>
+</tr>
+<tr>
+<td>reduce()</td>
+<td>并行整合所有 RDD 数据，如求和操作</td>
+<td>rdd.reduce((x,y)=&gt;x+y)</td>
+<td>9</td>
+</tr>
+<tr>
+<td>fold(zero)(func)</td>
+<td>和 reduce() 功能一样，但需要提供初始值</td>
+<td>rdd.fold(0)((x,y)=&gt;x+y)</td>
+<td>9</td>
+</tr>
+<tr>
+<td>foreach(func)</td>
+<td>对 RDD 的每个元素都使用特定函数</td>
+<td>rdd1.foreach(x=&gt;printIn(x))</td>
+<td>打印每一个元素</td>
+</tr>
+<tr>
+<td>saveAsTextFile(path)</td>
+<td>将数据集的元素，以文本的形式保存到文件系统中</td>
+<td>rdd1.saveAsTextFile(file://home/test)</td>
+<td></td>
+</tr>
+<tr>
+<td>saveAsSequenceFile(path)</td>
+<td>将数据集的元素，以顺序文件格式保存到指 定的目录下</td>
+<td>saveAsSequenceFile(hdfs://home/test)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<br>
+<h4 id="rdd血缘关系">RDD血缘关系</h4>
+<p>RDD 的最重要的特性之一就是血缘关系（Lineage )，它描述了一个 RDD 是如何从父 RDD 计算得来的。如果某个 RDD 丢失了，则可以根据血缘关系，从父 RDD 计算得来。</p>
+<p>下图给出了一个 RDD 执行过程的实例。系统从输入中逻辑上生成了 A 和 C 两个 RDD， 经过一系列转换操作，逻辑上生成了 F 这个 RDD。</p>
+<p>Spark 记录了 RDD 之间的生成和依赖关系。当 F 进行行动操作时，Spark 才会根据 RDD 的依赖关系生成 DAG，并从起点开始真正的计算。</p>
+<img src="/images/RDD_blood.png">
+<br>
+<h4 id="rdd依赖类型">RDD依赖类型</h4>
+<p>根据不同的转换操作，RDD 血缘关系的依赖分为窄依赖和宽依赖。窄依赖是指父 RDD 的每个分区都只被子 RDD 的一个分区所使用。宽依赖是指父 RDD 的每个分区都被多个子 RDD 的分区所依赖。</p>
+<img src="/images/RDD0.png">
+<br>
+<h4 id="rdd几大特性">RDD几大特性</h4>
+<p>五大特性：</p>
+<ul>
+<li>
+<p>A list of partitions</p>
+<p>RDD是由一系列partition组成(block块对应partition),textFile底层调用的是MR读取hdfs上的数据的方法</p>
+<p>默认一个block块对应一个split,split的大小和block大小一致,可以自己调整</p>
+</li>
+<li>
+<p>A function for computing each split</p>
+<p>函数作用在每一个partition(split)上</p>
+</li>
+<li>
+<p>A list of dependencies on other RDDs</p>
+<p>RDD之间有一系列的依赖关系(容错机制)</p>
+</li>
+<li>
+<p>Optionally, a Partitioner for key-value RDDs</p>
+<p>分区器作用在K,V格式的RDD上</p>
+</li>
+<li>
+<p>Optionally, a list of preferred locations to compute each  split on</p>
+<p>RDD 提供一系列最佳的计算位置</p>
+</li>
+</ul>
+<br>
+<h3 id="spark总体架构">Spark总体架构</h3>
+<br>
+<img src="/images/Spark_articture.png">
+<br>
+<h3 id="spark运行流程">Spark运行流程</h3>
+<br>
+<img src="/images/spark.png">
+<h3 id="windows配置spark">Windows配置Spark</h3>
+<br>
+<p>版本：Java8+Hadoop3.x+scala2.11+spark2.0(不包括2.4.2)</p>
+<p>清华源下载<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/">hadoop</a>和<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/spark/">spark</a>，解压后设置环境变量</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量名</th>
+<th style="text-align:center">变量值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HADOOP_HOME</td>
+<td style="text-align:center">D:\hadoop-3.3.3</td>
+</tr>
+<tr>
+<td style="text-align:center">SPARK_HOME</td>
+<td style="text-align:center">D:\spark-2.4.8</td>
+</tr>
+</tbody>
+</table>
+<p>安装pyspark</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install pyspark
+</span></span></code></pre></div><br>
+<h3 id="pyspark_wordcount">PySpark_Wordcount</h3>
+<br>
+<br>
 
 
 
@@ -954,19 +1221,19 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1653985397"></script>
-    <script src="/js/perfect-scrollbar.min.js?1653985397"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1653985397"></script>
-    <script src="/js/jquery.sticky.js?1653985397"></script>
-    <script src="/js/featherlight.min.js?1653985397"></script>
-    <script src="/js/highlight.pack.js?1653985397"></script>
+    <script src="/js/clipboard.min.js?1654001112"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654001112"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654001112"></script>
+    <script src="/js/jquery.sticky.js?1654001112"></script>
+    <script src="/js/featherlight.min.js?1654001112"></script>
+    <script src="/js/highlight.pack.js?1654001112"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1653985397"></script>
-    <script src="/js/learn.js?1653985397"></script>
-    <script src="/js/hugo-learn.js?1653985397"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654001112"></script>
+    <script src="/js/learn.js?1654001112"></script>
+    <script src="/js/hugo-learn.js?1654001112"></script>
     
         
-            <script src="/mermaid/mermaid.js?1653985397"></script>
+            <script src="/mermaid/mermaid.js?1654001112"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
