@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>大数据 :: 刘顿的博客</title>
+    <title>C language :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1653966426" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/bigdata/">
+  <body class="" data-url="/cpp/clang/">
     <nav id="sidebar" class="">
 
 
@@ -319,7 +319,7 @@
   
     
     <li data-nav-id="/cpp/" title="CPP" class="dd-item
-        
+        parent
         
         
         ">
@@ -348,8 +348,8 @@
   
     
     <li data-nav-id="/cpp/clang/" title="C language" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/cpp/clang/">
@@ -407,8 +407,8 @@
   
     
     <li data-nav-id="/bigdata/" title="大数据" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/bigdata/">
@@ -518,6 +518,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -528,7 +530,13 @@
             
           
           
-            <a href='/'></a> > 大数据
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/cpp/'>CPP</a> > C language
+          
+        
           
         
           
@@ -537,6 +545,31 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#常量与变量">常量与变量</a></li>
+        <li><a href="#数据类型">数据类型</a></li>
+        <li><a href="#数据存储">数据存储</a></li>
+        <li><a href="#分支循环语句">分支、循环语句</a></li>
+        <li><a href="#操作符">操作符</a></li>
+        <li><a href="#函数">函数</a></li>
+        <li><a href="#数组">数组</a></li>
+        <li><a href="#指针">指针</a></li>
+        <li><a href="#动态内存管理">动态内存管理</a></li>
+        <li><a href="#文件操作">文件操作</a></li>
+        <li><a href="#代码编译">代码编译</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -544,16 +577,71 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              C language
+            </h1>
           
 
         
 
 
 
-	<h3 id="大数据">大数据</h3>
+	<h3 id="常量与变量">常量与变量</h3>
+<br>
+<h4 id="变量">变量</h4>
+<h4 id="常量">常量</h4>
+<h4 id="常见关键字">常见关键字</h4>
+<h4 id="注释">注释</h4>
+<br>
+<h3 id="数据类型">数据类型</h3>
+<br>
+<h4 id="数据类型的本质与作用">数据类型的本质与作用</h4>
+<h4 id="基本类型">基本类型</h4>
+<h4 id="构造类型">构造类型</h4>
+<h4 id="空类型void">空类型void</h4>
+<h4 id="指针类型">指针类型</h4>
+<br>
+<h3 id="数据存储">数据存储</h3>
+<br>
+<h4 id="整型存储">整型存储</h4>
+<h4 id="浮点型存储">浮点型存储</h4>
+<h4 id="大小端">大小端</h4>
+<br>
+<h3 id="分支循环语句">分支、循环语句</h3>
+<br>
+<h4 id="分支语句">分支语句</h4>
+<h4 id="循环语句">循环语句</h4>
+<br>
+<h3 id="操作符">操作符</h3>
+<br>
+<h4 id="算术操作符">算术操作符</h4>
+<h4 id="移位操作符">移位操作符</h4>
+<h4 id="位操作符">位操作符</h4>
+<h4 id="赋值操作符">赋值操作符</h4>
+<h4 id="单目操作符">单目操作符</h4>
+<h4 id="关系操作符">关系操作符</h4>
+<h4 id="逻辑操作符">逻辑操作符</h4>
+<h4 id="条件操作符">条件操作符</h4>
+<h4 id="逗号表达式">逗号表达式</h4>
+<h4 id="下标引用函数调用和结构体成员">下标引用、函数调用和结构体成员</h4>
+<h4 id="表达式求值">表达式求值</h4>
+<br>
+<h3 id="函数">函数</h3>
+<br>
+<br>
+<h3 id="数组">数组</h3>
+<p><br><br></p>
+<h3 id="指针">指针</h3>
+<p><br><br></p>
+<h3 id="动态内存管理">动态内存管理</h3>
+<p><br><br></p>
+<h3 id="文件操作">文件操作</h3>
+<p><br><br></p>
+<h3 id="代码编译">代码编译</h3>
+<br>
 
 
 
@@ -563,8 +651,6 @@
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -745,6 +831,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -760,6 +847,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -767,6 +855,28 @@
                     
                     
 
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
             
         
@@ -781,26 +891,6 @@
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -810,9 +900,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -853,10 +940,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/cpp/cpp/" title="C&#43;&#43;"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/cpp/" title="CPP"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/bigdata/hadoop/" title="Hadoop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/cpp/cpp/" title="C&#43;&#43;" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
