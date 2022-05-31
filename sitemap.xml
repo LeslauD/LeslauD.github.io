@@ -31,9 +31,9 @@
   </url><url>
     <loc>http://example.org/cxx/clang/</loc>
   </url><url>
-    <loc>http://example.org/cxx/cpp/</loc>
-  </url><url>
     <loc>http://example.org/cxx/</loc>
+  </url><url>
+    <loc>http://example.org/cxx/cpp/</loc>
   </url><url>
     <loc>http://example.org/bigdata/hadoop/</loc>
   </url><url>
