@@ -12,22 +12,22 @@
     <title>BodyAssessment :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654001723" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654001723" rel="stylesheet">
-    <link href="/css/hybrid.css?1654001723" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654001723" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654001723" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654001723" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654001723" rel="stylesheet">
-    <link href="/css/theme.css?1654001723" rel="stylesheet">
-    <link href="/css/tabs.css?1654001723" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654001723" rel="stylesheet">
+    <link href="/css/nucleus.css?1654071571" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654071571" rel="stylesheet">
+    <link href="/css/hybrid.css?1654071571" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654071571" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654071571" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654071571" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654071571" rel="stylesheet">
+    <link href="/css/theme.css?1654071571" rel="stylesheet">
+    <link href="/css/tabs.css?1654071571" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654071571" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654001723" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654071571" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654001723"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654071571"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654001723"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654001723"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654071571"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654071571"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654001723"></script>
+<script type="text/javascript" src="/js/search.js?1654071571"></script>
 
     
   </div>
@@ -845,6 +845,270 @@
 <p><strong>2022-05-14 ——  2022-05-28</strong></p>
 <br>
 <h5 id="4尝试结合前面的三种模型">4、尝试结合前面的三种模型</h5>
+<h4 id="对点云图进行处理">对点云图进行处理</h4>
+<p><strong>2022-06-01——</strong></p>
+<br>
+<h5 id="思路">思路</h5>
+<p><strong>分辨率、边缘平滑</strong></p>
+<p>Kinect相机→深度图/彩色图→点云→插值提高分辨率、保持边缘平滑、滤波→映射到二维深度图/灰度图</p>
+<br>
+<h5 id="整理获取图像的流程">整理获取图像的流程</h5>
+<p>启动界面BdAssessment，在其构造函数中新建了一个camera实例，以及一个控制相机显示的QTimer定时器</p>
+<p>定时器发出超时信号，触发槽函数cameraDisplay()</p>
+<p>start(0)：时间间隔0毫秒，一旦窗口系统事件队列中的所有事件都已经被处理完，该QTimer就会到时间了，进行cameraDisplay()</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>BdAssessment<span style="color:#f92672">::</span>BdAssessment(QWidget <span style="color:#f92672">*</span>parent)<span style="color:#f92672">:</span> QMainWindow(parent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	camera <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Camera();
+</span></span><span style="display:flex;"><span>    cameraDisplayTimer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> QTimer();
+</span></span><span style="display:flex;"><span>    connect(cameraDisplayTimer, SIGNAL(timeout()), <span style="color:#66d9ef">this</span>, SLOT(cameraDisplay()));
+</span></span><span style="display:flex;"><span>    cameraDisplayTimer<span style="color:#f92672">-&gt;</span>start(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>启动Kinect设备</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>Camera<span style="color:#f92672">::</span>Camera()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	openDevice();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>进入cameraDisplay()</strong></p>
+<ul>
+<li>
+<p>camera→getFrame() 获取一帧图像</p>
+<p>getFrame()是一个重载函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>UINT16<span style="color:#f92672">*</span> <span style="color:#a6e22e">getFrame</span>(<span style="color:#66d9ef">float</span> floorH);
+</span></span><span style="display:flex;"><span>UINT16<span style="color:#f92672">*</span> <span style="color:#a6e22e">getFrame</span>(<span style="color:#66d9ef">float</span> floorH, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&amp;</span> isBody);
+</span></span><span style="display:flex;"><span>BYTE<span style="color:#f92672">*</span> <span style="color:#a6e22e">getFrame</span>(<span style="color:#66d9ef">float</span> floorH, <span style="color:#66d9ef">int</span> mode);
+</span></span></code></pre></div><p>这里用的是第一个，getFrame(setting-&gt;getHeight())，floorH是相机高度</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> Setting<span style="color:#f92672">::</span>getHeight()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> ui.heightValue<span style="color:#f92672">-&gt;</span>text().toFloat();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><img src="/images/cameraHeight.png">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>IDepthFrame<span style="color:#f92672">*</span> pDepthFrame <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>IColorFrame<span style="color:#f92672">*</span> pColorFrame <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;		
+</span></span><span style="display:flex;"><span>IDepthFrameReader<span style="color:#f92672">*</span> m_pDepthFrameReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>IColorFrameReader<span style="color:#f92672">*</span> m_pColorFrameReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span></code></pre></div><p><strong>IDepthFrame</strong> 和 <strong>IColorFrame</strong> 是Kinect中的两个类，分别用来<strong>存储深度图像和彩色图像</strong></p>
+<p>IDepthFrameReader和IColorFrameReader 是Kinect中的两个类，分别用来<strong>读取深度图像和彩色图像</strong></p>
+<p>1）读取深度图像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>hr <span style="color:#f92672">=</span> m_pDepthFrameReader<span style="color:#f92672">-&gt;</span>AcquireLatestFrame(<span style="color:#f92672">&amp;</span>pDepthFrame);
+</span></span></code></pre></div><p>返回值hr表示读取是否成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (SUCCEEDED(hr))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (frameId <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">149</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        frameId<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        SafeRelease(pDepthFrame);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> depthBuffers <span style="color:#f92672">+</span> (frameId <span style="color:#f92672">%</span> <span style="color:#ae81ff">150</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    hr <span style="color:#f92672">=</span> pDepthFrame<span style="color:#f92672">-&gt;</span>CopyFrameDataToArray(depthHeight <span style="color:#f92672">*</span> depthWidth, depthBuffers <span style="color:#f92672">+</span> frameId <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>CopyFrameDataToArray将Kinect中的帧数据转换成一维数组(depthBuffers)，</p>
+<p>depthHeight * depthWidth(424*512)为一帧的像素个数</p>
+<p>frameId（初值为0）用来记录帧数，最多150帧（行走图共有150帧）,存满150帧就返回depthBuffers，然后一帧一帧地返回</p>
+<p>2）读取彩色图像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (SUCCEEDED(hr))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	hr <span style="color:#f92672">=</span> m_pColorFrameReader<span style="color:#f92672">-&gt;</span>AcquireLatestFrame(<span style="color:#f92672">&amp;</span>pColorFrame);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (SUCCEEDED(hr))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    hr <span style="color:#f92672">=</span> pColorFrame<span style="color:#f92672">-&gt;</span>CopyConvertedFrameDataToArray(<span style="color:#ae81ff">1080</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1920</span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>, <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>BYTE<span style="color:#f92672">*&gt;</span>(i_rgb.data), 														ColorImageFormat<span style="color:#f92672">::</span>ColorImageFormat_Bgra);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>SafeRelease(pDepthFrame);
+</span></span><span style="display:flex;"><span>SafeRelease(pColorFrame);
+</span></span></code></pre></div><p>彩色图像是bgra四通道格式的，尺寸为1080*1920，存储到 cv::Mat i_rgb; 中</p>
+<p>3）数据预处理</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (SUCCEEDED(hr))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> h <span style="color:#f92672">=</span> floorH;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> depthHeight; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> depthWidth; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            DepthSpacePoint depthSpacePoint;
+</span></span><span style="display:flex;"><span>            depthSpacePoint <span style="color:#f92672">=</span> { <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(j), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(i) };
+</span></span><span style="display:flex;"><span>            UINT16 currDepth <span style="color:#f92672">=</span> depthBuffers[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> frameId <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>]; 
+</span></span><span style="display:flex;"><span>            CameraSpacePoint cameraPoint <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };
+</span></span><span style="display:flex;"><span>            ColorSpacePoint colorPoint <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };
+</span></span><span style="display:flex;"><span>            m_pMap<span style="color:#f92672">-&gt;</span>MapDepthPointToCameraSpace(depthSpacePoint, currDepth, <span style="color:#f92672">&amp;</span>cameraPoint);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (cameraPoint.Y <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>h <span style="color:#f92672">||</span> j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">99</span> <span style="color:#f92672">||</span> j<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">99</span><span style="color:#f92672">+</span><span style="color:#ae81ff">318</span>)
+</span></span><span style="display:flex;"><span>            	depthBuffers[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> frameId <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    UINT16<span style="color:#f92672">*</span> img <span style="color:#f92672">=</span> depthBuffers <span style="color:#f92672">+</span> frameId <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/***************************************************************************************************/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    BYTE<span style="color:#f92672">*</span> label <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BYTE[depthHeight <span style="color:#f92672">*</span> depthWidth]();
+</span></span><span style="display:flex;"><span>    label[seedY <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> seedX] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> points;
+</span></span><span style="display:flex;"><span>    points.push(seedX);
+</span></span><span style="display:flex;"><span>    points.push(seedY);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> nearby[] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> nn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>points.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> points.front();
+</span></span><span style="display:flex;"><span>        points.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> points.front();
+</span></span><span style="display:flex;"><span>        points.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> img[y <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> x];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> nearby[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> yy <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> nearby[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>            xx <span style="color:#f92672">=</span> min(max(<span style="color:#ae81ff">0</span>, xx), depthWidth <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            yy <span style="color:#f92672">=</span> min(max(<span style="color:#ae81ff">0</span>, yy), depthHeight <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (abs(img[yy <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> xx] <span style="color:#f92672">-</span> value) <span style="color:#f92672">&lt;</span> d <span style="color:#f92672">&amp;&amp;</span> label[yy<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> xx] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                label[yy <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> xx] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                nn<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                points.push(xx);
+</span></span><span style="display:flex;"><span>                points.push(yy);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> depthHeight; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> depthWidth; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>   	 		<span style="color:#66d9ef">if</span> (label[i<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    			img[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/***************************************************************************************************/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (record)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*if (colorFlag)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            cv::Mat i_rgb2;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            cvtColor(i_rgb, i_rgb2, CV_RGBA2RGB);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            i_rgbs.push_back(i_rgb2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        }*/</span>
+</span></span><span style="display:flex;"><span>        	frameId<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> img;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>DepthSpacePoint，CameraDepthPoint，ColorDepthPoint是kinect中的一个结构体</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_DepthSpacePoint</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> X;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Y;
+</span></span><span style="display:flex;"><span>    } 	DepthSpacePoint;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_CameraSpacePoint</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> X;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Y;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Z;
+</span></span><span style="display:flex;"><span>    } 	CameraSpacePoint;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_ColorSpacePoint</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> X;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Y;
+</span></span><span style="display:flex;"><span>    } 	ColorSpacePoint;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>depthSpacePoint <span style="color:#f92672">=</span> { <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(j), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(i) };
+</span></span><span style="display:flex;"><span>CameraSpacePoint cameraPoint <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };
+</span></span><span style="display:flex;"><span>ColorSpacePoint colorPoint <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };		
+</span></span></code></pre></div><p>j是列索引，i是行索引，分别对应X和Y坐标，所以坐标系如下：</p>
+<img src="/images/2dCoordinate.png">
+<p>currDepth为深度图像的深度值</p>
+<p>将深度坐标转换为相机坐标，Z即为深度值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>m_pMap<span style="color:#f92672">-&gt;</span>MapDepthPointToCameraSpace(depthSpacePoint, currDepth, <span style="color:#f92672">&amp;</span>cameraPoint);
+</span></span></code></pre></div><img src="/images/3dCoordinate.png">
+<p>将比人体所在区域高和低的部分的深度值置为0</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (cameraPoint.Y <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>h <span style="color:#f92672">||</span> j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">99</span> <span style="color:#f92672">||</span> j<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">99</span><span style="color:#f92672">+</span><span style="color:#ae81ff">318</span>)
+</span></span><span style="display:flex;"><span>            	depthBuffers[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> frameId <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>取当前的帧</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>UINT16<span style="color:#f92672">*</span> img <span style="color:#f92672">=</span> depthBuffers <span style="color:#f92672">+</span> frameId <span style="color:#f92672">*</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>;
+</span></span></code></pre></div><p>区域增长分割人体(队列、深度差阈值)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>BYTE<span style="color:#f92672">*</span> label <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BYTE[depthHeight <span style="color:#f92672">*</span> depthWidth]();
+</span></span><span style="display:flex;"><span>label[seedY <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> seedX] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> points;
+</span></span><span style="display:flex;"><span>points.push(seedX);
+</span></span><span style="display:flex;"><span>points.push(seedY);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> nearby[] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> };
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> nn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>points.empty())
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> points.front();
+</span></span><span style="display:flex;"><span>    points.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> points.front();
+</span></span><span style="display:flex;"><span>    points.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> img[y <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> x];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> nearby[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> yy <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> nearby[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        xx <span style="color:#f92672">=</span> min(max(<span style="color:#ae81ff">0</span>, xx), depthWidth <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        yy <span style="color:#f92672">=</span> min(max(<span style="color:#ae81ff">0</span>, yy), depthHeight <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (abs(img[yy <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> xx] <span style="color:#f92672">-</span> value) <span style="color:#f92672">&lt;</span> d <span style="color:#f92672">&amp;&amp;</span> label[yy<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> xx] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            label[yy <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> xx] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            nn<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            points.push(xx);
+</span></span><span style="display:flex;"><span>            points.push(yy);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> depthHeight; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> depthWidth; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (label[i<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            img[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p><strong>返回分割人体后的帧</strong>，record表示是否录像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (record)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	frameId<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> img;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>回到cameraDisplay()</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>UINT16<span style="color:#f92672">*</span> depthImg <span style="color:#f92672">=</span> camera<span style="color:#f92672">-&gt;</span>getFrame(setting<span style="color:#f92672">-&gt;</span>getHeight());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (depthImg <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>UINT16 depth <span style="color:#f92672">=</span> depthImg[seedY<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> seedX];
+</span></span><span style="display:flex;"><span>DepthSpacePoint depthSpacePoint <span style="color:#f92672">=</span> { <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(seedX), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(seedY) };
+</span></span><span style="display:flex;"><span>CameraSpacePoint cameraPoint <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };
+</span></span><span style="display:flex;"><span>camera<span style="color:#f92672">-&gt;</span>m_pMap<span style="color:#f92672">-&gt;</span>MapDepthPointToCameraSpace(depthSpacePoint, depth, <span style="color:#f92672">&amp;</span>cameraPoint);<span style="color:#75715e">//将深度图坐标转换到相机坐标
+</span></span></span></code></pre></div><p>depthImg是camera-&gt;getFrame()返回的分割出人体后的深度图</p>
+<p>seedX = depthWidth / 2;      seedY = depthHeight / 2;   是中心种子点的坐标，depth为其深度值</p>
+<p>cameraPoint为人体种子点对应的相机坐标（X,Y,Z）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (cameraPoint.Z <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>std<span style="color:#f92672">::</span>numeric_limits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;::</span>infinity())
+</span></span><span style="display:flex;"><span>    ui.label_14<span style="color:#f92672">-&gt;</span>setText(QStringLiteral(<span style="color:#e6db74">&#34;未检测出物体&#34;</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>    ui.label_14<span style="color:#f92672">-&gt;</span>setText(QStringLiteral(<span style="color:#e6db74">&#34;距离： &#34;</span>) <span style="color:#f92672">+</span> QString<span style="color:#f92672">::</span>number(cameraPoint.Z) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;m&#34;</span>);
+</span></span><span style="display:flex;"><span>    tempDis <span style="color:#f92672">=</span> cameraPoint.Z;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>根据种子点深度值判断是否检测出人体，</p>
+<p>tempDis为种子点离相机的距离，单位为m，后面需要用来判断拍摄的照片是否符合要求</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (tempDis <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">230</span> <span style="color:#f92672">||</span> tempDis <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">170</span>) {
+</span></span><span style="display:flex;"><span>    mess <span style="color:#f92672">=</span> QStringLiteral(<span style="color:#e6db74">&#34;请调整您与摄像头的距离！&#34;</span>);
+</span></span><span style="display:flex;"><span>    flag <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果帧数达到150，保存录像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (camera<span style="color:#f92672">-&gt;</span>frameId <span style="color:#f92672">==</span> <span style="color:#ae81ff">150</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    cameraDisplayTimer<span style="color:#f92672">-&gt;</span>stop();
+</span></span><span style="display:flex;"><span>    cameraDisplayTimer<span style="color:#f92672">-&gt;</span>start(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    saveVideo();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>将深度值转换为灰度值[0,255]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    depthBuffers[i] <span style="color:#f92672">=</span> depthImg[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>;
+</span></span></code></pre></div><p>将种子点附近的值置为255</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> seedY <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>; i <span style="color:#f92672">&lt;</span> seedY <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> seedX <span style="color:#f92672">-</span> <span style="color:#ae81ff">20</span>; j <span style="color:#f92672">&lt;</span> seedX <span style="color:#f92672">+</span> <span style="color:#ae81ff">20</span>; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        depthBuffers[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> seedY <span style="color:#f92672">-</span> <span style="color:#ae81ff">20</span>; i <span style="color:#f92672">&lt;</span> seedY <span style="color:#f92672">+</span> <span style="color:#ae81ff">20</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> seedX <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>; j <span style="color:#f92672">&lt;</span> seedX <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        depthBuffers[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>;
+</span></span></code></pre></div><p>显示</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>QImage depthImgQ <span style="color:#f92672">=</span> QImage(depthBuffers, depthWidth, depthHeight, QImage<span style="color:#f92672">::</span>Format_Grayscale8);
+</span></span><span style="display:flex;"><span>QImage depthImgROI <span style="color:#f92672">=</span> depthImgQ.copy(depthWidth <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> depthHeight <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">0</span>, depthHeight <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">4</span>, depthHeight);
+</span></span><span style="display:flex;"><span>depthImgROI <span style="color:#f92672">=</span> depthImgROI.scaled(ui.depthFig<span style="color:#f92672">-&gt;</span>width(), ui.depthFig<span style="color:#f92672">-&gt;</span>height());
+</span></span><span style="display:flex;"><span>ui.depthFig<span style="color:#f92672">-&gt;</span>setPixmap(QPixmap<span style="color:#f92672">::</span>fromImage(depthImgROI));
+</span></span></code></pre></div></li>
+<li></li>
+</ul>
 
 
 
@@ -1156,19 +1420,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654001723"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654001723"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654001723"></script>
-    <script src="/js/jquery.sticky.js?1654001723"></script>
-    <script src="/js/featherlight.min.js?1654001723"></script>
-    <script src="/js/highlight.pack.js?1654001723"></script>
+    <script src="/js/clipboard.min.js?1654071571"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654071571"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654071571"></script>
+    <script src="/js/jquery.sticky.js?1654071571"></script>
+    <script src="/js/featherlight.min.js?1654071571"></script>
+    <script src="/js/highlight.pack.js?1654071571"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654001723"></script>
-    <script src="/js/learn.js?1654001723"></script>
-    <script src="/js/hugo-learn.js?1654001723"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654071571"></script>
+    <script src="/js/learn.js?1654071571"></script>
+    <script src="/js/hugo-learn.js?1654071571"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654001723"></script>
+            <script src="/mermaid/mermaid.js?1654071571"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
