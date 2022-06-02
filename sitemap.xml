@@ -5,6 +5,9 @@
     <loc>http://example.org/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
+    <loc>http://example.org/programs/bodyassessment/</loc>
+    <lastmod>2022-05-29T20:05:01+08:00</lastmod>
+  </url><url>
     <loc>http://example.org/resume/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
@@ -57,7 +60,7 @@
   </url><url>
     <loc>http://example.org/bigdata/</loc>
   </url><url>
-    <loc>http://example.org/programs/bodyassessment/</loc>
+    <loc>http://example.org/programs/bodyassessment/imageprocess/</loc>
   </url><url>
     <loc>http://example.org/categories/</loc>
   </url><url>
