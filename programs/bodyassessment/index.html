@@ -12,22 +12,22 @@
     <title>BodyAssessment :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654097001" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654097001" rel="stylesheet">
-    <link href="/css/hybrid.css?1654097001" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654097001" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654097001" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654097001" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654097001" rel="stylesheet">
-    <link href="/css/theme.css?1654097001" rel="stylesheet">
-    <link href="/css/tabs.css?1654097001" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654097001" rel="stylesheet">
+    <link href="/css/nucleus.css?1654144663" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654144663" rel="stylesheet">
+    <link href="/css/hybrid.css?1654144663" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654144663" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654144663" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654144663" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654144663" rel="stylesheet">
+    <link href="/css/theme.css?1654144663" rel="stylesheet">
+    <link href="/css/tabs.css?1654144663" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654144663" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654097001" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654144663" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654097001"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654144663"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654097001"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654097001"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654144663"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654144663"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654097001"></script>
+<script type="text/javascript" src="/js/search.js?1654144663"></script>
 
     
   </div>
@@ -1369,7 +1369,7 @@
 </span></span><span style="display:flex;"><span>			iProBack<span style="color:#f92672">-&gt;</span>start();
 </span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>}		
-</span></span></code></pre></div><h5 id="imageprocess类">ImageProcess类</h5>
+</span></span></code></pre></div><h5 id="图像处理类imageprocess">图像处理类（ImageProcess）</h5>
 <p>将深度图像转换成点云是在这里实现的</p>
 <br>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ImageProcess<span style="color:#f92672">::</span>run()
@@ -1447,7 +1447,9 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><br>
 <p>result = extractBody();</p>
-<p>extractBody：</p>
+</li>
+<li>
+<p><strong>extractBody</strong>：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// ------------------------区域生长----------------------------
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
 </span></span><span style="display:flex;"><span>BYTE<span style="color:#f92672">*</span> label <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BYTE[depthHeight <span style="color:#f92672">*</span> depthWidth](); 
@@ -1512,11 +1514,11 @@
 </span></span><span style="display:flex;"><span>            depthBuffer2[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>利用队列和深度差进行区域生长分割人体</p>
+</span></span></code></pre></div><p>利用队列和深度差进行区域生长分割人体，结果存储至<strong>depthBuffer2</strong></p>
 <p>up,down,left,right分别为人体(label==1)的上下左右坐标极值(即人体的第一/最后一行/列)</p>
 <p>high和low为深度值的最大最小(需要至少出现5次,出现5次以下的深度值不予考虑)</p>
 <br>
-<p>平滑处理，可以用均值滤波、高斯滤波、双边滤波等</p>
+<p>平滑处理，可以用均值滤波、高斯滤波、双边滤波等，结果存储至<strong>depthBuffer3</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//--------------------------图像平滑处理-----------------------------(平滑只是简单的均值滤波，用双边滤波可以改进)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> depthBuffer3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[depthHeight <span style="color:#f92672">*</span> depthWidth]();
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;</span> depthHeight<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>)
@@ -1542,12 +1544,276 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><br>
 <p>计算点云坐标</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> depthHeight; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> depthWidth; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (depthBuffer3[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        DepthSpacePoint depthSpacePoint;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (depthHeight <span style="color:#f92672">==</span> <span style="color:#ae81ff">424</span>)
+</span></span><span style="display:flex;"><span>            depthSpacePoint <span style="color:#f92672">=</span> { <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(j), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(i) };
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            depthSpacePoint <span style="color:#f92672">=</span> { <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(i), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(j) };
+</span></span><span style="display:flex;"><span>        UINT16 depth <span style="color:#f92672">=</span> depthBuffer3[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j];
+</span></span><span style="display:flex;"><span>        CameraSpacePoint cameraSpacePoint <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">0.0f</span> };
+</span></span><span style="display:flex;"><span>        m_pMap<span style="color:#f92672">-&gt;</span>MapDepthPointToCameraSpace(depthSpacePoint, depth, <span style="color:#f92672">&amp;</span>cameraSpacePoint);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (depthHeight<span style="color:#f92672">==</span><span style="color:#ae81ff">424</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> cameraSpacePoint.X;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cameraSpacePoint.Y;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> cameraSpacePoint.Z;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> cameraSpacePoint.Y;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>cameraSpacePoint.X;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> cameraSpacePoint.Z;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (depth <span style="color:#f92672">&gt;=</span> low <span style="color:#f92672">&amp;&amp;</span> depth <span style="color:#f92672">&lt;=</span> high)
+</span></span><span style="display:flex;"><span>            depthBuffer2[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> (depthBuffer3[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">-</span> low) <span style="color:#f92672">*</span> <span style="color:#ae81ff">256</span> <span style="color:#f92672">/</span> (high <span style="color:#f92672">-</span> low);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            depthBuffer2[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>一维数组cloudPoints：</p>
+<table>
+<thead>
+<tr>
+<th>X1</th>
+<th>Y1</th>
+<th>Z1</th>
+<th>X2</th>
+<th>Y2</th>
+<th>Z2</th>
+<th>&hellip;</th>
+<th>&hellip;</th>
+<th>&hellip;</th>
+<th>Xn</th>
+<th>Yn</th>
+<th>Zn</th>
+</tr>
+</thead>
+</table>
+<p>根据像素点的下标（i,j）生成depthSpacePoint(x,y)，然后利用depthSpacePoint和深度值depth生成相机空间坐标cameraSpacePoint(x,y,z)</p>
+<p>点云坐标即为相机空间坐标</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> cameraSpacePoint.X;
+</span></span><span style="display:flex;"><span>cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cameraSpacePoint.Y;
+</span></span><span style="display:flex;"><span>cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> cameraSpacePoint.Z;
+</span></span></code></pre></div><br>
+<p>对depthBuffer2进行归一化[0,256]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (depth <span style="color:#f92672">&gt;=</span> low <span style="color:#f92672">&amp;&amp;</span> depth <span style="color:#f92672">&lt;=</span> high)
+</span></span><span style="display:flex;"><span>    depthBuffer2[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> (depthBuffer3[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">-</span> low) <span style="color:#f92672">*</span> <span style="color:#ae81ff">256</span> <span style="color:#f92672">/</span> (high <span style="color:#f92672">-</span> low);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    depthBuffer2[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><br>
+<p>遍历每一个像素点，如果其左右两个点的深度为0，就将其坐标置为(0，0，0)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> depthHeight<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> depthWidth<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> z1 <span style="color:#f92672">=</span> cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> z2 <span style="color:#f92672">=</span> cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> z3 <span style="color:#f92672">=</span> cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (z1 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> z2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> z3 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><br>
+<p>存储人体所在的区域的数据</p>
+<p>height为人体高度，weidth为人体宽度，一维数组input2的前四个值为人体的up\down\left\right</p>
+<p>存储至文件”<strong>DepthPP_&hellip;&hellip;..</strong>“</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> down <span style="color:#f92672">-</span> up <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> right <span style="color:#f92672">-</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UINT16<span style="color:#f92672">*</span> input2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UINT16[height<span style="color:#f92672">*</span>width <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>]();
+</span></span><span style="display:flex;"><span>input2[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> up;
+</span></span><span style="display:flex;"><span>input2[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> down;
+</span></span><span style="display:flex;"><span>input2[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> left;
+</span></span><span style="display:flex;"><span>input2[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> right;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> height; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> width; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> j;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> up <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>        input2[i<span style="color:#f92672">*</span>width <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> depthBuffer2[y<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> x];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>f5.write(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(input2), (height<span style="color:#f92672">*</span> width <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>) <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(UINT16));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span>[] input2;
+</span></span></code></pre></div><img src="/images/people.png">
 <br>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>deepLearning();
-</span></span><span style="display:flex;"><span>compressData();
-</span></span></code></pre></div></li>
+<p>同上</p>
+<p>存储至文件”<strong>DepthP_&hellip;&hellip;..</strong>“</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> height1, height2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (subId <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    height1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, height2 <span style="color:#f92672">=</span> height;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (subId <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    height1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, height2 <span style="color:#f92672">=</span> height;
+</span></span><span style="display:flex;"><span>down <span style="color:#f92672">=</span> up <span style="color:#f92672">+</span> height2 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>up <span style="color:#f92672">=</span> up <span style="color:#f92672">+</span> height1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>height <span style="color:#f92672">=</span> height2 <span style="color:#f92672">-</span> height1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UINT16<span style="color:#f92672">*</span> input <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UINT16[height <span style="color:#f92672">*</span> width <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>]();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>input[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> up;
+</span></span><span style="display:flex;"><span>input[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> down;
+</span></span><span style="display:flex;"><span>input[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> left;
+</span></span><span style="display:flex;"><span>input[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> right;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> height; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> width; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> j;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> up <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>        input[i<span style="color:#f92672">*</span>width <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> depthBuffer2[y<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> x];
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>f4.write(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(input), (height<span style="color:#f92672">*</span> width <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>) <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(UINT16));
+</span></span></code></pre></div><br>
+</li>
+<li>
+<p><strong>outputFile()</strong>;</p>
+</li>
 </ul>
-
+<p>将点云cloudPoint存储至文件”<strong>Cloud_&hellip;&hellip;</strong>“</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//输出分割后的点云
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ImageProcess<span style="color:#f92672">::</span>outputFile()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	f3.write(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(cloudPoints), depthHeight <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(FLOAT));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>  <br>
+<ul>
+<li>
+<p>deepLearning();</p>
+<p>深度学习预测关键点</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ImageProcess<span style="color:#f92672">::</span>deepLearning()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	string fileName;
+</span></span><span style="display:flex;"><span>	QFileInfo file;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (subId <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>		fileName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;DepthPP_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_1.dat&#34;</span>;
+</span></span><span style="display:flex;"><span>		file.setFile(QString<span style="color:#f92672">::</span>fromStdString(<span style="color:#e6db74">&#34;./Data/DepthP_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_1.dat&#34;</span>));
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (subId <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>		fileName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;DepthP_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_2.dat&#34;</span>;
+</span></span><span style="display:flex;"><span>		file.setFile(QString<span style="color:#f92672">::</span>fromStdString(<span style="color:#e6db74">&#34;./Data/DepthP_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_2.dat&#34;</span>));
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (subId <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>){
+</span></span><span style="display:flex;"><span>		fileName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;DepthP_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_3.dat&#34;</span>;
+</span></span><span style="display:flex;"><span>		file.setFile(QString<span style="color:#f92672">::</span>fromStdString(<span style="color:#e6db74">&#34;./Data/DepthP_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_3.dat&#34;</span>));
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//当正面 背面 走路全录入后 一起送进网络进行预测
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> (file.isFile())
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		string mCommand <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;predict/predict &#34;</span>;
+</span></span><span style="display:flex;"><span>		mCommand <span style="color:#f92672">+=</span> fileName;
+</span></span><span style="display:flex;"><span>		WinExec(mCommand.c_str(), SW_HIDE);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><br>
+</li>
+<li>
+<p>compressData();</p>
+<p>压缩点云文件</p>
+<p>compress(buf, &amp;bufLen, cloud, cloudLen)</p>
+<p>compress是第三方库zlib中压缩数据的函数</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//压缩点云文件、删除原始深度图像数据、压缩分割后深度图像视频
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ImageProcess<span style="color:#f92672">::</span>compressData()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> Len;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (subId <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>		Len <span style="color:#f92672">=</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">150</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(FLOAT);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		Len <span style="color:#f92672">=</span> <span style="color:#ae81ff">424</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(FLOAT);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	string cloudName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./Data/Cloud_&#34;</span> <span style="color:#f92672">+</span> to_string(fileId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> to_string(subId) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.dat&#34;</span>;
+</span></span><span style="display:flex;"><span>	f2.open(cloudName, ios<span style="color:#f92672">::</span>binary);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> cloud <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>[Len];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> cloudLen <span style="color:#f92672">=</span> Len;
+</span></span><span style="display:flex;"><span>	f2.read(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(cloud), cloudLen);
+</span></span><span style="display:flex;"><span>	f2.close();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> buf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span>[Len];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> bufLen <span style="color:#f92672">=</span> Len;
+</span></span><span style="display:flex;"><span>	compress(buf, <span style="color:#f92672">&amp;</span>bufLen, cloud, cloudLen);
+</span></span><span style="display:flex;"><span>	f3.open(cloudName, ios<span style="color:#f92672">::</span>binary);
+</span></span><span style="display:flex;"><span>	f3.write(<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(buf), bufLen);
+</span></span><span style="display:flex;"><span>	f3.close();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">delete</span>[] buf;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">delete</span>[] cloud;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="显示点云dataprocess项目">显示点云（dataProcess项目）</h5>
+<br>
+<p>用PCL渲染点云</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//-------------------------------点云渲染------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cloud<span style="color:#f92672">-&gt;</span>clear();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> dephtHeight; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> depthWidth; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (depthBuffer[i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>			cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>			cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">float</span> cx, cy, cz;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (cameraMap<span style="color:#f92672">-&gt;</span>convertDepthToXYZ(j, i, depthBuffer[i<span style="color:#f92672">*</span>depthWidth<span style="color:#f92672">+</span>j], cx, cy, cz))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>cx;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cy;
+</span></span><span style="display:flex;"><span>            cloudPoints[(i <span style="color:#f92672">*</span> depthWidth <span style="color:#f92672">+</span> j) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> cz;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> dephtHeight <span style="color:#f92672">*</span> depthWidth; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (cloudPoints[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>   		<span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    pcl<span style="color:#f92672">::</span>PointXYZ p;
+</span></span><span style="display:flex;"><span>    p.x <span style="color:#f92672">=</span> cloudPoints[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    p.y <span style="color:#f92672">=</span> cloudPoints[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    p.z <span style="color:#f92672">=</span> cloudPoints[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    cloud<span style="color:#f92672">-&gt;</span>push_back(p);
+</span></span><span style="display:flex;"><span>    centerX <span style="color:#f92672">+=</span> p.x;
+</span></span><span style="display:flex;"><span>    centerY <span style="color:#f92672">+=</span> p.y;
+</span></span><span style="display:flex;"><span>    centerZ <span style="color:#f92672">+=</span> p.z;
+</span></span><span style="display:flex;"><span>    id<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (id <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    centerX <span style="color:#f92672">=</span> centerX <span style="color:#f92672">/</span> id;
+</span></span><span style="display:flex;"><span>    centerY <span style="color:#f92672">=</span> centerY <span style="color:#f92672">/</span> id;
+</span></span><span style="display:flex;"><span>    centerZ <span style="color:#f92672">=</span> centerZ <span style="color:#f92672">/</span> id;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    centerX <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    centerY <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    centerZ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>viewer<span style="color:#f92672">-&gt;</span>setCameraPosition(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, centerX, centerY, centerZ, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>viewer<span style="color:#f92672">-&gt;</span>setBackgroundColor(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>viewer<span style="color:#f92672">-&gt;</span>removeAllPointClouds();
+</span></span><span style="display:flex;"><span>viewer<span style="color:#f92672">-&gt;</span>addPointCloud(cloud, <span style="color:#e6db74">&#34;cloud&#34;</span>);
+</span></span><span style="display:flex;"><span>ui.body3D<span style="color:#f92672">-&gt;</span>update();
+</span></span></code></pre></div>
 
 
 
@@ -1959,19 +2225,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654097001"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654097001"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654097001"></script>
-    <script src="/js/jquery.sticky.js?1654097001"></script>
-    <script src="/js/featherlight.min.js?1654097001"></script>
-    <script src="/js/highlight.pack.js?1654097001"></script>
+    <script src="/js/clipboard.min.js?1654144663"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654144663"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654144663"></script>
+    <script src="/js/jquery.sticky.js?1654144663"></script>
+    <script src="/js/featherlight.min.js?1654144663"></script>
+    <script src="/js/highlight.pack.js?1654144663"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654097001"></script>
-    <script src="/js/learn.js?1654097001"></script>
-    <script src="/js/hugo-learn.js?1654097001"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654144663"></script>
+    <script src="/js/learn.js?1654144663"></script>
+    <script src="/js/hugo-learn.js?1654144663"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654097001"></script>
+            <script src="/mermaid/mermaid.js?1654144663"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
