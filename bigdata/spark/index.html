@@ -12,22 +12,22 @@
     <title>Spark :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654331656" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654331656" rel="stylesheet">
-    <link href="/css/hybrid.css?1654331656" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654331656" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654331656" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654331656" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654331656" rel="stylesheet">
-    <link href="/css/theme.css?1654331656" rel="stylesheet">
-    <link href="/css/tabs.css?1654331656" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654331656" rel="stylesheet">
+    <link href="/css/nucleus.css?1654343372" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654343372" rel="stylesheet">
+    <link href="/css/hybrid.css?1654343372" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654343372" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654343372" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654343372" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654343372" rel="stylesheet">
+    <link href="/css/theme.css?1654343372" rel="stylesheet">
+    <link href="/css/tabs.css?1654343372" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654343372" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654331656" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654343372" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654331656"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654343372"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654331656"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654331656"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654343372"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654343372"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654331656"></script>
+<script type="text/javascript" src="/js/search.js?1654343372"></script>
 
     
   </div>
@@ -763,6 +763,7 @@
         <li><a href="#spark总体架构">Spark总体架构</a></li>
         <li><a href="#spark运行流程">Spark运行流程</a></li>
         <li><a href="#windows配置spark">Windows配置Spark</a></li>
+        <li><a href="#docker--spark">Docker&ndash;Spark</a></li>
         <li><a href="#pyspark_wordcount">PySpark_Wordcount</a></li>
       </ul>
     </li>
@@ -1092,20 +1093,47 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
 <br>
 <p><a href="https://blog.csdn.net/qq_52491380/article/details/120787037">https://blog.csdn.net/qq_52491380/article/details/120787037</a></p>
 <br>
+<br>
+<h3 id="docker--spark">Docker&ndash;Spark</h3>
+<p>安装docker后运行如下命令</p>
+<p>jupyter/pyspark-notebook 是docker官方镜像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run -p 8888:8888 jupyter/pyspark-notebook
+</span></span></code></pre></div><p>将docker容器内8888端口映射到本地的8888端口</p>
+<br>
 <h3 id="pyspark_wordcount">PySpark_Wordcount</h3>
 <br>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pyspark <span style="color:#f92672">import</span> SparkConf, SparkContext
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pyspark.storagelevel <span style="color:#f92672">import</span> StorageLevel
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> 
 </span></span><span style="display:flex;"><span>conf <span style="color:#f92672">=</span> SparkConf()<span style="color:#f92672">.</span>setMaster(<span style="color:#e6db74">&#34;local&#34;</span>)<span style="color:#f92672">.</span>setAppName(<span style="color:#e6db74">&#34;wordcount&#34;</span>)
 </span></span><span style="display:flex;"><span>sc <span style="color:#f92672">=</span> SparkContext(conf<span style="color:#f92672">=</span>conf)
 </span></span><span style="display:flex;"><span>sc<span style="color:#f92672">.</span>setCheckpointDir(<span style="color:#e6db74">&#34;.&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>data1 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;i love xuruyun&#39;</span>, <span style="color:#e6db74">&#39;i love liangyongqi&#39;</span>, <span style="color:#e6db74">&#39;i love wangfei&#39;</span>]
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>data1 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;I like Edison Chan&#39;</span>, <span style="color:#e6db74">&#39;I like Eason Chan&#39;</span>, <span style="color:#e6db74">&#39;I love myself&#39;</span>]
 </span></span><span style="display:flex;"><span>rdd1 <span style="color:#f92672">=</span> sc<span style="color:#f92672">.</span>parallelize(data1)
 </span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> rdd1<span style="color:#f92672">.</span>flatMap(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>split())<span style="color:#f92672">.</span>map(<span style="color:#66d9ef">lambda</span> word: (word, <span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>reduceByKey(<span style="color:#66d9ef">lambda</span> x, y: x<span style="color:#f92672">+</span>y)
 </span></span><span style="display:flex;"><span>result<span style="color:#f92672">.</span>foreach(print)
-</span></span></code></pre></div><br>
+</span></span></code></pre></div><img src="/images/wcres.png">
+<p>输出每一步的RDD：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rdd1 <span style="color:#f92672">=</span> sc<span style="color:#f92672">.</span>parallelize(data1)
+</span></span><span style="display:flex;"><span>rdd1<span style="color:#f92672">.</span>foreach(print)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># result = rdd1.flatMap(lambda x: x.split()).map(lambda word: (word, 1)).reduceByKey(lambda x, y: x+y)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># result.foreach(print)</span>
+</span></span><span style="display:flex;"><span>rdd2 <span style="color:#f92672">=</span> rdd1<span style="color:#f92672">.</span>flatMap(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>split())
+</span></span><span style="display:flex;"><span>rdd2<span style="color:#f92672">.</span>foreach(print)
+</span></span><span style="display:flex;"><span>rdd3 <span style="color:#f92672">=</span> rdd2<span style="color:#f92672">.</span>map(<span style="color:#66d9ef">lambda</span> word:(word,<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>rdd3<span style="color:#f92672">.</span>foreach(print)
+</span></span><span style="display:flex;"><span>rdd4 <span style="color:#f92672">=</span> rdd3<span style="color:#f92672">.</span>reduceByKey(<span style="color:#66d9ef">lambda</span> x,y: x<span style="color:#f92672">+</span>y)
+</span></span><span style="display:flex;"><span>rdd4<span style="color:#f92672">.</span>foreach(print)
+</span></span></code></pre></div><p>原始数据：</p>
+<img src="/images/wc1.png">
+<p>flat:</p>
+<img src="/images/wc2.png">
+<p>map:</p>
+<img src="/images/wc3.png">
+<p>reduce:</p>
+<img src="/images/wc4.png">
+<br>
 
 
 
@@ -1533,19 +1561,19 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654331656"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654331656"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654331656"></script>
-    <script src="/js/jquery.sticky.js?1654331656"></script>
-    <script src="/js/featherlight.min.js?1654331656"></script>
-    <script src="/js/highlight.pack.js?1654331656"></script>
+    <script src="/js/clipboard.min.js?1654343372"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654343372"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654343372"></script>
+    <script src="/js/jquery.sticky.js?1654343372"></script>
+    <script src="/js/featherlight.min.js?1654343372"></script>
+    <script src="/js/highlight.pack.js?1654343372"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654331656"></script>
-    <script src="/js/learn.js?1654331656"></script>
-    <script src="/js/hugo-learn.js?1654331656"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654343372"></script>
+    <script src="/js/learn.js?1654343372"></script>
+    <script src="/js/hugo-learn.js?1654343372"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654331656"></script>
+            <script src="/mermaid/mermaid.js?1654343372"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
