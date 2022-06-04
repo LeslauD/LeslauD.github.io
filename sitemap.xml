@@ -60,9 +60,9 @@
   </url><url>
     <loc>http://example.org/bigdata/</loc>
   </url><url>
-    <loc>http://example.org/programs/bodyassessment/imageprocess/</loc>
-  </url><url>
     <loc>http://example.org/categories/</loc>
+  </url><url>
+    <loc>http://example.org/programs/bodyassessment/imageprocess/</loc>
   </url><url>
     <loc>http://example.org/tags/</loc>
   </url>

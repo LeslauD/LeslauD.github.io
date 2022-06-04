@@ -12,22 +12,22 @@
     <title>Spark :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654159333" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654159333" rel="stylesheet">
-    <link href="/css/hybrid.css?1654159333" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654159333" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654159333" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654159333" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654159333" rel="stylesheet">
-    <link href="/css/theme.css?1654159333" rel="stylesheet">
-    <link href="/css/tabs.css?1654159333" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654159333" rel="stylesheet">
+    <link href="/css/nucleus.css?1654331656" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654331656" rel="stylesheet">
+    <link href="/css/hybrid.css?1654331656" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654331656" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654331656" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654331656" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654331656" rel="stylesheet">
+    <link href="/css/theme.css?1654331656" rel="stylesheet">
+    <link href="/css/tabs.css?1654331656" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654331656" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654159333" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654331656" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654159333"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654331656"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654159333"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654159333"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654331656"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654331656"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654159333"></script>
+<script type="text/javascript" src="/js/search.js?1654331656"></script>
 
     
   </div>
@@ -430,13 +430,13 @@
  
   
     
-    <li data-nav-id="/programs/bodyassessment/imageprocess/" title="BodyAssessment" class="dd-item
+    <li data-nav-id="/programs/bodyassessment/imageprocess/" title="ImageProcess" class="dd-item
         
         
         
         ">
       <a href="/programs/bodyassessment/imageprocess/">
-          BodyAssessment
+          ImageProcess
           
       </a>
       
@@ -1090,32 +1090,22 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
 <img src="/images/spark.png">
 <h3 id="windows配置spark">Windows配置Spark</h3>
 <br>
-<p>版本：Java8+Hadoop3.x+scala2.11+spark2.0(不包括2.4.2)</p>
-<p>清华源下载<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/">hadoop</a>和<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/spark/">spark</a>，解压后设置环境变量</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">变量名</th>
-<th style="text-align:center">变量值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">HADOOP_HOME</td>
-<td style="text-align:center">D:\hadoop-3.3.3</td>
-</tr>
-<tr>
-<td style="text-align:center">SPARK_HOME</td>
-<td style="text-align:center">D:\spark-2.4.8</td>
-</tr>
-</tbody>
-</table>
-<p>安装pyspark</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install pyspark
-</span></span></code></pre></div><br>
+<p><a href="https://blog.csdn.net/qq_52491380/article/details/120787037">https://blog.csdn.net/qq_52491380/article/details/120787037</a></p>
+<br>
 <h3 id="pyspark_wordcount">PySpark_Wordcount</h3>
 <br>
-<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pyspark <span style="color:#f92672">import</span> SparkConf, SparkContext
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pyspark.storagelevel <span style="color:#f92672">import</span> StorageLevel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conf <span style="color:#f92672">=</span> SparkConf()<span style="color:#f92672">.</span>setMaster(<span style="color:#e6db74">&#34;local&#34;</span>)<span style="color:#f92672">.</span>setAppName(<span style="color:#e6db74">&#34;wordcount&#34;</span>)
+</span></span><span style="display:flex;"><span>sc <span style="color:#f92672">=</span> SparkContext(conf<span style="color:#f92672">=</span>conf)
+</span></span><span style="display:flex;"><span>sc<span style="color:#f92672">.</span>setCheckpointDir(<span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data1 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;i love xuruyun&#39;</span>, <span style="color:#e6db74">&#39;i love liangyongqi&#39;</span>, <span style="color:#e6db74">&#39;i love wangfei&#39;</span>]
+</span></span><span style="display:flex;"><span>rdd1 <span style="color:#f92672">=</span> sc<span style="color:#f92672">.</span>parallelize(data1)
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> rdd1<span style="color:#f92672">.</span>flatMap(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>split())<span style="color:#f92672">.</span>map(<span style="color:#66d9ef">lambda</span> word: (word, <span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>reduceByKey(<span style="color:#66d9ef">lambda</span> x, y: x<span style="color:#f92672">+</span>y)
+</span></span><span style="display:flex;"><span>result<span style="color:#f92672">.</span>foreach(print)
+</span></span></code></pre></div><br>
 
 
 
@@ -1543,19 +1533,19 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654159333"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654159333"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654159333"></script>
-    <script src="/js/jquery.sticky.js?1654159333"></script>
-    <script src="/js/featherlight.min.js?1654159333"></script>
-    <script src="/js/highlight.pack.js?1654159333"></script>
+    <script src="/js/clipboard.min.js?1654331656"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654331656"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654331656"></script>
+    <script src="/js/jquery.sticky.js?1654331656"></script>
+    <script src="/js/featherlight.min.js?1654331656"></script>
+    <script src="/js/highlight.pack.js?1654331656"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654159333"></script>
-    <script src="/js/learn.js?1654159333"></script>
-    <script src="/js/hugo-learn.js?1654159333"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654331656"></script>
+    <script src="/js/learn.js?1654331656"></script>
+    <script src="/js/hugo-learn.js?1654331656"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654159333"></script>
+            <script src="/mermaid/mermaid.js?1654331656"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
