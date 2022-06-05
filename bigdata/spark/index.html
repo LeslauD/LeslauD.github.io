@@ -12,22 +12,22 @@
     <title>Spark :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654343372" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654343372" rel="stylesheet">
-    <link href="/css/hybrid.css?1654343372" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654343372" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654343372" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654343372" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654343372" rel="stylesheet">
-    <link href="/css/theme.css?1654343372" rel="stylesheet">
-    <link href="/css/tabs.css?1654343372" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654343372" rel="stylesheet">
+    <link href="/css/nucleus.css?1654443252" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654443252" rel="stylesheet">
+    <link href="/css/hybrid.css?1654443252" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654443252" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654443252" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654443252" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654443252" rel="stylesheet">
+    <link href="/css/theme.css?1654443252" rel="stylesheet">
+    <link href="/css/tabs.css?1654443252" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654443252" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654343372" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654443252" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654343372"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654443252"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654343372"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654343372"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654443252"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654443252"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654343372"></script>
+<script type="text/javascript" src="/js/search.js?1654443252"></script>
 
     
   </div>
@@ -146,6 +146,44 @@
           
       </a>
       
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/machinelearning/recommendedsystem/" title="RecommendedSystem" class="dd-item
+        
+        
+        
+        ">
+      <a href="/machinelearning/recommendedsystem/">
+          RecommendedSystem
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
       
     </li>
   
@@ -765,6 +803,7 @@
         <li><a href="#windows配置spark">Windows配置Spark</a></li>
         <li><a href="#docker--spark">Docker&ndash;Spark</a></li>
         <li><a href="#pyspark_wordcount">PySpark_Wordcount</a></li>
+        <li><a href="#spark--mllib">Spark&ndash;MLlib</a></li>
       </ul>
     </li>
   </ul>
@@ -1134,6 +1173,39 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
 <p>reduce:</p>
 <img src="/images/wc4.png">
 <br>
+<br>
+<h3 id="spark--mllib">Spark&ndash;MLlib</h3>
+<p>MLlib 是 Spark 的机器学习库，旨在简化机器学习的工程实践工作，并方便扩展到更大规模。</p>
+<p>MLlib 由一些通用的学习算法和工具组成，包括分类、回归、聚类、协同过滤、降维等，同时还包括底层的优化原语和高层的管道 API。</p>
+<p>本节将对 Spark MLlib 进行简单介绍，在介绍数据挖掘算法时，将使用 Spark MLlib 提供的算法进行实例讲解。</p>
+<h4 id="spark-mllib的构成">Spark MLlib的构成</h4>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据类型</td>
+<td>向量、带类别的向量、矩阵等</td>
+</tr>
+<tr>
+<td>数学统计计算库</td>
+<td>基本统计量、相关分析、随机数产生器、假设检验等</td>
+</tr>
+<tr>
+<td>算法评测</td>
+<td>AUC、准确率、召回率、F-Measure 等</td>
+</tr>
+<tr>
+<td>机器学习算法</td>
+<td>分类算法、回归算法、聚类算法、协同过滤等</td>
+</tr>
+</tbody>
+</table>
+<br>
 
 
 
@@ -1214,8 +1286,26 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
 
                     
                     
+                        
+                    
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
             
         
@@ -1561,19 +1651,19 @@ export PATH=${SCALA_HOME}/bin:$PATH</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654343372"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654343372"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654343372"></script>
-    <script src="/js/jquery.sticky.js?1654343372"></script>
-    <script src="/js/featherlight.min.js?1654343372"></script>
-    <script src="/js/highlight.pack.js?1654343372"></script>
+    <script src="/js/clipboard.min.js?1654443252"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654443252"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654443252"></script>
+    <script src="/js/jquery.sticky.js?1654443252"></script>
+    <script src="/js/featherlight.min.js?1654443252"></script>
+    <script src="/js/highlight.pack.js?1654443252"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654343372"></script>
-    <script src="/js/learn.js?1654343372"></script>
-    <script src="/js/hugo-learn.js?1654343372"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654443252"></script>
+    <script src="/js/learn.js?1654443252"></script>
+    <script src="/js/hugo-learn.js?1654443252"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654343372"></script>
+            <script src="/mermaid/mermaid.js?1654443252"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

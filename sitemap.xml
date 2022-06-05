@@ -56,6 +56,8 @@
   </url><url>
     <loc>http://example.org/programs/millenniumtemple/</loc>
   </url><url>
+    <loc>http://example.org/machinelearning/recommendedsystem/</loc>
+  </url><url>
     <loc>http://example.org/bigdata/spark/</loc>
   </url><url>
     <loc>http://example.org/bigdata/</loc>
