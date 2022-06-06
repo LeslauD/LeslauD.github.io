@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>小星星变奏曲 :: 刘顿的博客</title>
+    <title>NewCoder :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1654528958" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/piano/littlestar/">
+  <body class="" data-url="/algorithm/newcoder/">
     <nav id="sidebar" class="">
 
 
@@ -137,7 +137,7 @@
   
     
     <li data-nav-id="/algorithm/" title="数据结构与算法" class="dd-item
-        
+        parent
         
         
         ">
@@ -192,8 +192,8 @@
   
     
     <li data-nav-id="/algorithm/newcoder/" title="NewCoder" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/algorithm/newcoder/">
@@ -387,7 +387,7 @@
   
     
     <li data-nav-id="/piano/" title="钢琴" class="dd-item
-        parent
+        
         
         
         ">
@@ -520,8 +520,8 @@
   
     
     <li data-nav-id="/piano/littlestar/" title="小星星变奏曲" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/piano/littlestar/">
@@ -920,7 +920,7 @@
             
           
           
-            <a href='/'></a> > <a href='/piano/'>钢琴</a> > 小星星变奏曲
+            <a href='/'></a> > <a href='/algorithm/'>数据结构与算法</a> > NewCoder
           
         
           
@@ -933,7 +933,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ab1模板-栈">AB1、[模板] 栈</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -949,7 +957,7 @@
           
             <h1>
               
-              小星星变奏曲
+              NewCoder
             </h1>
           
 
@@ -957,7 +965,91 @@
 
 
 
-	
+	<h3 id="ab1模板-栈">AB1、[模板] 栈</h3>
+<ul>
+<li>
+<p>题目描述</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>描述
+</span></span><span style="display:flex;"><span>请你实现一个栈。
+</span></span><span style="display:flex;"><span>操作：
+</span></span><span style="display:flex;"><span>push x：将 加x\x 入栈，保证 x\x 为 int 型整数。
+</span></span><span style="display:flex;"><span>pop：输出栈顶，并让栈顶出栈
+</span></span><span style="display:flex;"><span>top：输出栈顶，栈顶不出栈
+</span></span><span style="display:flex;"><span>输入描述：
+</span></span><span style="display:flex;"><span>第一行为一个正整数 n\n ，代表操作次数。(1 \leq n \leq 100000)(1≤n≤100000)
+</span></span><span style="display:flex;"><span>接下来的 n\n ，每行为一个字符串，代表一个操作。保证操作是题目描述中三种中的一种。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>输出描述：
+</span></span><span style="display:flex;"><span>如果操作为push，则不输出任何东西。
+</span></span><span style="display:flex;"><span>如果为另外两种，若栈为空，则输出 &#34;error“
+</span></span><span style="display:flex;"><span>否则按对应操作输出。
+</span></span><span style="display:flex;"><span>示例1
+</span></span><span style="display:flex;"><span>输入：
+</span></span><span style="display:flex;"><span>6
+</span></span><span style="display:flex;"><span>push 1
+</span></span><span style="display:flex;"><span>pop
+</span></span><span style="display:flex;"><span>top
+</span></span><span style="display:flex;"><span>push 2
+</span></span><span style="display:flex;"><span>push 3
+</span></span><span style="display:flex;"><span>pop
+</span></span><span style="display:flex;"><span>复制
+</span></span><span style="display:flex;"><span>输出：
+</span></span><span style="display:flex;"><span>1
+</span></span><span style="display:flex;"><span>error
+</span></span><span style="display:flex;"><span>3
+</span></span></code></pre></div></li>
+<li>
+<p>代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>n);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> s[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> stack[n],i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,num;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(n<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        scanf(<span style="color:#e6db74">&#34;%s&#34;</span>,<span style="color:#f92672">&amp;</span>s);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(s[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;u&#39;</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            scanf(<span style="color:#e6db74">&#34;%d &#34;</span>,<span style="color:#f92672">&amp;</span>num);
+</span></span><span style="display:flex;"><span>            stack[i<span style="color:#f92672">++</span>]<span style="color:#f92672">=</span>num;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(s[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;o&#39;</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(s[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;p&#39;</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,stack[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>                    i<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;error</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(s[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;t&#39;</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,stack[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>                    printf(<span style="color:#e6db74">&#34;error</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析</p>
+</li>
+</ul>
+<p>​	直接用数组来表示栈，数组索引表示指针，i++即为入栈，i&ndash;即为出栈</p>
+
 
 
 
@@ -1032,6 +1124,162 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -1106,24 +1354,6 @@
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -1147,144 +1377,6 @@
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -1474,10 +1566,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/piano/sunrise/" title="太阳照常升起"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/algorithm/leetcode/" title="LeetCode"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/programs/" title="项目" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/algorithm/pat/" title="PAT" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

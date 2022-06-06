@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>CPP :: 刘顿的博客</title>
+    <title>LeetCode :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1654528958" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/cxx/cpp/">
+  <body class="" data-url="/algorithm/leetcode/">
     <nav id="sidebar" class="">
 
 
@@ -137,7 +137,7 @@
   
     
     <li data-nav-id="/algorithm/" title="数据结构与算法" class="dd-item
-        
+        parent
         
         
         ">
@@ -166,8 +166,8 @@
   
     
     <li data-nav-id="/algorithm/leetcode/" title="LeetCode" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/algorithm/leetcode/">
@@ -705,7 +705,7 @@
   
     
     <li data-nav-id="/cxx/" title="CPP" class="dd-item
-        parent
+        
         
         
         ">
@@ -760,8 +760,8 @@
   
     
     <li data-nav-id="/cxx/cpp/" title="CPP" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/cxx/cpp/">
@@ -920,7 +920,7 @@
             
           
           
-            <a href='/'></a> > <a href='/cxx/'>CPP</a> > CPP
+            <a href='/'></a> > <a href='/algorithm/'>数据结构与算法</a> > LeetCode
           
         
           
@@ -937,13 +937,12 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#c基础">C++基础</a></li>
-        <li><a href="#类和对象">类和对象</a></li>
-        <li><a href="#模板">模板</a></li>
-        <li><a href="#异常">异常</a></li>
-        <li><a href="#编程技巧">编程技巧</a></li>
-        <li><a href="#继承和多态">继承和多态</a></li>
-        <li><a href="#动态内存管理">动态内存管理</a></li>
+        <li><a href="#1两数之和">1、两数之和</a></li>
+        <li><a href="#2两数相加">2、两数相加</a></li>
+        <li><a href="#3">3、</a></li>
+        <li><a href="#4">4、</a></li>
+        <li><a href="#374猜数字大小">374、猜数字大小</a></li>
+        <li><a href="#704二分查找">704、二分查找</a></li>
       </ul>
     </li>
   </ul>
@@ -963,7 +962,7 @@
           
             <h1>
               
-              CPP
+              LeetCode
             </h1>
           
 
@@ -971,254 +970,248 @@
 
 
 
-	<h3 id="c基础">C++基础</h3>
-<h4 id="c语言">C语言</h4>
-<p><a href="/cxx/clang">^-^</a></p>
-<h4 id="函数">函数</h4>
+	<h3 id="1两数之和">1、两数之和</h3>
 <ul>
-<li>函数的默认参数    在函数声明或定义的形参列表中，为形参提供默认值</li>
-<li>函数重载
-<ul>
-<li>同一个作用域内，函数的形参不同，函数名相同，则这些函数构成重载函数(与返回值类型无关)</li>
-<li>函数如何构成重载：编译器在编译时对函数进行了重命名</li>
-</ul>
+<li>
+<p>题目描述</p>
+<p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums = [2,7,11,15], target = 9</p>
+<p>输出：[0,1]</p>
+<p>解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</p>
+<p>示例 2：</p>
+<p>输入：nums = [3,2,4], target = 6</p>
+<p>输出：[1,2]</p>
+<p>示例 3：</p>
+<p>输入：nums = [3,3], target = 6</p>
+<p>输出：[0,1]</p>
+<p>提示：</p>
+<p>2 &lt;= nums.length &lt;= 104</p>
+<p>-109 &lt;= nums[i] &lt;= 109</p>
+<p>-109 &lt;= target &lt;= 109</p>
+<p>只会存在一个有效答案</p>
+<p>进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？</p>
+<br>
 </li>
-<li>内联函数
-<ul>
-<li>定义在类内的函数会自动成为内联函数</li>
-<li>内联函数只是对编译器的一种建议，编译器可以选择忽略这种建议</li>
-<li>内联函数相比普通函数没有函数压栈的开销，提升了程序运行效率</li>
-<li>内联是一种以空间换取时间的做法，省去了调用函数的开销，代码很长的函数不适合作为内联函数</li>
-</ul>
+<li>
+<p>代码1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> twoSum(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> flag<span style="color:#f92672">=</span>false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>nums.size();i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span>nums.size() <span style="color:#f92672">&amp;&amp;</span> i<span style="color:#f92672">!=</span>j ;j<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(nums[i]<span style="color:#f92672">+</span>nums[j] <span style="color:#f92672">==</span> target){
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">return</span> {i,j};
+</span></span><span style="display:flex;"><span>                }                    
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析1</p>
 </li>
 </ul>
-<h4 id="引用">引用</h4>
+<p>​		暴力枚举</p>
+<p>​		时间复杂度O(n²)</p>
+<p>​		空间复杂度O(1)</p>
+<br>
 <ul>
-<li>引用变量是所引用变量的别名，地址与原变量的地址相同</li>
-<li>引用与指针
-<ul>
-<li>引用必须在定义时就要初始化</li>
-<li>引用变量和指针变量的自增自减运算</li>
-<li>引用和指针变量的大小</li>
-</ul>
+<li>
+<p>代码2</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> twoSum(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> hashtable;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> hashtable.find(target <span style="color:#f92672">-</span> nums[i]);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">!=</span> hashtable.end()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {it<span style="color:#f92672">-&gt;</span>second, i};
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            hashtable[nums[i]] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析2</p>
 </li>
-<li>引用作为函数参数：参数传递时不会产生临时变量</li>
+</ul>
+<p>​		哈希表，元素值作为索引，元素在nums中的下标作为值</p>
+<p>​		unorder_map内部实现了一个哈希表，因此查找速度非常快，遇到<strong>查找问题</strong>，<strong>unorder_map</strong>会比较高效。</p>
+<br>
+<h3 id="2两数相加">2、两数相加</h3>
+<ul>
+<li>
+<p>题目描述</p>
+<p>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例 1：</p>
+<p>输入：l1 = [2,4,3], l2 = [5,6,4]</p>
+<p>输出：[7,0,8]</p>
+<p>解释：342 + 465 = 807.</p>
+<p>示例 2：</p>
+<p>输入：l1 = [0], l2 = [0]</p>
+<p>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]</p>
+<p>输出：[8,9,9,9,0,0,0,1]</p>
+<p>提示：</p>
+<p>每个链表中的节点数在范围 [1, 100] 内</p>
+<p>0 &lt;= Node.val &lt;= 9</p>
+<p>题目数据保证列表表示的数字不含前导零</p>
+<br>
+</li>
+<li>
+<p>代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> addTwoNumbers(ListNode<span style="color:#f92672">*</span> l1, ListNode<span style="color:#f92672">*</span> l2) {        
+</span></span><span style="display:flex;"><span>        ListNode <span style="color:#f92672">*</span>head <span style="color:#f92672">=</span> NULL, <span style="color:#f92672">*</span>p;  <span style="color:#75715e">//头指针，工作指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> carry <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sum;<span style="color:#75715e">//进位位，和
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (l1 <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">||</span> l2 <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">||</span> carry <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//直接用或，包括了两个都没有算完，还剩一个，还剩进位位，共三种情况
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (l1 <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">+=</span> l1<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                l1 <span style="color:#f92672">=</span> l1<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//l1,l2不空的时候就加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (l2 <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">+=</span> l2<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                l2 <span style="color:#f92672">=</span> l2<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">+=</span> carry;
+</span></span><span style="display:flex;"><span>            carry <span style="color:#f92672">=</span> sum <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>; <span style="color:#75715e">//进位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            sum <span style="color:#f92672">%=</span> <span style="color:#ae81ff">10</span>; 
+</span></span><span style="display:flex;"><span>            ListNode <span style="color:#f92672">*</span>newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(sum);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (head <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>                head <span style="color:#f92672">=</span> newNode;
+</span></span><span style="display:flex;"><span>                p <span style="color:#f92672">=</span> newNode;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>                p<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> newNode;   
+</span></span><span style="display:flex;"><span>                p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>next;    <span style="color:#75715e">//尾插
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> head;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析</p>
+<p>链表相关：头指针、工作指针；尾插法</p>
+<p>进位位，三种情况</p>
+</li>
 </ul>
 <br>
-<h3 id="类和对象">类和对象</h3>
-<h4 id="类的默认成员函数">类的默认成员函数</h4>
+<h3 id="3">3、</h3>
 <ul>
-<li>构造函数
-<ul>
-<li>调用场景：类的对象在被创建时自动调用构造函数</li>
-<li>构造函数一般完成构造对象以及初始化工作</li>
-<li>如果没有显式定义，编译器会自动产生一个缺省的默认构造函数</li>
-<li>无参的构造函数和全缺省值的构造函数都被认为是缺省构造函数，一个类中，缺省的构造函数只能有一个</li>
-<li>构造函数没有返回值，可以重载，函数名与类名相同</li>
-<li>构造函数的参数列表：
-<ul>
-<li>更高效(两次构造函数变成一次拷贝构造函数)</li>
-<li>const、引用、没有默认参数的构造函数的类对象必须在构造函数的初始化列表中进行初始化</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>析构函数
-<ul>
-<li>调用场景：类对象的生命周期结束会自动调用析构函数</li>
-<li>析构函数主要完成的是内存的释放以及对象的销毁等工作</li>
-<li>析构函数的函数名是在类名前面加上~</li>
-<li>如果没有显式的提供析构函数，编译器会自动生成一个默认的析构函数</li>
-</ul>
-</li>
-<li>拷贝构造函数
-<ul>
-<li>调用场景：用一个已经存在的对象创建一个新对象</li>
-<li>拷贝构造函数其实是构造函数的重载</li>
-<li>拷贝构造函数的参数必须是引用传参，其他传参方式会引起无穷递归</li>
-<li>如果没有显式提供拷贝构造函数，编译器会自动生成一个默认的拷贝构造函数，在默认的拷贝构造函数中采用了浅拷贝的方式</li>
-</ul>
-</li>
-<li>赋值运算符重载</li>
-<li>取地址运算符重载</li>
-<li>const修饰的取地址运算符重载</li>
-</ul>
-<h4 id="this指针">this指针</h4>
-<ul>
-<li>指向类的对象的地址</li>
-<li>构造函数和静态成员函数中不存在this指针</li>
-<li>this隐式地存在在类的成员函数中，但可以进行显式访问</li>
-</ul>
-<h4 id="静态成员">静态成员</h4>
-<ul>
-<li>静态成员属于类，不属于对象</li>
-<li>静态成员变量和函数需要在类外进行定义和初始化</li>
-</ul>
-<h4 id="友元">友元</h4>
-<ul>
-<li>友元类
-<ul>
-<li>一个类被friend class在另一个类中，这另一个类可以访问这个类的对象的成员</li>
-</ul>
-</li>
-<li>友元函数
-<ul>
-<li>友元函数可以访问类的成员</li>
-</ul>
-</li>
-</ul>
-<h4 id="const成员函数">const成员函数</h4>
-<ul>
-<li>this指针指向的内容不能被修改</li>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析</li>
 </ul>
 <br>
-<h3 id="模板">模板</h3>
-<h4 id="函数模板">函数模板</h4>
+<h3 id="4">4、</h3>
 <ul>
-<li>template&lt;模板参数&gt;</li>
-<li>实例化函数模板       通过函数实参推演模板实参，并绑定到模板参数上</li>
-</ul>
-<h4 id="非类型模板参数">非类型模板参数</h4>
-<h4 id="类模板">类模板</h4>
-<ul>
-<li>使用了类模板后，用类模板创建一个对象时必须显式地提供类型</li>
-<li>当类中的成员函数在类外定义时，必须加上template后接模板参数列表</li>
-<li>返回值，类名作为形参  需要加上模板参数列表</li>
-</ul>
-<h4 id="分离编译">分离编译</h4>
-<ul>
-<li>类的定义和类中函数的定义放在一个文件中</li>
-</ul>
-<h4 id="模板的特化">模板的特化</h4>
-<ul>
-<li>重新定义模板时在模板参数列表中显式地指定类型</li>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析</li>
 </ul>
 <br>
-<h3 id="异常">异常</h3>
-<h4 id="异常对象">异常对象</h4>
+<h3 id="374猜数字大小">374、猜数字大小</h3>
 <ul>
-<li>编译器使用throw抛出去的表达式</li>
-</ul>
-<h4 id="异常产生-throw">异常产生 throw</h4>
-<h4 id="异常处理-try与catch">异常处理 try与catch</h4>
-<ul>
-<li>一个异常如果没有被捕获，则会提前终止程序</li>
-<li>栈展开的过程中对象被自动销毁(例如在构造函数中抛出异常)</li>
-<li>如果析构函数中要抛出异常      try语句和catch语句应写在析构函数内部</li>
+<li>
+<p>题目描述</p>
+<p>猜数字游戏的规则如下：</p>
+<p>每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。</p>
+<p>如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。</p>
+<p>你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：</p>
+<p>-1：我选出的数字比你猜的数字小 pick &lt; num</p>
+<p>1：我选出的数字比你猜的数字大 pick &gt; num</p>
+<p>0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num</p>
+<p>返回我选出的数字。</p>
+</li>
+<li>
+<p>代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> guessNumber(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, right <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (left <span style="color:#f92672">&lt;</span> right) { <span style="color:#75715e">// 循环直至区间左右端点相同
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>; <span style="color:#75715e">// 防止计算时溢出
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (guess(mid) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>                right <span style="color:#f92672">=</span> mid; <span style="color:#75715e">// 答案在区间 [left, mid] 中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                left <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// 答案在区间 [mid+1, right] 中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 此时有 left == right，区间缩为一个点，即为答案
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> left;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析</p>
+<p>二分查找思想</p>
+</li>
 </ul>
 <br>
-<h3 id="编程技巧">编程技巧</h3>
-<h4 id="浅拷贝深拷贝写时拷贝">浅拷贝/深拷贝/写时拷贝</h4>
-<h4 id="类型萃取">类型萃取</h4>
-<h4 id="泛型编程">泛型编程</h4>
-<br>
-<h3 id="继承和多态">继承和多态</h3>
-<h4 id="继承">继承</h4>
+<h3 id="704二分查找">704、二分查找</h3>
 <ul>
-<li>继承是面向对象的重要复用手段</li>
-<li>三种继承关系
-<ul>
-<li>公有继承：public
-<ul>
-<li>基类的非私有成员在子类访问属性不变</li>
-<li>is-a原则</li>
-</ul>
+<li>
+<p>题目描述</p>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<p>示例 1:</p>
+<p>输入: nums = [-1,0,3,5,9,12], target = 9</p>
+<p>输出: 4</p>
+<p>解释: 9 出现在 nums 中并且下标为 4</p>
+<p>示例 2:</p>
+<p>输入: nums = [-1,0,3,5,9,12], target = 2</p>
+<p>输出: -1</p>
+<p>解释: 2 不存在 nums 中因此返回 -1</p>
+<p>提示：</p>
+<p>你可以假设 nums 中的所有元素是不重复的。</p>
+<p>n 将在 [1, 10000]之间。</p>
+<p>nums 的每个元素都将在 [-9999, 9999]之间。</p>
 </li>
-<li>私有继承：private
-<ul>
-<li>基类的非私有成员都变为子类的私有成员</li>
-</ul>
+<li>
+<p>代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> search(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 返回target在nums中的下标，不存在就返回-1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,high <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(low<span style="color:#f92672">&lt;=</span>high)             <span style="color:#75715e">// low&lt;=high,low&lt;high或有样例不通过
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        {
+</span></span><span style="display:flex;"><span>            mid <span style="color:#f92672">=</span> (low<span style="color:#f92672">+</span>high)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;      <span style="color:#75715e">// 每次都要更新 mid 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(target<span style="color:#f92672">&lt;</span>nums[mid])
+</span></span><span style="display:flex;"><span>                high <span style="color:#f92672">=</span> mid<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(target<span style="color:#f92672">&gt;</span>nums[mid])
+</span></span><span style="display:flex;"><span>                low <span style="color:#f92672">=</span> mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> mid;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析及问题</p>
+<p>改进：<strong>mid = low +((high-low)/2)</strong></p>
+<p>在当low+high的结果大于表达式结果类型所能表示的最大值时会产生<strong>溢出</strong></p>
+<p>小错误：</p>
+<p>low&lt;high会有样例不通过（可能正确答案就是low=high时的值）</p>
 </li>
-<li>保护继承：protected
-<ul>
-<li>基类的非私有成员都变为子类的protected成员</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>注：基类的私有成员在派生类中不能访问</li>
-<li>赋值兼容规则
-<ul>
-<li>可以用一个子类对象给一个父类对象赋值</li>
-<li>父类对象的指针或引用可以指向子类对象</li>
-<li>上面两条反转过来不能实现，虽然可以进行强制类型转换，但这样非常容易出现访问错误的情况</li>
-</ul>
-</li>
-<li>派生类的6个默认构造函数</li>
-<li>菱形继承
-<ul>
-<li>在孙子类的对象中存在两份父类的成员(二义性、数据冗余)       解决方法：虚拟继承</li>
-<li>虚拟继承
-<ul>
-<li>专门用来解决菱形继承中存在的二义性和数据冗余的问题</li>
-<li>使用虚拟继承会带来性能上的损耗</li>
-<li>采用的偏移量的方式来解决二义性的问题</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>纯虚函数
-<ul>
-<li>在函数形参列表后写上“=0”叫做纯虚函数</li>
-<li>包含纯虚函数的类叫做抽象类，抽象类不能实例化，只有在派生类中重新定义后才能实例化出对象</li>
-</ul>
-</li>
-<li>把析构函数写成虚函数      不会造成内存泄漏(编译器在这一块做了特殊处理)</li>
-</ul>
-<h4 id="多态">多态</h4>
-<ul>
-<li>什么是多态
-<ul>
-<li>一个接口，多种方法</li>
-</ul>
-</li>
-<li>多态的实现条件
-<ul>
-<li>继承关系</li>
-<li>只有在父类定义了虚函数，并且子类重写虚函数的情况下多态才能被实现</li>
-<li>必须是父类的指针/引用指向子类或者父类的对象</li>
-</ul>
-</li>
-<li>多态的实现原因&mdash;虚函数列表
-<ul>
-<li>虚函数列表是用一块连续的内存来存储虚函数的地址</li>
-<li>虚函数表怎么解决虚函数的重写问题
-<ul>
-<li>父类中的虚函数如果在子类中被重新定义，则构成重写，虚函数表中的父类函数的弟子被子类函数所覆盖</li>
-<li>子类重写父类的虚函数形参和函数名以及返回类型必须相同</li>
-<li>上述规则对一条无效：斜变(函数返回值类型为类本身的指针或引用时函数重写仍然发生)：父类与子类必须对应</li>
-<li>final关键字      定义在函数的形参列表后面，不允许派生类的子类的虚构函数进行重写</li>
-<li>override关键字      会匹配子类与父类函数名相同的函数形参和类型是否一致，不一致则会报错</li>
-</ul>
-</li>
-<li>单继承      只会出现一张虚函数表，虚函数表先存放父类的虚函数，再存放子类的虚函数</li>
-<li>多继承      会出现多个虚函数表，子类的虚函数会放在第一个虚函数表中</li>
-</ul>
-</li>
-<li>静态多态      函数重载      静态多态主要再编译期间发生，例如函数重载在编译期间对函数名进行了重命名</li>
 </ul>
 <br>
-<h3 id="动态内存管理">动态内存管理</h3>
-<h4 id="new和delete">new和delete</h4>
-<ul>
-<li>new开辟空间可以进行初始化      eg: new int(10)</li>
-</ul>
-<h4 id="new和delete-1">new[]和delete[]</h4>
-<ul>
-<li>new int[10]()也可以进行初始化，但只能是上面这种形式，开辟的数组被初始化为0</li>
-</ul>
-<h4 id="相比于c语言的动态内存管理c的动态内存管理">相比于C语言的动态内存管理，C++的动态内存管理</h4>
-<ul>
-<li>new new[] delete delete[]是操作符，不是函数</li>
-<li>new和new[]在开辟空间后还调用了类的构造函数</li>
-<li>delete和delete[]先调用析构函数，再释放内存空间</li>
-<li>new和new[]不需要进行强制类型转换</li>
-</ul>
-<h4 id="定位new表达式">定位new表达式</h4>
-<ul>
-<li>定位new表达式是在已分配的内存空间中调用构造函数初始化一个对象</li>
-<li>new(pA)type(init-list):其中pA是指向初始化这个类并且开辟了内存空间的指针</li>
-</ul>
 
 
 
@@ -1294,6 +1287,159 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -1368,154 +1514,6 @@
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -1624,7 +1622,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -1639,9 +1636,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1658,7 +1652,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -1678,9 +1671,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1736,10 +1726,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/cxx/clang/" title="C language"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/algorithm/" title="数据结构与算法"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/bigdata/" title="大数据" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/algorithm/newcoder/" title="NewCoder" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

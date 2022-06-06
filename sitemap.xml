@@ -29,13 +29,13 @@
     <loc>http://example.org/photograph/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
+    <loc>http://example.org/algorithm/</loc>
+    <lastmod>2022-05-29T20:05:01+08:00</lastmod>
+  </url><url>
     <loc>http://example.org/machinelearning/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
     <loc>http://example.org/deeplearning/</loc>
-    <lastmod>2022-05-29T20:05:01+08:00</lastmod>
-  </url><url>
-    <loc>http://example.org/algorithm/</loc>
     <lastmod>2022-05-29T20:05:01+08:00</lastmod>
   </url><url>
     <loc>http://example.org/vehicle/</loc>
@@ -57,11 +57,19 @@
   </url><url>
     <loc>http://example.org/programs/joyyourmind/</loc>
   </url><url>
+    <loc>http://example.org/algorithm/leetcode/</loc>
+  </url><url>
     <loc>http://example.org/programs/millenniumtemple/</loc>
+  </url><url>
+    <loc>http://example.org/algorithm/newcoder/</loc>
+  </url><url>
+    <loc>http://example.org/algorithm/pat/</loc>
   </url><url>
     <loc>http://example.org/machinelearning/recommendedsystem/</loc>
   </url><url>
     <loc>http://example.org/bigdata/spark/</loc>
+  </url><url>
+    <loc>http://example.org/algorithm/tooffer/</loc>
   </url><url>
     <loc>http://example.org/bigdata/</loc>
   </url><url>

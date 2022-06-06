@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>小星星变奏曲 :: 刘顿的博客</title>
+    <title>PAT :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1654528958" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/piano/littlestar/">
+  <body class="" data-url="/algorithm/pat/">
     <nav id="sidebar" class="">
 
 
@@ -137,7 +137,7 @@
   
     
     <li data-nav-id="/algorithm/" title="数据结构与算法" class="dd-item
-        
+        parent
         
         
         ">
@@ -218,8 +218,8 @@
   
     
     <li data-nav-id="/algorithm/pat/" title="PAT" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/algorithm/pat/">
@@ -387,7 +387,7 @@
   
     
     <li data-nav-id="/piano/" title="钢琴" class="dd-item
-        parent
+        
         
         
         ">
@@ -520,8 +520,8 @@
   
     
     <li data-nav-id="/piano/littlestar/" title="小星星变奏曲" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/piano/littlestar/">
@@ -920,7 +920,7 @@
             
           
           
-            <a href='/'></a> > <a href='/piano/'>钢琴</a> > 小星星变奏曲
+            <a href='/'></a> > <a href='/algorithm/'>数据结构与算法</a> > PAT
           
         
           
@@ -933,7 +933,110 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+        <li><a href="#1001-卡拉兹callatz猜想">1001 卡拉兹(Callatz)猜想</a></li>
+        <li><a href="#1002">1002</a></li>
+        <li><a href="#1003">1003</a></li>
+        <li><a href="#1004">1004</a></li>
+        <li><a href="#1005">1005</a></li>
+        <li><a href="#1006">1006</a></li>
+        <li><a href="#1007">1007</a></li>
+        <li><a href="#1008">1008</a></li>
+        <li><a href="#1009">1009</a></li>
+        <li><a href="#1010">1010</a></li>
+        <li><a href="#1011">1011</a></li>
+        <li><a href="#1012">1012</a></li>
+        <li><a href="#1013">1013</a></li>
+        <li><a href="#1014">1014</a></li>
+        <li><a href="#1015">1015</a></li>
+        <li><a href="#1016">1016</a></li>
+        <li><a href="#1017">1017</a></li>
+        <li><a href="#1018">1018</a></li>
+        <li><a href="#1019">1019</a></li>
+        <li><a href="#1020">1020</a></li>
+        <li><a href="#1021">1021</a></li>
+        <li><a href="#1022">1022</a></li>
+        <li><a href="#1023">1023</a></li>
+        <li><a href="#1024">1024</a></li>
+        <li><a href="#1025">1025</a></li>
+        <li><a href="#1026">1026</a></li>
+        <li><a href="#1027">1027</a></li>
+        <li><a href="#1028">1028</a></li>
+        <li><a href="#1029">1029</a></li>
+        <li><a href="#1030">1030</a></li>
+        <li><a href="#1031">1031</a></li>
+        <li><a href="#1032">1032</a></li>
+        <li><a href="#1033">1033</a></li>
+        <li><a href="#1034">1034</a></li>
+        <li><a href="#1035">1035</a></li>
+        <li><a href="#1036">1036</a></li>
+        <li><a href="#1037">1037</a></li>
+        <li><a href="#1038">1038</a></li>
+        <li><a href="#1039">1039</a></li>
+        <li><a href="#1040">1040</a></li>
+        <li><a href="#1041">1041</a></li>
+        <li><a href="#1042">1042</a></li>
+        <li><a href="#1043">1043</a></li>
+        <li><a href="#1044">1044</a></li>
+        <li><a href="#1045">1045</a></li>
+        <li><a href="#1046">1046</a></li>
+        <li><a href="#1047">1047</a></li>
+        <li><a href="#1048">1048</a></li>
+        <li><a href="#1049">1049</a></li>
+        <li><a href="#1050">1050</a></li>
+        <li><a href="#1051">1051</a></li>
+        <li><a href="#1052">1052</a></li>
+        <li><a href="#1053">1053</a></li>
+        <li><a href="#1054">1054</a></li>
+        <li><a href="#1055">1055</a></li>
+        <li><a href="#1056">1056</a></li>
+        <li><a href="#1057">1057</a></li>
+        <li><a href="#1058">1058</a></li>
+        <li><a href="#1059">1059</a></li>
+        <li><a href="#1060">1060</a></li>
+        <li><a href="#1061">1061</a></li>
+        <li><a href="#1062">1062</a></li>
+        <li><a href="#1063">1063</a></li>
+        <li><a href="#1064">1064</a></li>
+        <li><a href="#1065">1065</a></li>
+        <li><a href="#1066">1066</a></li>
+        <li><a href="#1067">1067</a></li>
+        <li><a href="#1068">1068</a></li>
+        <li><a href="#1069">1069</a></li>
+        <li><a href="#1070">1070</a></li>
+        <li><a href="#1071">1071</a></li>
+        <li><a href="#1072">1072</a></li>
+        <li><a href="#1073">1073</a></li>
+        <li><a href="#1074">1074</a></li>
+        <li><a href="#1075">1075</a></li>
+        <li><a href="#1076">1076</a></li>
+        <li><a href="#1077">1077</a></li>
+        <li><a href="#1078">1078</a></li>
+        <li><a href="#1079">1079</a></li>
+        <li><a href="#1080">1080</a></li>
+        <li><a href="#1081">1081</a></li>
+        <li><a href="#1082">1082</a></li>
+        <li><a href="#1083">1083</a></li>
+        <li><a href="#1084">1084</a></li>
+        <li><a href="#1085">1085</a></li>
+        <li><a href="#1086">1086</a></li>
+        <li><a href="#1087">1087</a></li>
+        <li><a href="#1088">1088</a></li>
+        <li><a href="#1089">1089</a></li>
+        <li><a href="#1090">1090</a></li>
+        <li><a href="#1091">1091</a></li>
+        <li><a href="#1092">1092</a></li>
+        <li><a href="#1093">1093</a></li>
+        <li><a href="#1094">1094</a></li>
+        <li><a href="#1095">1095</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -949,7 +1052,7 @@
           
             <h1>
               
-              小星星变奏曲
+              PAT
             </h1>
           
 
@@ -957,7 +1060,714 @@
 
 
 
-	
+	<h4 id="2019-12-302020-01-30">2019-12-30——2020-01-30</h4>
+<h3 id="1001-卡拉兹callatz猜想">1001 卡拉兹(Callatz)猜想</h3>
+<ul>
+<li>
+<p>题目描述</p>
+<p>卡拉兹(Callatz)猜想：</p>
+<p>对任何一个正整数 <em>n</em>，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把 (3<em>n</em>+1) 砍掉一半。这样一直反复砍下去，最后一定在某一步得到 <em>n</em>=1。卡拉兹在 1950 年的世界数学家大会上公布了这个猜想，传说当时耶鲁大学师生齐动员，拼命想证明这个貌似很傻很天真的命题，结果闹得学生们无心学业，一心只证 (3<em>n</em>+1)，以至于有人说这是一个阴谋，卡拉兹是在蓄意延缓美国数学界教学与科研的进展……</p>
+<p>我们今天的题目不是证明卡拉兹猜想，而是对给定的任一不超过 1000 的正整数 <em>n</em>，简单地数一下，需要多少步（砍几下）才能得到 <em>n</em>=1？</p>
+<p>输入格式：</p>
+<p>每个测试输入包含 1 个测试用例，即给出正整数 <em>n</em> 的值。</p>
+<p>输出格式：</p>
+<p>输出从 <em>n</em> 计算到 1 需要的步数。</p>
+<p>输入样例：</p>
+<p>3</p>
+<p>输出样例：</p>
+<p>5</p>
+<br>
+</li>
+<li>
+<p>代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>cin <span style="color:#f92672">&gt;&gt;</span> n;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (n<span style="color:#f92672">!=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//注意考虑n=1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>    	n<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        n<span style="color:#f92672">=</span>n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> count <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>思路分析及问题</p>
+</li>
+</ul>
+<br>
+<h3 id="1002">1002</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1003">1003</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1004">1004</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1005">1005</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1006">1006</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1007">1007</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1008">1008</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1009">1009</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1010">1010</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1011">1011</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1012">1012</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1013">1013</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1014">1014</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1015">1015</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1016">1016</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1017">1017</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1018">1018</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1019">1019</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1020">1020</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1021">1021</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1022">1022</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1023">1023</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1024">1024</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1025">1025</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1026">1026</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1027">1027</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1028">1028</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1029">1029</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1030">1030</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1031">1031</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1032">1032</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1033">1033</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1034">1034</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1035">1035</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1036">1036</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1037">1037</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1038">1038</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1039">1039</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1040">1040</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1041">1041</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1042">1042</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1043">1043</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1044">1044</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1045">1045</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1046">1046</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1047">1047</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1048">1048</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1049">1049</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1050">1050</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1051">1051</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1052">1052</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1053">1053</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1054">1054</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1055">1055</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1056">1056</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1057">1057</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1058">1058</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1059">1059</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1060">1060</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1061">1061</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1062">1062</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1063">1063</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1064">1064</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1065">1065</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1066">1066</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1067">1067</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1068">1068</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1069">1069</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1070">1070</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1071">1071</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1072">1072</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1073">1073</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1074">1074</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1075">1075</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1076">1076</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1077">1077</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1078">1078</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1079">1079</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1080">1080</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1081">1081</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1082">1082</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1083">1083</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1084">1084</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1085">1085</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1086">1086</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1087">1087</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1088">1088</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1089">1089</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1090">1090</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1091">1091</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1092">1092</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1093">1093</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1094">1094</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+<h3 id="1095">1095</h3>
+<ul>
+<li>题目描述</li>
+<li>代码</li>
+<li>思路分析及问题</li>
+</ul>
+<br>
+
 
 
 
@@ -1032,6 +1842,162 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -1106,24 +2072,6 @@
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -1147,144 +2095,6 @@
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -1474,10 +2284,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/piano/sunrise/" title="太阳照常升起"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/algorithm/newcoder/" title="NewCoder"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/programs/" title="项目" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/algorithm/tooffer/" title="剑指Offer" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
