@@ -12,22 +12,22 @@
     <title>ImageProcess :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654479038" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654479038" rel="stylesheet">
-    <link href="/css/hybrid.css?1654479038" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654479038" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654479038" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654479038" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654479038" rel="stylesheet">
-    <link href="/css/theme.css?1654479038" rel="stylesheet">
-    <link href="/css/tabs.css?1654479038" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654479038" rel="stylesheet">
+    <link href="/css/nucleus.css?1654503626" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654503626" rel="stylesheet">
+    <link href="/css/hybrid.css?1654503626" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654503626" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654503626" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654503626" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654503626" rel="stylesheet">
+    <link href="/css/theme.css?1654503626" rel="stylesheet">
+    <link href="/css/tabs.css?1654503626" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654503626" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654479038" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654503626" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654479038"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654503626"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654479038"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654479038"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654503626"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654503626"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654479038"></script>
+<script type="text/javascript" src="/js/search.js?1654503626"></script>
 
     
   </div>
@@ -1922,7 +1922,69 @@
 </span></span><span style="display:flex;"><span>viewer<span style="color:#f92672">-&gt;</span>removeAllPointClouds();
 </span></span><span style="display:flex;"><span>viewer<span style="color:#f92672">-&gt;</span>addPointCloud(cloud, <span style="color:#e6db74">&#34;cloud&#34;</span>);
 </span></span><span style="display:flex;"><span>ui.body3D<span style="color:#f92672">-&gt;</span>update();
-</span></span></code></pre></div>
+</span></span></code></pre></div><br>
+<br>
+<h4 id="去除地面">去除地面</h4>
+<p>去除前后效果：</p>
+<img src="/images/unremove_ground.png">
+<img src="/images/remove_ground.png">
+<p>代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//------------------------------去除地面------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> dephtHeight; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> depthWidth; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> cx, cy, cz;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">99</span> <span style="color:#f92672">||</span> j<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">99</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">318</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>cameraMap<span style="color:#f92672">-&gt;</span>convertDepthToXYZ(j, i, depthBuffer[i<span style="color:#f92672">*</span>depthWidth<span style="color:#f92672">+</span>j], cx, cy, 				cz) <span style="color:#f92672">||</span> cy <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>cameraHeight)
+</span></span><span style="display:flex;"><span>            depthBuffer[i<span style="color:#f92672">*</span>depthWidth <span style="color:#f92672">+</span> j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>代码解读：</p>
+<p>遍历每一个像素点，满足if语句中的任何一个条件就将该点的深度值置为0</p>
+<ul>
+<li>
+<p>j&lt;99，高度大概低于脚</p>
+</li>
+<li>
+<p>j&gt;99+318，高度大概高于头</p>
+</li>
+<li>
+<p>!cameraMap-&gt;convertDepthToXYZ(j, i, depthBuffer[i*depthWidth+j], cx, cy, cz)</p>
+<p>前三个参数分别为像素点的列索引、行索引、深度值，分别对应X、Y、Z坐标；cx、cy、cz为函数的返回值</p>
+<p>函数convertDepthToXYZ：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">cx</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>d_cx), cy(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>d_cy);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">fx</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>d_fx), fy(<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>d_fy);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> xx <span style="color:#f92672">=</span> distort_map[(y <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">+</span> x) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> yy <span style="color:#f92672">=</span> distort_map[(y <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">+</span> x) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (xx<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> xx <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">||</span> yy<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> yy <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">424</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> depth_val <span style="color:#f92672">=</span> depth <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000.0f</span>; <span style="color:#75715e">//scaling factor, so that value of 1 is one meter.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (isnan(depth_val) <span style="color:#f92672">||</span> depth_val <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    dx <span style="color:#f92672">=</span> (xx <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> cx) <span style="color:#f92672">*</span> fx <span style="color:#f92672">*</span> depth_val;
+</span></span><span style="display:flex;"><span>    dy <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(yy <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> cy) <span style="color:#f92672">*</span> fy <span style="color:#f92672">*</span> depth_val;
+</span></span><span style="display:flex;"><span>    dz <span style="color:#f92672">=</span> depth_val;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>d_cx，259.464：相机的水平方向中心点</p>
+<p>d_cy，202.937：相机的垂直方向中心点</p>
+<p>d_fx，364.503：相机的水平方向焦距</p>
+<p>d_fy，364.503：相机的垂直方向焦距</p>
+<img src="/images/camera.png">
+</li>
+<li>
+<p>cy &lt; -cameraHeight</p>
+</li>
+</ul>
+<br>
+<h4 id="点云插值">点云插值</h4>
+<h4 id="点云滤波">点云滤波</h4>
+<h4 id="点云平滑边缘">点云平滑边缘</h4>
+
 
 
 
@@ -2384,19 +2446,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654479038"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654479038"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654479038"></script>
-    <script src="/js/jquery.sticky.js?1654479038"></script>
-    <script src="/js/featherlight.min.js?1654479038"></script>
-    <script src="/js/highlight.pack.js?1654479038"></script>
+    <script src="/js/clipboard.min.js?1654503626"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654503626"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654503626"></script>
+    <script src="/js/jquery.sticky.js?1654503626"></script>
+    <script src="/js/featherlight.min.js?1654503626"></script>
+    <script src="/js/highlight.pack.js?1654503626"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654479038"></script>
-    <script src="/js/learn.js?1654479038"></script>
-    <script src="/js/hugo-learn.js?1654479038"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654503626"></script>
+    <script src="/js/learn.js?1654503626"></script>
+    <script src="/js/hugo-learn.js?1654503626"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654479038"></script>
+            <script src="/mermaid/mermaid.js?1654503626"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
