@@ -12,22 +12,22 @@
     <title>ImageProcess :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654503626" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654503626" rel="stylesheet">
-    <link href="/css/hybrid.css?1654503626" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654503626" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654503626" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654503626" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654503626" rel="stylesheet">
-    <link href="/css/theme.css?1654503626" rel="stylesheet">
-    <link href="/css/tabs.css?1654503626" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654503626" rel="stylesheet">
+    <link href="/css/nucleus.css?1654523905" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654523905" rel="stylesheet">
+    <link href="/css/hybrid.css?1654523905" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654523905" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654523905" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654523905" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654523905" rel="stylesheet">
+    <link href="/css/theme.css?1654523905" rel="stylesheet">
+    <link href="/css/tabs.css?1654523905" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654523905" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654503626" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654523905" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654503626"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654523905"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654503626"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654503626"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654523905"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654523905"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654503626"></script>
+<script type="text/javascript" src="/js/search.js?1654523905"></script>
 
     
   </div>
@@ -1975,15 +1975,43 @@
 <p>d_fx，364.503：相机的水平方向焦距</p>
 <p>d_fy，364.503：相机的垂直方向焦距</p>
 <img src="/images/camera.png">
+<p>成像时的x、y坐标会产生偏差(失真)，一维数组distort_map中存储的是利用相机的参数计算后的正确坐标（xx,yy）</p>
+<br>
+<p>真实坐标在图像范围外，则该点无效</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (xx<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> xx <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">||</span> yy<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> yy <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">424</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>原始深度值的单位为毫米，转换为米：</p>
+<p>如果得到空值或者深度小于0.001米，则该点无效</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> depth_val <span style="color:#f92672">=</span> depth <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000.0f</span>; <span style="color:#75715e">//scaling factor, so that value of 1 is one meter.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (isnan(depth_val) <span style="color:#f92672">||</span> depth_val <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.001</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><br>
+<p>否则计算（x,y,z）并返回</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>dx <span style="color:#f92672">=</span> (xx <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> cx) <span style="color:#f92672">*</span> fx <span style="color:#f92672">*</span> depth_val;
+</span></span><span style="display:flex;"><span>dy <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(yy <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> cy) <span style="color:#f92672">*</span> fy <span style="color:#f92672">*</span> depth_val;
+</span></span><span style="display:flex;"><span>dz <span style="color:#f92672">=</span> depth_val;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>!cameraMap-&gt;convertDepthToXYZ()：如果函数的返回值为0，则该点无效</p>
+<br>
 </li>
 <li>
 <p>cy &lt; -cameraHeight</p>
+<p>cy是负值，cy &lt; -cameraHeight表示该点高于相机高度</p>
 </li>
 </ul>
 <br>
 <h4 id="点云插值">点云插值</h4>
+<br>
+<p>插值插值插值插插值</p>
+<br>
 <h4 id="点云滤波">点云滤波</h4>
+<br>
+<br>
 <h4 id="点云平滑边缘">点云平滑边缘</h4>
+<br>
+<br>
 
 
 
@@ -2446,19 +2474,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654503626"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654503626"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654503626"></script>
-    <script src="/js/jquery.sticky.js?1654503626"></script>
-    <script src="/js/featherlight.min.js?1654503626"></script>
-    <script src="/js/highlight.pack.js?1654503626"></script>
+    <script src="/js/clipboard.min.js?1654523906"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654523906"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654523906"></script>
+    <script src="/js/jquery.sticky.js?1654523906"></script>
+    <script src="/js/featherlight.min.js?1654523906"></script>
+    <script src="/js/highlight.pack.js?1654523906"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654503626"></script>
-    <script src="/js/learn.js?1654503626"></script>
-    <script src="/js/hugo-learn.js?1654503626"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654523906"></script>
+    <script src="/js/learn.js?1654523906"></script>
+    <script src="/js/hugo-learn.js?1654523906"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654503626"></script>
+            <script src="/mermaid/mermaid.js?1654523906"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
