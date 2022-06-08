@@ -12,22 +12,22 @@
     <title>ImageProcess :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654610528" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654610528" rel="stylesheet">
-    <link href="/css/hybrid.css?1654610528" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654610528" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654610528" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654610528" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654610528" rel="stylesheet">
-    <link href="/css/theme.css?1654610528" rel="stylesheet">
-    <link href="/css/tabs.css?1654610528" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654610528" rel="stylesheet">
+    <link href="/css/nucleus.css?1654661105" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654661105" rel="stylesheet">
+    <link href="/css/hybrid.css?1654661105" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654661105" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654661105" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654661105" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654661105" rel="stylesheet">
+    <link href="/css/theme.css?1654661105" rel="stylesheet">
+    <link href="/css/tabs.css?1654661105" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654661105" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654610528" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654661105" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654610528"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654661105"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654610528"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654610528"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654661105"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654661105"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654610528"></script>
+<script type="text/javascript" src="/js/search.js?1654661105"></script>
 
     
   </div>
@@ -2171,12 +2171,32 @@
 <li>
 <p>移动最小二乘实现点云插值（上采样 | 增采样）详细讲解</p>
 <p><a href="https://blog.csdn.net/weixin_46098577/article/details/119849306">https://blog.csdn.net/weixin_46098577/article/details/119849306</a></p>
+<p><a href="https://blog.csdn.net/baidu_35536188/article/details/123399020">https://blog.csdn.net/baidu_35536188/article/details/123399020</a></p>
+<p><a href="https://blog.csdn.net/dreliveam/article/details/111666235">https://blog.csdn.net/dreliveam/article/details/111666235</a></p>
 <ul>
 <li>
-<p>移动最小二乘</p>
+<p><strong>最小二乘</strong></p>
+<p>最小二乘法是解决曲线拟合问题最常用的方法。其基本思路是：令
+$$
+f(x) = a_1φ_1(x)+a_2φ_2(x)+&hellip;+a_mφ_m(x)
+$$
+其中$φ_k(x)$是事先选定的一组线性无关的函数，$a_k$是待定系数(k=1,2,&hellip;,m,m&lt;n)，拟合的准则是使$y_i$(i = 1,2,&hellip;,n)与$f(x_i)$的距离$δ_i$的平方和最小，称为最小二乘准则。</p>
+<p>求解目标函数：
+$$
+L(y,f(x,w)) = Σ_1^m[y_i-f(x_i,w_i)]^2
+$$
+其中w为函数f的待定参数，求使L取最小值的参数w即可。</p>
 </li>
 <li>
-<p>使用<a href="https://www.cloudcompare.org/">CloudCompare</a>进行上采样实验</p>
+<p><strong>移动最小二乘</strong></p>
+<p>mls算法本质上和最小二乘一样，是一种拟合数据的算法。区别在于mls是局部的，即通过系数向量和基函数分别对数据中不同位置的节点区域进行拟合，需要计算出全部节点域的拟合函数的参数。而传统的最小二乘是全局的，采用所有的数据进行最小化平方和，不能过滤掉噪声点。</p>
+<img src="/images/mls1.png">
+<img src="/images/mls2.png">
+<img src="/images/mls3.png">
+<img src="/images/mls4.png">
+</li>
+<li>
+<p><strong>使用<a href="https://www.cloudcompare.org/">CloudCompare</a>进行上采样实验</strong></p>
 <p>CloudCompare无法打开.dat文件，用代码将cloud转存成.ply文件</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//将cloud保存为ply文件
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>string outpath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cloudBody.ply&#34;</span>;
@@ -2192,7 +2212,7 @@
 <p>设置MLS参数，上采样后的结果点云：</p>
 </li>
 <li>
-<p>C++实现</p>
+<p><strong>C++实现</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//点云上采样
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>pcl<span style="color:#f92672">::</span>PointCloud<span style="color:#f92672">&lt;</span>pcl<span style="color:#f92672">::</span>PointXYZ<span style="color:#f92672">&gt;::</span>Ptr Up_Cloud(<span style="color:#66d9ef">new</span> pcl<span style="color:#f92672">::</span>PointCloud<span style="color:#f92672">&lt;</span>pcl<span style="color:#f92672">::</span>PointXYZ<span style="color:#f92672">&gt;</span>);
 </span></span><span style="display:flex;"><span>pcl<span style="color:#f92672">::</span>MovingLeastSquares<span style="color:#f92672">&lt;</span>pcl<span style="color:#f92672">::</span>PointXYZ, pcl<span style="color:#f92672">::</span>PointXYZ<span style="color:#f92672">&gt;</span> mls;
@@ -2767,19 +2787,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654610529"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654610529"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654610529"></script>
-    <script src="/js/jquery.sticky.js?1654610529"></script>
-    <script src="/js/featherlight.min.js?1654610529"></script>
-    <script src="/js/highlight.pack.js?1654610529"></script>
+    <script src="/js/clipboard.min.js?1654661105"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654661105"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654661105"></script>
+    <script src="/js/jquery.sticky.js?1654661105"></script>
+    <script src="/js/featherlight.min.js?1654661105"></script>
+    <script src="/js/highlight.pack.js?1654661105"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654610529"></script>
-    <script src="/js/learn.js?1654610529"></script>
-    <script src="/js/hugo-learn.js?1654610529"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654661105"></script>
+    <script src="/js/learn.js?1654661105"></script>
+    <script src="/js/hugo-learn.js?1654661105"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654610529"></script>
+            <script src="/mermaid/mermaid.js?1654661105"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
