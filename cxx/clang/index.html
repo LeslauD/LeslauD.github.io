@@ -12,22 +12,22 @@
     <title>C language :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654661206" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654661206" rel="stylesheet">
-    <link href="/css/hybrid.css?1654661206" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654661206" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654661206" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654661206" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654661206" rel="stylesheet">
-    <link href="/css/theme.css?1654661206" rel="stylesheet">
-    <link href="/css/tabs.css?1654661206" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654661206" rel="stylesheet">
+    <link href="/css/nucleus.css?1654751488" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654751488" rel="stylesheet">
+    <link href="/css/hybrid.css?1654751488" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654751488" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654751488" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654751488" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654751488" rel="stylesheet">
+    <link href="/css/theme.css?1654751488" rel="stylesheet">
+    <link href="/css/tabs.css?1654751488" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654751488" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654661206" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654751488" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654661206"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654751488"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654661206"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654661206"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654751488"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654751488"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654661206"></script>
+<script type="text/javascript" src="/js/search.js?1654751488"></script>
 
     
   </div>
@@ -975,6 +975,7 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#c程序结构">C程序结构</a></li>
         <li><a href="#常量与变量">常量与变量</a></li>
         <li><a href="#数据类型">数据类型</a></li>
         <li><a href="#数据存储">数据存储</a></li>
@@ -986,6 +987,7 @@
         <li><a href="#动态内存管理">动态内存管理</a></li>
         <li><a href="#文件操作">文件操作</a></li>
         <li><a href="#代码编译">代码编译</a></li>
+        <li><a href="#c命令行参数">C命令行参数</a></li>
       </ul>
     </li>
   </ul>
@@ -1013,7 +1015,16 @@
 
 
 
-	<h3 id="常量与变量">常量与变量</h3>
+	<h3 id="c程序结构">C程序结构</h3>
+<p>预处理指令、函数、变量、语句&amp;表达式、注释</p>
+<h4 id="编译和执行">编译和执行</h4>
+<p>gcc xx.c 编译</p>
+<p>编译生成xx.out文件</p>
+<p>xx.out 执行</p>
+<p><strong>编译和执行多个C源文件</strong></p>
+<p>gcc aa.c bb.c -o main.out</p>
+<p>main.out</p>
+<h3 id="常量与变量">常量与变量</h3>
 <br>
 <h4 id="变量">变量</h4>
 <ul>
@@ -1045,15 +1056,193 @@
 </li>
 </ul>
 </li>
+<li>左值和右值
+<ul>
+<li>**左值（lvalue）：**指向内存位置的表达式被称为左值（lvalue）表达式。左值可以出现在赋值号的左边或右边。</li>
+<li><strong>右值（rvalue）：<strong>术语右值（rvalue）指的是存储在内存中某些地址的</strong>数值</strong>。右值是不能对其进行赋值的表达式，也就是说，右值可以出现在赋值号的右边，但不能出现在赋值号的左边。</li>
+</ul>
+</li>
 </ul>
 <h4 id="常量">常量</h4>
 <ul>
-<li>字面常量</li>
-<li>const修饰的常变量</li>
-<li>枚举常量</li>
-<li>字符串常量(&ldquo;hello world&rdquo;)</li>
+<li>
+<p>字面常量</p>
+<ul>
+<li>常量是固定值，在程序执行期间不会改变。这些固定的值，又叫做<strong>字面量</strong>。</li>
+</ul>
+</li>
+<li>
+<p>const修饰的常变量</p>
+<ul>
+<li><strong>常量</strong>就像是常规的变量，只不过常量的值在定义后不能进行修改。</li>
+</ul>
+</li>
+<li>
+<p>枚举常量</p>
+</li>
+<li>
+<p>字符串常量(&ldquo;hello world&rdquo;)</p>
+</li>
+<li>
+<p>定义常量</p>
+<ul>
+<li>
+<p>使用 <strong>#define</strong> 预处理器</p>
+<ul>
+<li>eg.    #define PI 3.1415926</li>
+</ul>
+</li>
+<li>
+<p>使用 <strong>const</strong> 关键字</p>
+<img src="/images/c-const-2021-01-15.png">
+<p>const 声明常量要在一个语句内完成</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> var;      <span style="color:#960050;background-color:#1e0010">×</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> bar;
+</span></span><span style="display:flex;"><span>var <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;			<span style="color:#960050;background-color:#1e0010">×</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> var <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;	<span style="color:#960050;background-color:#1e0010">√</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="常见关键字">常见关键字</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">关键字</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">auto</td>
+<td style="text-align:left">声明自动变量</td>
+</tr>
+<tr>
+<td style="text-align:left">break</td>
+<td style="text-align:left">跳出当前循环</td>
+</tr>
+<tr>
+<td style="text-align:left">case</td>
+<td style="text-align:left">开关语句分支</td>
+</tr>
+<tr>
+<td style="text-align:left">char</td>
+<td style="text-align:left">声明字符型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td style="text-align:left">const</td>
+<td style="text-align:left">定义常量，如果一个变量被 const 修饰，那么它的<strong>值就不能再被改变</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">continue</td>
+<td style="text-align:left">结束当前循环，开始下一轮循环</td>
+</tr>
+<tr>
+<td style="text-align:left">default</td>
+<td style="text-align:left">开关语句中的&quot;其它&quot;分支</td>
+</tr>
+<tr>
+<td style="text-align:left">do</td>
+<td style="text-align:left">循环语句的循环体</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">声明双精度浮点型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td style="text-align:left">else</td>
+<td style="text-align:left">条件语句否定分支（与 if 连用）</td>
+</tr>
+<tr>
+<td style="text-align:left">enum</td>
+<td style="text-align:left">声明枚举类型</td>
+</tr>
+<tr>
+<td style="text-align:left">extern</td>
+<td style="text-align:left">声明变量或函数是在其它文件或本文件的其他位置定义，<strong>只是声明，不定义</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:left">声明浮点型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td style="text-align:left">for</td>
+<td style="text-align:left">一种循环语句</td>
+</tr>
+<tr>
+<td style="text-align:left">goto</td>
+<td style="text-align:left">无条件跳转语句</td>
+</tr>
+<tr>
+<td style="text-align:left">if</td>
+<td style="text-align:left">条件语句</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">声明整型变量或函数</td>
+</tr>
+<tr>
+<td style="text-align:left">long</td>
+<td style="text-align:left">声明长整型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td style="text-align:left">register</td>
+<td style="text-align:left">声明寄存器变量</td>
+</tr>
+<tr>
+<td style="text-align:left">return</td>
+<td style="text-align:left">子程序返回语句（可以带参数，也可不带参数）</td>
+</tr>
+<tr>
+<td style="text-align:left">short</td>
+<td style="text-align:left">声明短整型变量或函数</td>
+</tr>
+<tr>
+<td style="text-align:left">signed</td>
+<td style="text-align:left">声明有符号类型变量或函数</td>
+</tr>
+<tr>
+<td style="text-align:left">sizeof</td>
+<td style="text-align:left">计算数据类型或变量长度（即所占字节数）</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/w3cnote/cpp-static-usage.html">static</a></td>
+<td style="text-align:left">声明静态变量</td>
+</tr>
+<tr>
+<td style="text-align:left">struct</td>
+<td style="text-align:left">声明结构体类型</td>
+</tr>
+<tr>
+<td style="text-align:left">switch</td>
+<td style="text-align:left">用于开关语句</td>
+</tr>
+<tr>
+<td style="text-align:left">typedef</td>
+<td style="text-align:left">用以给数据类型取别名</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned</td>
+<td style="text-align:left">声明无符号类型变量或函数</td>
+</tr>
+<tr>
+<td style="text-align:left">union</td>
+<td style="text-align:left">声明共用体类型</td>
+</tr>
+<tr>
+<td style="text-align:left">void</td>
+<td style="text-align:left">声明函数无返回值或无参数，声明无类型指针</td>
+</tr>
+<tr>
+<td style="text-align:left">volatile</td>
+<td style="text-align:left">说明变量在程序执行中可被隐含地改变</td>
+</tr>
+<tr>
+<td style="text-align:left">while</td>
+<td style="text-align:left">循环语句的循环条件</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>auto break case char const continue default do&hellip;（32个）</li>
 <li>typedef      类型重命名</li>
@@ -1088,14 +1277,115 @@
 </ul>
 <h4 id="基本类型">基本类型</h4>
 <ul>
-<li>数值类型
+<li>
+<p>数值类型</p>
 <ul>
-<li>整型：short、int、long、long long</li>
-<li>浮点型：单精度float、双精度double</li>
+<li>
+<p>整型：short、int、long、long long</p>
+</li>
+<li>
+<p>浮点型：单精度float、双精度double</p>
+<p>float:<img src="/images/float.png"></p>
+<p>double:<img src="/images/double.png"></p>
+</li>
 </ul>
 </li>
-<li>字符类型 char</li>
+<li>
+<p>字符类型 char</p>
+</li>
 </ul>
+<p>标准整数类型的存储大小和值的范围：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">存储大小</th>
+<th style="text-align:left">值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">char</td>
+<td style="text-align:left">1 字节</td>
+<td style="text-align:left">-128 到 127 或 0 到 255</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned char</td>
+<td style="text-align:left">1 字节</td>
+<td style="text-align:left">0 到 255</td>
+</tr>
+<tr>
+<td style="text-align:left">signed char</td>
+<td style="text-align:left">1 字节</td>
+<td style="text-align:left">-128 到 127</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">2 或 4 字节</td>
+<td style="text-align:left">-32,768 到 32,767 或 -2,147,483,648 到 2,147,483,647</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned int</td>
+<td style="text-align:left">2 或 4 字节</td>
+<td style="text-align:left">0 到 65,535 或 0 到 4,294,967,295</td>
+</tr>
+<tr>
+<td style="text-align:left">short</td>
+<td style="text-align:left">2 字节</td>
+<td style="text-align:left">-32,768 到 32,767</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned short</td>
+<td style="text-align:left">2 字节</td>
+<td style="text-align:left">0 到 65,535</td>
+</tr>
+<tr>
+<td style="text-align:left">long</td>
+<td style="text-align:left">4 字节</td>
+<td style="text-align:left">-2,147,483,648 到 2,147,483,647</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned long</td>
+<td style="text-align:left">4 字节</td>
+<td style="text-align:left">0 到 4,294,967,295</td>
+</tr>
+</tbody>
+</table>
+<p>各种类型的存储大小与系统位数有关，但目前通用的以64位系统为主。</p>
+<p>以下列出了32位系统与64位系统的存储大小的差别（windows 相同）：</p>
+<img src="/images/32-64.jpg">
+<p><em>sizeof(type)</em> 得到对象或类型的存储字节大小</p>
+<p>下表列出了关于标准浮点类型的存储大小、值范围和精度的细节：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">存储大小</th>
+<th style="text-align:left">值范围</th>
+<th style="text-align:left">精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:left">4 字节</td>
+<td style="text-align:left">1.2E-38 到 3.4E+38</td>
+<td style="text-align:left">6 位有效位</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">8 字节</td>
+<td style="text-align:left">2.3E-308 到 1.7E+308</td>
+<td style="text-align:left">15 位有效位</td>
+</tr>
+<tr>
+<td style="text-align:left">long double</td>
+<td style="text-align:left">16 字节</td>
+<td style="text-align:left">3.4E-4932 到 1.1E+4932</td>
+<td style="text-align:left">19 位有效位</td>
+</tr>
+</tbody>
+</table>
 <h4 id="构造类型">构造类型</h4>
 <ul>
 <li>
@@ -1104,15 +1394,33 @@
 <li>
 <p>共用体（联合体） union</p>
 <ul>
-<li>特征：所有成员公用一块空间（共用）</li>
-<li>联合大小计算：是少是最大成员的大小，最大成员不是最大对齐数整数倍时，对齐</li>
+<li>
+<p>特征：所有成员公用一块空间（共用）</p>
+</li>
+<li>
+<p>联合大小计算：至少是最大成员的大小，最大成员不是最大对齐数整数倍时，<strong>对齐</strong></p>
+</li>
+<li>
+<p>union变量初始化时，只能对第一个成员赋值</p>
+</li>
+<li>
+<p>union变量在一个时刻只能一个成员发挥作用，赋值时，成员之间会互相覆盖，最后一次被赋值的成员起作用。</p>
+</li>
 </ul>
 </li>
 <li>
 <p>枚举类型 enum</p>
+<p>​	枚举语法定义格式为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span>　<span style="color:#960050;background-color:#1e0010">枚举名</span>　{<span style="color:#960050;background-color:#1e0010">枚举元素</span><span style="color:#ae81ff">1</span>[<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">整型常数</span>],<span style="color:#960050;background-color:#1e0010">枚举元素</span><span style="color:#ae81ff">2</span>[<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">整型常数</span>],<span style="color:#960050;background-color:#1e0010">……</span>};
+</span></span></code></pre></div><p>枚举元素是一个整型，枚举型可以隐式的转换为int型，int型不能隐式的转换为枚举型。</p>
 <ul>
-<li>成员默认从0开始依次递增，也可以定义时赋初值</li>
-<li>优点
+<li>
+<p>成员默认从0开始<strong>依次递增</strong>，也可以定义时赋初值（没有赋初值的元素按前面赋过初值的元素依次递增）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">course</span> {math,chinese,english<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,physics,chemistry}
+</span></span></code></pre></div><p>其中各个元素的值为：0，1，1，2，3</p>
+</li>
+<li>
+<p>优点</p>
 <ul>
 <li>增加代码可读性可维护性</li>
 <li>和#define定义的标识符比较，枚举有类型，更加严谨</li>
@@ -1150,6 +1458,20 @@
 <li>收尾工作结构体的总大小，也就是sizeof的结果，必须是其内部最大成员的整数倍，不足的要补齐</li>
 </ul>
 </li>
+</ul>
+<p>结构体大小和字节对齐
+现代计算机中内存空间都是按照byte划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特定的内存地址访问，这就需要<strong>各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐.</strong>
+为什么需要字节对齐？各个硬件平台对存储空间的处理上有很大的不同。一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数据。
+三个个概念：</p>
+<p>自身对齐值：数据类型本身的对齐值，<strong>结构体或类的的自身对齐值是其成员中最大的那个值</strong>，例如char类型的自身对齐值是1，short类型是2；
+指定对齐值：编译器或程序员指定的对齐值，32位单片机的指定对齐值默认是4；
+有效对齐值：自身对齐值和指定对齐值中较小的那个。
+字节对齐的三个准则
+结构体变量的首地址能够被其有效对齐值的大小所整除
+结构体的总大小为结构体有效对齐值的整数倍。
+结构体每个成员相对于结构体首地址的偏移量都是有效对齐值的整数倍。
+可以通过#pragma pack(n)来设定变量以n字节对齐方式 作者：程序员-王坚 <a href="https://www.bilibili.com/read/cv14206037">https://www.bilibili.com/read/cv14206037</a> 出处：bilibili</p>
+<ul>
 <li>
 <p>为什么存在内存对齐</p>
 <ul>
@@ -1208,21 +1530,158 @@
 <br>
 <h4 id="分支语句">分支语句</h4>
 <ul>
-<li>if、switch</li>
+<li>if、switch
+<table>
+<thead>
+<tr>
+<th style="text-align:left">语句</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-if.html">if 语句</a></td>
+<td style="text-align:left">一个 <strong>if 语句</strong> 由一个布尔表达式后跟一个或多个语句组成。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-if-else.html">if&hellip;else 语句</a></td>
+<td style="text-align:left">一个 <strong>if 语句</strong> 后可跟一个可选的 <strong>else 语句</strong>，else 语句在布尔表达式为假时执行。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-nested-if.html">嵌套 if 语句</a></td>
+<td style="text-align:left">您可以在一个 <strong>if</strong> 或 <strong>else if</strong> 语句内使用另一个 <strong>if</strong> 或 <strong>else if</strong> 语句。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-switch.html">switch 语句</a></td>
+<td style="text-align:left">一个 <strong>switch</strong> 语句允许测试一个变量等于多个值时的情况。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-nested-switch.html">嵌套 switch 语句</a></td>
+<td style="text-align:left">您可以在一个 <strong>switch</strong> 语句内使用另一个 <strong>switch</strong> 语句。</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ul>
 <h4 id="循环语句">循环语句</h4>
 <ul>
-<li>while、for、do while、goto</li>
+<li>while、for、do while、goto、break、continue
+<table>
+<thead>
+<tr>
+<th style="text-align:left">循环类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-while-loop.html">while 循环</a></td>
+<td style="text-align:left">当给定条件为真时，重复语句或语句组。它会在执行循环主体之前测试条件。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-for-loop.html">for 循环</a></td>
+<td style="text-align:left">多次执行一个语句序列，简化管理循环变量的代码。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-do-while-loop.html">do&hellip;while 循环</a></td>
+<td style="text-align:left">除了它是在循环主体结尾测试条件外，其他与 while 语句类似。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-nested-loops.html">嵌套循环</a></td>
+<td style="text-align:left">您可以在 while、for 或 do..while 循环内使用一个或多个循环。</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">控制语句</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-break-statement.html">break 语句</a></td>
+<td style="text-align:left">终止<strong>循环</strong>或 <strong>switch</strong> 语句，程序流将继续执行紧接着循环或 switch 的下一条语句。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-continue-statement.html">continue 语句</a></td>
+<td style="text-align:left">告诉一个循环体立刻停止本次循环迭代，重新开始下次循环迭代。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/cprogramming/c-goto-statement.html">goto 语句</a></td>
+<td style="text-align:left">将控制转移到被标记的语句。但是不建议在程序中使用 goto 语句。</td>
+</tr>
+</tbody>
+</table>
 <br>
 <h3 id="操作符">操作符</h3>
 <br>
 <h4 id="算术操作符">算术操作符</h4>
 <p>+      -       *       /       %</p>
+<p>/ 是整除，%是取模(整除后的余数)</p>
 <h4 id="移位操作符">移位操作符</h4>
 <p>&laquo;      &raquo;</p>
+<table>
+<thead>
+<tr>
+<th>&laquo;</th>
+<th>二进制左移运算符。将一个运算对象的各二进制位全部左移若干位（左边的二进制位丢弃，右边补0）。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&raquo;</td>
+<td>二进制右移运算符。将一个数的各二进制位全部右移若干位，正数左补0，负数左补1，右边丢弃。</td>
+</tr>
+</tbody>
+</table>
 <h4 id="位操作符">位操作符</h4>
-<p>&amp;      |      ^</p>
+<p>&amp;      |      ^     ~</p>
+<p>~是按位取反</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">p</th>
+<th style="text-align:left">q</th>
+<th style="text-align:left">p &amp; q 与</th>
+<th style="text-align:left">p | q  或</th>
+<th style="text-align:left">p ^ q   异或</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
 <h4 id="赋值操作符">赋值操作符</h4>
 <p>=      +=      -=      *=      /=      %=      &raquo;=      &laquo;=      &amp;=      |=      ^=</p>
 <h4 id="单目操作符">单目操作符</h4>
@@ -1230,7 +1689,8 @@
 <h4 id="关系操作符">关系操作符</h4>
 <p>&gt;      &gt;=      &lt;      &lt;=      !=      ==</p>
 <h4 id="逻辑操作符">逻辑操作符</h4>
-<p>&amp;&amp;      ||</p>
+<p>&amp;&amp;      第一项为false的话，就不用算第二项了</p>
+<p>||   第一项为true的话，第二项就不用算了</p>
 <h4 id="条件操作符">条件操作符</h4>
 <p>exp1?exp2:exp3</p>
 <h4 id="逗号表达式">逗号表达式</h4>
@@ -1263,6 +1723,93 @@
 </ul>
 </li>
 </ul>
+<p>下表将按运算符优先级从高到低列出各个运算符，具有较高优先级的运算符出现在表格的上面，具有较低优先级的运算符出现在表格的下面。在表达式中，较高优先级的运算符会优先被计算。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类别</th>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">结合性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">后缀</td>
+<td style="text-align:left">() [] -&gt; . ++ - -</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">一元</td>
+<td style="text-align:left">+ - ! ~ ++ - - (type)* &amp; sizeof</td>
+<td style="text-align:left">从右到左</td>
+</tr>
+<tr>
+<td style="text-align:left">乘除</td>
+<td style="text-align:left">* / %</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">加减</td>
+<td style="text-align:left">+ -</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">移位</td>
+<td style="text-align:left">&laquo; &raquo;</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">关系</td>
+<td style="text-align:left">&lt; &lt;= &gt; &gt;=</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">相等</td>
+<td style="text-align:left">== !=</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">位与 AND</td>
+<td style="text-align:left">&amp;</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">位异或 XOR</td>
+<td style="text-align:left">^</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">位或 OR</td>
+<td style="text-align:left">|</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">逻辑与 AND</td>
+<td style="text-align:left">&amp;&amp;</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">逻辑或 OR</td>
+<td style="text-align:left">||</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+<tr>
+<td style="text-align:left">条件</td>
+<td style="text-align:left">?:</td>
+<td style="text-align:left">从右到左</td>
+</tr>
+<tr>
+<td style="text-align:left">赋值</td>
+<td style="text-align:left">= += -= *= /= %=&raquo;= &laquo;= &amp;= ^= |=</td>
+<td style="text-align:left">从右到左</td>
+</tr>
+<tr>
+<td style="text-align:left">逗号</td>
+<td style="text-align:left">,</td>
+<td style="text-align:left">从左到右</td>
+</tr>
+</tbody>
+</table>
 <br>
 <h3 id="函数">函数</h3>
 <br>
@@ -1280,14 +1827,23 @@
 <p>有函数名、返回值类型和函数参数，需要程序员自己设计</p>
 <h4 id="函数的声明和定义">函数的声明和定义</h4>
 <ul>
-<li>函数声明
+<li>
+<p>函数声明</p>
 <ul>
-<li>告诉编译器函数名、参数、返回类型</li>
-<li>先声明后使用</li>
-<li>一般放在头文件中</li>
+<li>
+<p>告诉编译器函数名、参数、返回类型</p>
+</li>
+<li>
+<p>先声明后使用</p>
+</li>
+<li>
+<p>一般放在头文件中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>return_type <span style="color:#a6e22e">function_name</span>( parameter list );
+</span></span></code></pre></div></li>
 </ul>
 </li>
-<li>函数定义
+<li>
+<p>函数定义</p>
 <ul>
 <li>函数的具体实现，交待函数的功能实现</li>
 </ul>
@@ -1310,8 +1866,8 @@
 </ul>
 <h4 id="函数调用">函数调用</h4>
 <ul>
-<li>传值调用</li>
-<li>传地址调用</li>
+<li>传值调用：该方法把参数的实际值复制给函数的形式参数。在这种情况下，修改函数内的形式参数不会影响实际参数。</li>
+<li>传地址调用(引用调用)：通过指针传递方式，形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作。</li>
 </ul>
 <h4 id="函数的嵌套调用和链式访问">函数的嵌套调用和链式访问</h4>
 <ul>
@@ -1373,6 +1929,8 @@
 <h4 id="指针变量">指针变量</h4>
 <p>存放地址的变量（指针变量中的值会被当做内存单元地址处理）</p>
 <h4 id="指针类型-1">指针类型</h4>
+<p>在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个 NULL 值是一个良好的编程习惯。赋为 NULL 值的指针被称为<strong>空</strong>指针。</p>
+<p>NULL 指针是一个定义在标准库中的值为零的常量。</p>
 <ul>
 <li>自定义类型
 <ul>
@@ -1528,6 +2086,10 @@
 </ul>
 </li>
 </ul>
+<h3 id="c命令行参数">C命令行参数</h3>
+<p>执行程序时，可以从命令行传值给 C 程序。这些值被称为<strong>命令行参数</strong>，它们对程序很重要，特别是当您想从外部控制程序，而不是在代码内对这些值进行硬编码时，就显得尤为重要了。</p>
+<p>命令行参数是使用 main() 函数参数来处理的，其中，<strong>argc</strong> 是指传入参数的个数，<strong>argv[]</strong> 是一个指针数组，指向传递给程序的每个参数。</p>
+<p><strong>argv[0]</strong> 存储程序的名称，<strong>argv[1]</strong> 是一个指向第一个命令行参数的指针，*argv[n] 是最后一个参数。如果没有提供任何参数，argc 将为 1，否则，如果传递了一个参数，<strong>argc</strong> 将被设置为 2。</p>
 
 
 
@@ -2073,19 +2635,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654661206"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654661206"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654661206"></script>
-    <script src="/js/jquery.sticky.js?1654661206"></script>
-    <script src="/js/featherlight.min.js?1654661206"></script>
-    <script src="/js/highlight.pack.js?1654661206"></script>
+    <script src="/js/clipboard.min.js?1654751488"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654751488"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654751488"></script>
+    <script src="/js/jquery.sticky.js?1654751488"></script>
+    <script src="/js/featherlight.min.js?1654751488"></script>
+    <script src="/js/highlight.pack.js?1654751488"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654661206"></script>
-    <script src="/js/learn.js?1654661206"></script>
-    <script src="/js/hugo-learn.js?1654661206"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654751488"></script>
+    <script src="/js/learn.js?1654751488"></script>
+    <script src="/js/hugo-learn.js?1654751488"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654661206"></script>
+            <script src="/mermaid/mermaid.js?1654751488"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
