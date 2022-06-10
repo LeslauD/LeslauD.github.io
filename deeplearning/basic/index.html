@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>CPP :: 刘顿的博客</title>
+    <title>基础算法理论 :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1654851409" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/cxx/">
+  <body class="" data-url="/deeplearning/basic/">
     <nav id="sidebar" class="">
 
 
@@ -339,7 +339,7 @@
   
     
     <li data-nav-id="/deeplearning/" title="深度学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -368,8 +368,8 @@
   
     
     <li data-nav-id="/deeplearning/basic/" title="基础算法理论" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/deeplearning/basic/">
@@ -781,8 +781,8 @@
   
     
     <li data-nav-id="/cxx/" title="CPP" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/cxx/">
@@ -980,6 +980,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -990,7 +992,13 @@
             
           
           
-            <a href='/'></a> > CPP
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/deeplearning/'>深度学习</a> > 基础算法理论
+          
+        
           
         
           
@@ -999,6 +1007,24 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#神经网络">神经网络</a></li>
+        <li><a href="#激活函数">激活函数</a></li>
+        <li><a href="#网络拓扑">网络拓扑</a></li>
+        <li><a href="#训练算法">训练算法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -1006,17 +1032,52 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              基础算法理论
+            </h1>
           
 
         
 
 
 
-	<h3 id="ccxxclang"><a href="/cxx/clang">C</a></h3>
-<h3 id="ccxxcpp"><a href="/cxx/cpp">C++</a></h3>
+	<h3 id="神经网络">神经网络</h3>
+<p>激活函数：将神经元的净输入信号换成单一的输出信号，以便进一步在网络中传播</p>
+<p>网络拓扑：描述了模型中神经元的数量以及层数和它们连接的方式</p>
+<p>训练算法：指定如何设置连接权重，以便抑制或者增加神经元在输入信号中的比重
+$$
+y = f(Σ_0^nW_iX_i)
+$$
+其中f(·)为activation function 激活函数，W0为偏置项bias，对应的X0=1</p>
+<h3 id="激活函数">激活函数</h3>
+<h4 id="sigmod">sigmod</h4>
+<p>$$
+\frac{1}{1+e^{-x}}
+$$</p>
+<h4 id="tanh">tanh</h4>
+<p>$$
+\frac{e^x-e^{-x}}{e^x+e^{-x}}
+$$</p>
+<h4 id="relu">relu</h4>
+<p>$$
+max(0,x)
+$$</p>
+<h3 id="网络拓扑">网络拓扑</h3>
+<h4 id="单层网络">单层网络</h4>
+<img src="/images/signalLayerNet.png">
+<p>只有输入层和输出层</p>
+<h4 id="多层网络">多层网络</h4>
+<img src="/images/multiLayerNet.png">
+<p>除了输入层和输出层，中间还有隐藏层</p>
+<h4 id="多节点输出网络">多节点输出网络</h4>
+<img src="/images/multiOutputs.png">
+<p>二分类：一个输出</p>
+<p>多分类：多个输出</p>
+<p>回归：一或多个输出</p>
+<h3 id="训练算法">训练算法</h3>
 
 
 
@@ -1026,8 +1087,6 @@
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -1210,6 +1269,45 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -1253,56 +1351,6 @@
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1368,39 +1416,6 @@
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -1430,8 +1445,41 @@
 
                     
                     
+                        
+                    
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
             
         
@@ -1452,6 +1500,22 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1460,7 +1524,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -1475,9 +1538,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1568,10 +1628,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/programs/millenniumtemple/" title="MillenniumTemple"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/deeplearning/" title="深度学习"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/cxx/clang/" title="C language" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/vehicle/" title="车车" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
