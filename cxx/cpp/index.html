@@ -12,22 +12,22 @@
     <title>CPP :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1654851409" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1654851409" rel="stylesheet">
-    <link href="/css/hybrid.css?1654851409" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1654851409" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1654851409" rel="stylesheet">
-    <link href="/css/auto-complete.css?1654851409" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1654851409" rel="stylesheet">
-    <link href="/css/theme.css?1654851409" rel="stylesheet">
-    <link href="/css/tabs.css?1654851409" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1654851409" rel="stylesheet">
+    <link href="/css/nucleus.css?1654951394" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1654951394" rel="stylesheet">
+    <link href="/css/hybrid.css?1654951394" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1654951394" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1654951394" rel="stylesheet">
+    <link href="/css/auto-complete.css?1654951394" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1654951394" rel="stylesheet">
+    <link href="/css/theme.css?1654951394" rel="stylesheet">
+    <link href="/css/tabs.css?1654951394" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1654951394" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1654851409" rel="stylesheet">
+    <link href="/css/theme-blue.css?1654951394" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1654851409"></script>
+    <script src="/js/jquery-3.3.1.min.js?1654951394"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1654851409"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1654851409"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1654951394"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1654951394"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1654851409"></script>
+<script type="text/javascript" src="/js/search.js?1654951394"></script>
 
     
   </div>
@@ -1020,6 +1020,7 @@
         <li><a href="#编程技巧">编程技巧</a></li>
         <li><a href="#继承和多态">继承和多态</a></li>
         <li><a href="#动态内存管理">动态内存管理</a></li>
+        <li><a href="#stl">STL</a></li>
       </ul>
     </li>
   </ul>
@@ -1295,6 +1296,599 @@
 <li>定位new表达式是在已分配的内存空间中调用构造函数初始化一个对象</li>
 <li>new(pA)type(init-list):其中pA是指向初始化这个类并且开辟了内存空间的指针</li>
 </ul>
+<br>
+<br>
+<h3 id="stl">STL</h3>
+<h4 id="vector">vector</h4>
+<ul>
+<li>
+<p>创建：</p>
+<ul>
+<li>
+<p>创建空的vector</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span><span style="color:#f92672">&gt;</span> values;
+</span></span></code></pre></div><p>reserve函数增加容量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>values.reserve(<span style="color:#ae81ff">20</span>)
+</span></span></code></pre></div></li>
+<li>
+<p>创建的同时指定初始值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> primes {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">19</span>};
+</span></span></code></pre></div></li>
+<li>
+<p>创建时指定元素个数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> values(<span style="color:#ae81ff">20</span>);
+</span></span></code></pre></div><p>默认初值为0，也可以指定初值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> values(<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">1.0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//圆括号中的参数也可以是变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> num<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> value <span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>;
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> values(num, value);
+</span></span></code></pre></div></li>
+<li>
+<p>通过存储元素类型相同的其他容器创建新的容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>value1(<span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#39;c&#39;</span>);
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>value2(value1);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//也可以指定取其他容器中的哪些元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> array[]<span style="color:#f92672">=</span>{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>};
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>values(array, array<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);<span style="color:#75715e">//values 将保存{1,2}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>value1{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>};
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>value2(std<span style="color:#f92672">::</span>begin(value1),std<span style="color:#f92672">::</span>begin(value1)<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);<span style="color:#75715e">//value2保存{1,2,3}
+</span></span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>vector的成员函数</p>
+<table>
+<thead>
+<tr>
+<th>函数成员</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin()</td>
+<td>返回指向容器中第一个元素的迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器最后一个元素所在位置后一个位置的迭代器，通常和 begin() 结合使用。</td>
+</tr>
+<tr>
+<td>rbegin()</td>
+<td>返回指向最后一个元素的迭代器。</td>
+</tr>
+<tr>
+<td>rend()</td>
+<td>返回指向第一个元素所在位置前一个位置的迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+</tr>
+<tr>
+<td>crbegin()</td>
+<td>和 rbegin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+</tr>
+<tr>
+<td>crend()</td>
+<td>和 rend() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回实际元素个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回元素个数的最大值。这通常是一个很大的值，一般是 232-1，所以我们很少会用到这个函数。</td>
+</tr>
+<tr>
+<td>resize()</td>
+<td>改变实际元素的个数。</td>
+</tr>
+<tr>
+<td>capacity()</td>
+<td>返回当前容量。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>判断容器中是否有元素，若无元素，则返回 true；反之，返回 false。</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>增加容器的容量。</td>
+</tr>
+<tr>
+<td>shrink _to_fit()</td>
+<td>将内存减少到等于当前元素实际所使用的大小。</td>
+</tr>
+<tr>
+<td>operator[ ]</td>
+<td>重载了 [ ] 运算符，可以向访问数组中元素那样，通过下标即可访问甚至修改 vector 容器中的元素。</td>
+</tr>
+<tr>
+<td>at()</td>
+<td>使用经过边界检查的索引访问元素。</td>
+</tr>
+<tr>
+<td>front()</td>
+<td>返回第一个元素的引用。</td>
+</tr>
+<tr>
+<td>back()</td>
+<td>返回最后一个元素的引用。</td>
+</tr>
+<tr>
+<td>data()</td>
+<td>返回指向容器中第一个元素的指针。</td>
+</tr>
+<tr>
+<td>assign()</td>
+<td>用新元素替换原有内容。</td>
+</tr>
+<tr>
+<td>push_back()</td>
+<td>在序列的尾部添加一个元素。</td>
+</tr>
+<tr>
+<td>pop_back()</td>
+<td>移出序列尾部的元素。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>在指定的位置插入一个或多个元素。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>移出一个元素或一段元素。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>移出所有的元素，容器大小变为 0。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换两个容器的所有元素。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>在指定的位置直接生成一个元素。</td>
+</tr>
+<tr>
+<td>emplace_back()</td>
+<td>在序列尾部生成一个元素。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<br>
+<h4 id="pair">pair</h4>
+<p>专门用来将 2 个普通元素 first 和 second（可以是 C++ 基本数据类型、结构体、类自定的类型）创建成一个新元素<code>&lt;first, second&gt;</code></p>
+<p>pair 类模板定义在<utility>头文件中</p>
+<ul>
+<li>构造函数</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#1) 默认构造函数，即创建空的 pair 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>pair();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#2) 直接使用 2 个元素初始化成 pair 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>pair (<span style="color:#66d9ef">const</span> first_type<span style="color:#f92672">&amp;</span> a, <span style="color:#66d9ef">const</span> second_type<span style="color:#f92672">&amp;</span> b);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#3) 拷贝（复制）构造函数，即借助另一个 pair 对象，创建新的 pair 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">U</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">V</span><span style="color:#f92672">&gt;</span> pair (<span style="color:#66d9ef">const</span> pair<span style="color:#f92672">&lt;</span>U,V<span style="color:#f92672">&gt;&amp;</span> pr);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#4) 移动构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">U</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">V</span><span style="color:#f92672">&gt;</span> pair (pair<span style="color:#f92672">&lt;</span>U,V<span style="color:#f92672">&gt;&amp;&amp;</span> pr);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#5) 使用右值引用参数，创建 pair 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">U</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">V</span><span style="color:#f92672">&gt;</span> pair (U<span style="color:#f92672">&amp;&amp;</span> a, V<span style="color:#f92672">&amp;&amp;</span> b);
+</span></span></code></pre></div><p><code>&lt;utility&gt;</code>头文件中除了提供创建 pair 对象的方法之外，还为 pair 对象重载了 &lt;、&lt;=、&gt;、&gt;=、==、!= 这 6 的运算符，其运算规则是：对于进行比较的 2 个 pair 对象，先比较 <strong>pair.first</strong> 元素的大小，如果相等则继续比较 <strong>pair.second</strong> 元素的大小。</p>
+<br>
+<h4 id="map">map</h4>
+<p>map容器存储的都是pair对象</p>
+<ul>
+<li>创建</li>
+</ul>
+<ol>
+<li>通过调用 map 容器类的默认构造函数，可以创建出一个空的 map 容器，比如：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> myMap;
+</span></span></code></pre></div><ol start="2">
+<li>
+<p>创建的同时初始化</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> myMap{ {<span style="color:#e6db74">&#34;C语言教程&#34;</span>,<span style="color:#ae81ff">10</span>},{<span style="color:#e6db74">&#34;STL教程&#34;</span>,<span style="color:#ae81ff">20</span>} };
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 或者创建pair对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> myMap{std<span style="color:#f92672">::</span>make_pair(<span style="color:#e6db74">&#34;C语言教程&#34;</span>,<span style="color:#ae81ff">10</span>),std<span style="color:#f92672">::</span>make_pair(<span style="color:#e6db74">&#34;STL教程&#34;</span>,<span style="color:#ae81ff">20</span>)};
+</span></span></code></pre></div></li>
+<li>
+<p>拷贝构造</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> newMap(myMap);
+</span></span></code></pre></div></li>
+<li>
+<p>map 类模板还支持取已建 map 容器中指定区域内的键值对，创建并初始化新的 map 容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> myMap{ {<span style="color:#e6db74">&#34;C语言教程&#34;</span>,<span style="color:#ae81ff">10</span>},{<span style="color:#e6db74">&#34;STL教程&#34;</span>,<span style="color:#ae81ff">20</span>} };
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> newMap(<span style="color:#f92672">++</span>myMap.begin(), myMap.end());
+</span></span></code></pre></div></li>
+<li>
+<p>手动修改 map 容器的排序规则。默认情况下，map 容器调用 std::less<T> 规则，根据容器内各键值对的键的大小，对所有键值对做升序排序。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>myMap{ {<span style="color:#e6db74">&#34;C语言教程&#34;</span>,<span style="color:#ae81ff">10</span>},{<span style="color:#e6db74">&#34;STL教程&#34;</span>,<span style="color:#ae81ff">20</span>} };
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span>, std<span style="color:#f92672">::</span>less<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>myMap{ {<span style="color:#e6db74">&#34;C语言教程&#34;</span>,<span style="color:#ae81ff">10</span>},{<span style="color:#e6db74">&#34;STL教程&#34;</span>,<span style="color:#ae81ff">20</span>} };
+</span></span></code></pre></div><p>&lt;&ldquo;C语言教程&rdquo;, 10&gt;
+&lt;&ldquo;STL教程&rdquo;, 20&gt;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, <span style="color:#66d9ef">int</span>, std<span style="color:#f92672">::</span>greater<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>myMap{ {<span style="color:#e6db74">&#34;C语言教程&#34;</span>,<span style="color:#ae81ff">10</span>},{<span style="color:#e6db74">&#34;STL教程&#34;</span>,<span style="color:#ae81ff">20</span>} };
+</span></span></code></pre></div><p>&lt;&ldquo;STL教程&rdquo;, 20&gt;
+&lt;&ldquo;C语言教程&rdquo;, 10&gt;</p>
+</li>
+</ol>
+<ul>
+<li>map容器包含的成员方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin()</td>
+<td>返回指向容器中第一个（注意，是已排好序的第一个）键值对的双向迭代器。如果 map 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器最后一个元素（注意，是已排好序的最后一个）所在位置后一个位置的双向迭代器，通常和 begin() 结合使用。如果 map 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>rbegin()</td>
+<td>返回指向最后一个（注意，是已排好序的最后一个）元素的反向双向迭代器。如果 map 容器用 const 限定，则该方法返回的是 const 类型的反向双向迭代器。</td>
+</tr>
+<tr>
+<td>rend()</td>
+<td>返回指向第一个（注意，是已排好序的第一个）元素所在位置前一个位置的反向双向迭代器。如果 map 容器用 const 限定，则该方法返回的是 const 类型的反向双向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>crbegin()</td>
+<td>和 rbegin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>crend()</td>
+<td>和 rend() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>在 map 容器中查找键为 key 的键值对，如果成功找到，则返回指向该键值对的双向迭代器；反之，则返回和 end() 方法一样的迭代器。另外，如果 map 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>lower_bound(key)</td>
+<td>返回一个指向当前 map 容器中第一个大于或等于 key 的键值对的双向迭代器。如果 map 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>upper_bound(key)</td>
+<td>返回一个指向当前 map 容器中第一个大于 key 的键值对的迭代器。如果 map 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>该方法返回一个 pair 对象（包含 2 个双向迭代器），其中 pair.first 和 lower_bound() 方法的返回值等价，pair.second 和 upper_bound() 方法的返回值等价。也就是说，该方法将返回一个范围，该范围中包含的键为 key 的键值对（map 容器键值对唯一，因此该范围最多包含一个键值对）。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前 map 容器中存有键值对的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回 map 容器所能容纳键值对的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>operator[]</td>
+<td>map容器重载了 [] 运算符，只要知道 map 容器中某个键值对的键的值，就可以向获取数组中元素那样，通过键直接获取对应的值。</td>
+</tr>
+<tr>
+<td>at(key)</td>
+<td>找到 map 容器中 key 键对应的值，如果找不到，该函数会引发 out_of_range 异常。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向 map 容器中插入键值对。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除 map 容器指定位置、指定键（key）值或者指定区域内的键值对。后续章节还会对该方法做重点讲解。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 map 容器中存储的键值对，这意味着，操作的 2 个键值对的类型必须相同。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空 map 容器中所有的键值对，即使 map 容器的 size() 为 0。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>在当前 map 容器中的指定位置处构造新键值对。其效果和插入键值对一样，但效率更高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>在本质上和 emplace() 在 map 容器中构造新键值对的方式是一样的，不同之处在于，使用者必须为该方法提供一个指示键值对生成位置的迭代器，并作为该方法的第一个参数。</td>
+</tr>
+<tr>
+<td>count(key)</td>
+<td>在当前 map 容器中，查找键为 key 的键值对的个数并返回。注意，由于 map 容器中各键值对的键的值是唯一的，因此该函数的返回值最大为 1。</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h4 id="set">set</h4>
+<p>set 容器存储的各个元素的值必须各不相同,采用默认的 std::less&lt;T&gt; 规则排序</p>
+<ul>
+<li>
+<p>创建</p>
+<ol>
+<li>
+<p>调用默认构造函数，创建空的 set 容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> myset;
+</span></span></code></pre></div></li>
+<li>
+<p>创建的同时初始化</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> myset{<span style="color:#e6db74">&#34;http://c.biancheng.net/java/&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;http://c.biancheng.net/stl/&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;http://c.biancheng.net/python/&#34;</span>};
+</span></span></code></pre></div></li>
+<li>
+<p>拷贝构造函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> copyset(myset);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//等同于
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> copyset <span style="color:#f92672">=</span> myset
+</span></span></code></pre></div></li>
+<li>
+<p>取已有 set 容器中的部分元素，来初始化新 set 容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> myset{ <span style="color:#e6db74">&#34;http://c.biancheng.net/java/&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;http://c.biancheng.net/stl/&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;http://c.biancheng.net/python/&#34;</span> };
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> copyset(<span style="color:#f92672">++</span>myset.begin(), myset.end());
+</span></span></code></pre></div></li>
+<li>
+<p>手动修改 set 容器中的排序规则</p>
+<pre tabindex="0"><code class="language-c+" data-lang="c+">std::set&lt;std::string,std::greater&lt;string&gt; &gt; myset{
+    &#34;http://c.biancheng.net/java/&#34;,
+    &#34;http://c.biancheng.net/stl/&#34;,
+    &#34;http://c.biancheng.net/python/&#34;};
+</code></pre></li>
+</ol>
+</li>
+<li>
+<p>成员方法</p>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin()</td>
+<td>返回指向容器中第一个（注意，是已排好序的第一个）元素的双向迭代器。如果 set 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器最后一个元素（注意，是已排好序的最后一个）所在位置后一个位置的双向迭代器，通常和 begin() 结合使用。如果 set 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>rbegin()</td>
+<td>返回指向最后一个（注意，是已排好序的最后一个）元素的反向双向迭代器。如果 set 容器用 const 限定，则该方法返回的是 const 类型的反向双向迭代器。</td>
+</tr>
+<tr>
+<td>rend()</td>
+<td>返回指向第一个（注意，是已排好序的第一个）元素所在位置前一个位置的反向双向迭代器。如果 set 容器用 const 限定，则该方法返回的是 const 类型的反向双向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的元素值。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的元素值。</td>
+</tr>
+<tr>
+<td>crbegin()</td>
+<td>和 rbegin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的元素值。</td>
+</tr>
+<tr>
+<td>crend()</td>
+<td>和 rend() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改容器内存储的元素值。</td>
+</tr>
+<tr>
+<td>find(val)</td>
+<td>在 set 容器中查找值为 val 的元素，如果成功找到，则返回指向该元素的双向迭代器；反之，则返回和 end() 方法一样的迭代器。另外，如果 set 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>lower_bound(val)</td>
+<td>返回一个指向当前 set 容器中第一个大于或等于 val 的元素的双向迭代器。如果 set 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>upper_bound(val)</td>
+<td>返回一个指向当前 set 容器中第一个大于 val 的元素的迭代器。如果 set 容器用 const 限定，则该方法返回的是 const 类型的双向迭代器。</td>
+</tr>
+<tr>
+<td>equal_range(val)</td>
+<td>该方法返回一个 pair 对象（包含 2 个双向迭代器），其中 pair.first 和 lower_bound() 方法的返回值等价，pair.second 和 upper_bound() 方法的返回值等价。也就是说，该方法将返回一个范围，该范围中包含的值为 val 的元素（set 容器中各个元素是唯一的，因此该范围最多包含一个元素）。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前 set 容器中存有元素的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回 set 容器所能容纳元素的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向 set 容器中插入元素。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除 set 容器中存储的元素。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 set 容器中存储的所有元素。这意味着，操作的 2 个 set 容器的类型必须相同。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空 set 容器中所有的元素，即令 set 容器的 size() 为 0。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>在当前 set 容器中的指定位置直接构造新元素。其效果和 insert() 一样，但效率更高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>在本质上和 emplace() 在 set 容器中构造新元素的方式是一样的，不同之处在于，使用者必须为该方法提供一个指示新元素生成位置的迭代器，并作为该方法的第一个参数。</td>
+</tr>
+<tr>
+<td>count(val)</td>
+<td>在当前 set 容器中，查找值为 val 的元素的个数，并返回。注意，由于 set 容器中各元素的值是唯一的，因此该函数的返回值最大为 1。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<br>
+<h4 id="unorder_map">unorder_map</h4>
+<p>unordered_map 容器和 map 容器仅有一点不同，即 map 容器中存储的数据是有序的，而 unordered_map 容器中是无序的。</p>
+<br>
+<br>
+<br>
+<h4 id="stack">stack</h4>
+<p>#include &lt;stack&gt;</p>
+<ul>
+<li>
+<p>创建</p>
+<pre tabindex="0"><code>std::stack&lt;int&gt; values;
+</code></pre></li>
+<li>
+<p>成员函数</p>
+<table>
+<thead>
+<tr>
+<th>成员函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty()</td>
+<td>当 stack 栈中没有元素时，该成员函数返回 true；反之，返回 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回 stack 栈中存储元素的个数。</td>
+</tr>
+<tr>
+<td>top()</td>
+<td>返回一个栈顶元素的引用，类型为 T&amp;。如果栈为空，程序会报错。</td>
+</tr>
+<tr>
+<td>push(const T&amp; val)</td>
+<td>先复制 val，再将 val 副本压入栈顶。这是通过调用底层容器的 push_back() 函数完成的。</td>
+</tr>
+<tr>
+<td>push(T&amp;&amp; obj)</td>
+<td>以移动元素的方式将其压入栈顶。这是通过调用底层容器的有右值引用参数的 push_back() 函数完成的。</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>弹出栈顶元素。</td>
+</tr>
+<tr>
+<td>emplace(arg&hellip;)</td>
+<td>arg&hellip; 可以是一个参数，也可以是多个参数，但它们都只用于构造一个对象，并在栈顶直接生成该对象，作为新的栈顶元素。</td>
+</tr>
+<tr>
+<td>swap(stack<T> &amp; other_stack)</td>
+<td>将两个 stack 适配器中的元素进行互换，需要注意的是，进行互换的 2 个 stack 适配器中存储的元素类型以及底层采用的基础容器类型，都必须相同。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="queue">queue</h4>
+<p>#include &lt;queue&gt;</p>
+<ul>
+<li>
+<p>创建</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> values;
+</span></span></code></pre></div></li>
+<li>
+<p>成员方法</p>
+<table>
+<thead>
+<tr>
+<th>成员函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty()</td>
+<td>如果 queue 中没有元素的话，返回 true。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回 queue 中元素的个数。</td>
+</tr>
+<tr>
+<td>front()</td>
+<td>返回 queue 中第一个元素的引用。如果 queue 是常量，就返回一个常引用；如果 queue 为空，返回值是未定义的。</td>
+</tr>
+<tr>
+<td>back()</td>
+<td>返回 queue 中最后一个元素的引用。如果 queue 是常量，就返回一个常引用；如果 queue 为空，返回值是未定义的。</td>
+</tr>
+<tr>
+<td>push(const T&amp; obj)</td>
+<td>在 queue 的尾部添加一个元素的副本。这是通过调用底层容器的成员函数 push_back() 来完成的。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>在 queue 的尾部直接添加一个元素。</td>
+</tr>
+<tr>
+<td>push(T&amp;&amp; obj)</td>
+<td>以移动的方式在 queue 的尾部添加元素。这是通过调用底层容器的具有右值引用参数的成员函数 push_back() 来完成的。</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>删除 queue 中的第一个元素。</td>
+</tr>
+<tr>
+<td>swap(queue<T> &amp;other_queue)</td>
+<td>将两个 queue 容器适配器中的元素进行互换，需要注意的是，进行互换的 2 个 queue 容器适配器中存储的元素类型以及底层采用的基础容器类型，都必须相同。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="c常用算法">C++常用算法</h4>
+<h5 id="sort">sort()</h5>
 
 
 
@@ -1861,19 +2455,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1654851409"></script>
-    <script src="/js/perfect-scrollbar.min.js?1654851409"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1654851409"></script>
-    <script src="/js/jquery.sticky.js?1654851409"></script>
-    <script src="/js/featherlight.min.js?1654851409"></script>
-    <script src="/js/highlight.pack.js?1654851409"></script>
+    <script src="/js/clipboard.min.js?1654951394"></script>
+    <script src="/js/perfect-scrollbar.min.js?1654951394"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1654951394"></script>
+    <script src="/js/jquery.sticky.js?1654951394"></script>
+    <script src="/js/featherlight.min.js?1654951394"></script>
+    <script src="/js/highlight.pack.js?1654951394"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1654851409"></script>
-    <script src="/js/learn.js?1654851409"></script>
-    <script src="/js/hugo-learn.js?1654851409"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1654951394"></script>
+    <script src="/js/learn.js?1654951394"></script>
+    <script src="/js/hugo-learn.js?1654951394"></script>
     
         
-            <script src="/mermaid/mermaid.js?1654851409"></script>
+            <script src="/mermaid/mermaid.js?1654951394"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
