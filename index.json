@@ -67,7 +67,7 @@
 	"title": "数据结构与算法",
 	"tags": [],
 	"description": "",
-	"content": "PAT LeetCode NewCoder 剑指Offer "
+	"content": "数据结构\nPAT LeetCode NewCoder 剑指Offer "
 },
 {
 	"uri": "http://example.org/machinelearning/",
@@ -201,6 +201,13 @@
 	"tags": [],
 	"description": "",
 	"content": "大数据 参考文献\nhttp://c.biancheng.net/view/3500.html\nHadoop Spark "
+},
+{
+	"uri": "http://example.org/algorithm/datastruct/",
+	"title": "数据结构",
+	"tags": [],
+	"description": "",
+	"content": "参考文献：王道 2021年数据结构考研复习指导\n1、绪论 1.1、数据结构的基本概念 1.2、算法和算法评价 2、线性表 2.1、线性表的定义和基本操作 2.2、线性表的顺序表示 2.3、 线性表的链式表示 3、栈和队列 3.1、栈 3.2、队列 3.3、栈和队列的应用 3.4、 特殊矩阵的压缩存储 4、串 4.1、串的定义和实现 4.2、串的模式匹配 5、树与二叉树 5.1、树的基本概念 5.2、二叉树的概念 5.3、二叉树的遍历和线索二叉树 5.4、树、森林 5.5、树与二叉树的应用 6、图 6.1、图的基本概念 6.2、图的存储及基本操作 6.3、图的遍历 6.4、图的应用 7、查找 7.1、查找的基本概念 7.2、顺序查找和折半查找 7.3、B树和B+树 7.4、散列表 8、排序 8.1、排序的基本概念 8.2、插入排序 8.3、交换排序 8.4、选择排序 8.5、归并排序和基数排序 8.6、各种内部排序算法的比较及应用 8.7、外部排序 "
 },
 {
 	"uri": "http://example.org/vehicle/santana/",

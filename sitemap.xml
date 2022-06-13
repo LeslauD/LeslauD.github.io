@@ -75,6 +75,8 @@
   </url><url>
     <loc>http://example.org/bigdata/</loc>
   </url><url>
+    <loc>http://example.org/algorithm/datastruct/</loc>
+  </url><url>
     <loc>http://example.org/vehicle/santana/</loc>
   </url><url>
     <loc>http://example.org/categories/</loc>
