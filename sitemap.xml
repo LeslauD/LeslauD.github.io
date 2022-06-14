@@ -69,6 +69,8 @@
   </url><url>
     <loc>http://example.org/bigdata/spark/</loc>
   </url><url>
+    <loc>http://example.org/deeplearning/tensorflow/</loc>
+  </url><url>
     <loc>http://example.org/algorithm/tooffer/</loc>
   </url><url>
     <loc>http://example.org/deeplearning/basic/</loc>
