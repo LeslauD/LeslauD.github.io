@@ -12,22 +12,22 @@
     <title>TensorFlow :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1655168494" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1655168494" rel="stylesheet">
-    <link href="/css/hybrid.css?1655168494" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1655168494" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1655168494" rel="stylesheet">
-    <link href="/css/auto-complete.css?1655168494" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1655168494" rel="stylesheet">
-    <link href="/css/theme.css?1655168494" rel="stylesheet">
-    <link href="/css/tabs.css?1655168494" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1655168494" rel="stylesheet">
+    <link href="/css/nucleus.css?1655184278" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655184278" rel="stylesheet">
+    <link href="/css/hybrid.css?1655184278" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655184278" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655184278" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655184278" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655184278" rel="stylesheet">
+    <link href="/css/theme.css?1655184278" rel="stylesheet">
+    <link href="/css/tabs.css?1655184278" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655184278" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1655168494" rel="stylesheet">
+    <link href="/css/theme-blue.css?1655184278" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1655168494"></script>
+    <script src="/js/jquery-3.3.1.min.js?1655184278"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1655168494"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1655168494"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1655184278"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655184278"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1655168494"></script>
+<script type="text/javascript" src="/js/search.js?1655184278"></script>
 
     
   </div>
@@ -1061,7 +1061,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tensorflow安装">TensorFlow安装</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1086,6 +1094,49 @@
 
 
 	<p><a href="https://www.tensorflow.org">www.tensorflow.org</a></p>
+<h3 id="tensorflow安装">TensorFlow安装</h3>
+<p>显卡型号：</p>
+<img src="/images/1050ti.png">
+<h4 id="cpu版本">CPU版本</h4>
+<ol start="0">
+<li>Windows需要VS环境，安装<a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145">vc_redist.x64.exe</a></li>
+<li>在 C:\Users(用户名)目录下，创建一个 pip 文件夹，创建一个 pip.ini 文件， 里面就写 [global] index-url = <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></li>
+<li>cmd 进入到 anaconda 的 scripts 脚本文件夹所在的位置，去使用命令行去安装 ./pip install &ndash;upgrade</li>
+</ol>
+<img src="/images/tf.png">
+<h4 id="gpu版本">GPU版本</h4>
+<p><a href="https://www.tensorflow.org/install/gpu">https://www.tensorflow.org/install/gpu</a></p>
+<ol>
+<li>
+<p>查看NVIDIA显卡驱动</p>
+<img src="/images/nvidia.png">
+</li>
+<li>
+<p>安装对应版本的CUDA==11.1</p>
+<p><a href="https://developer.nvidia.com/cuda-toolkit-archive">https://developer.nvidia.com/cuda-toolkit-archive</a></p>
+<img src="/images/nvcc.png">
+</li>
+<li>
+<p>安装cudnn对应的版本</p>
+</li>
+</ol>
+<p>​		https://developer.nvidia.com/rdp/cudnn-archive</p>
+<p>​		cudnn下载完毕之后无需安装，解压之后打开文件夹</p>
+<p>​		将其复制到，CUDA安装目录下，与bin目录同级，并改名为cudnn</p>
+<ol start="4">
+<li>安装tensorflow-gpu</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install tensorflow-gpu<span style="color:#f92672">==</span>2.5.0  <span style="color:#75715e">#要与cuda11.1版本适配</span>
+</span></span></code></pre></div><ol start="5">
+<li>
+<p>验证是否安装成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>test<span style="color:#f92672">.</span>gpu_device_name()
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>list_physical_devices(<span style="color:#e6db74">&#39;GPU&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;GPU&#39;</span>,tf<span style="color:#f92672">.</span>test<span style="color:#f92672">.</span>is_gpu_available())
+</span></span></code></pre></div><img src="/images/tf_gpu.png">
+</li>
+</ol>
 
 
 

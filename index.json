@@ -186,7 +186,7 @@
 	"title": "TensorFlow",
 	"tags": [],
 	"description": "",
-	"content": "www.tensorflow.org\n"
+	"content": "www.tensorflow.org\nTensorFlow安装 显卡型号：\nCPU版本 Windows需要VS环境，安装vc_redist.x64.exe 在 C:\\Users(用户名)目录下，创建一个 pip 文件夹，创建一个 pip.ini 文件， 里面就写 [global] index-url = https://pypi.tuna.tsinghua.edu.cn/simple cmd 进入到 anaconda 的 scripts 脚本文件夹所在的位置，去使用命令行去安装 ./pip install \u0026ndash;upgrade  GPU版本 https://www.tensorflow.org/install/gpu\n  查看NVIDIA显卡驱动\n  安装对应版本的CUDA==11.1\nhttps://developer.nvidia.com/cuda-toolkit-archive\n  安装cudnn对应的版本\n  ​\thttps://developer.nvidia.com/rdp/cudnn-archive\n​\tcudnn下载完毕之后无需安装，解压之后打开文件夹\n​\t将其复制到，CUDA安装目录下，与bin目录同级，并改名为cudnn\n安装tensorflow-gpu  pip install tensorflow-gpu==2.5.0 #要与cuda11.1版本适配  验证是否安装成功\nimport tensorflow as tf tf.test.gpu_device_name() tf.config.list_physical_devices(\u0026#39;GPU\u0026#39;) print(\u0026#39;GPU\u0026#39;,tf.test.is_gpu_available())   "
 },
 {
 	"uri": "http://example.org/algorithm/tooffer/",
