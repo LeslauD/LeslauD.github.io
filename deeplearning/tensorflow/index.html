@@ -12,22 +12,22 @@
     <title>TensorFlow :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1655184278" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1655184278" rel="stylesheet">
-    <link href="/css/hybrid.css?1655184278" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1655184278" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1655184278" rel="stylesheet">
-    <link href="/css/auto-complete.css?1655184278" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1655184278" rel="stylesheet">
-    <link href="/css/theme.css?1655184278" rel="stylesheet">
-    <link href="/css/tabs.css?1655184278" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1655184278" rel="stylesheet">
+    <link href="/css/nucleus.css?1655266018" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655266018" rel="stylesheet">
+    <link href="/css/hybrid.css?1655266018" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655266018" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655266018" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655266018" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655266018" rel="stylesheet">
+    <link href="/css/theme.css?1655266018" rel="stylesheet">
+    <link href="/css/tabs.css?1655266018" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655266018" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1655184278" rel="stylesheet">
+    <link href="/css/theme-blue.css?1655266018" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1655184278"></script>
+    <script src="/js/jquery-3.3.1.min.js?1655266018"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1655184278"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1655184278"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1655266018"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655266018"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1655184278"></script>
+<script type="text/javascript" src="/js/search.js?1655266018"></script>
 
     
   </div>
@@ -1066,6 +1066,7 @@
     <li>
       <ul>
         <li><a href="#tensorflow安装">TensorFlow安装</a></li>
+        <li><a href="#tensorflow实现线性回归预测波士顿房价">TensorFlow实现线性回归预测波士顿房价</a></li>
       </ul>
     </li>
   </ul>
@@ -1135,7 +1136,130 @@
 </span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>list_physical_devices(<span style="color:#e6db74">&#39;GPU&#39;</span>)
 </span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;GPU&#39;</span>,tf<span style="color:#f92672">.</span>test<span style="color:#f92672">.</span>is_gpu_available())
 </span></span></code></pre></div><img src="/images/tf_gpu.png">
-</li>
+<br>
+<h3 id="tensorflow实现线性回归预测波士顿房价">TensorFlow实现线性回归预测波士顿房价</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">预测波士顿房价
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">字段说明：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">CRIM: 城镇人均犯罪率
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ZN：住宅用地超过25000 sq.ft. 的比例
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">INDUS: 城镇非零售商用土地的比例
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">CHAS: 边界是河流为1，否则0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">NOX: 一氧化氮浓度
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">RM: 住宅平均房间数数据集解读
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">AGE: 1940年之前建成的自用房屋比例
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">DIS：到波士顿5个中心区域的加权距离
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">RAD:辐射性公路的靠近指数
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">TAX : 每10000美元的全值财产税率
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">PTRATIO: 城镇师生比例
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">LSTAT: 人口中地位低下者的比例
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">MEDV: 自住房的平均房价，单位：千美元
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils <span style="color:#f92672">import</span> shuffle
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> scale
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 保证sess.run()能够正常运行</span>
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>disable_eager_execution()
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>enable_eager_execution(
+</span></span><span style="display:flex;"><span>    config<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>,
+</span></span><span style="display:flex;"><span>    device_policy<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>,
+</span></span><span style="display:flex;"><span>    execution_mode<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取数据</span>
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;./housing.csv&#34;</span>, header<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>print(df<span style="color:#f92672">.</span>describe())
+</span></span><span style="display:flex;"><span>print(df<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 划分数据集</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>values[:, :<span style="color:#ae81ff">12</span>]
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>values[:, <span style="color:#ae81ff">12</span>]
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;x shape: &#34;</span>, x<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;y shape: &#34;</span>, y<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 划分训练集、验证集、测试集</span>
+</span></span><span style="display:flex;"><span>x_train, x_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(x, y, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">2019</span>)
+</span></span><span style="display:flex;"><span>x_train, x_valid, y_train, y_valid <span style="color:#f92672">=</span> train_test_split(x_train, y_train, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">2019</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 转换数据类型</span>
+</span></span><span style="display:flex;"><span>x_train <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(scale(x_train), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>x_valid <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(scale(x_valid), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>x_test <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(scale(x_test), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义模型</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">model</span>(x, w, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>matmul(x, w) <span style="color:#f92672">+</span> b           <span style="color:#75715e"># wx+b</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化参数w,b</span>
+</span></span><span style="display:flex;"><span>W <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>normal([<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">1</span>], mean<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>, stddev<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>, dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32))
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>zeros(<span style="color:#ae81ff">1</span>), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 模型训练</span>
+</span></span><span style="display:flex;"><span>epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>lr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.001</span>
+</span></span><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义损失函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loss</span>(x, y, w, b):
+</span></span><span style="display:flex;"><span>    err <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>square(model(x, w, b)<span style="color:#f92672">-</span>y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tf<span style="color:#f92672">.</span>reduce_mean(err)              <span style="color:#75715e"># 均方误差</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义梯度计算函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad</span>(x, y, w, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        loss_ <span style="color:#f92672">=</span> loss(x, y, w, b)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tape<span style="color:#f92672">.</span>gradient(loss_, [w, b])     <span style="color:#75715e"># 求loss对w和b的偏导</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 选择优化器</span>
+</span></span><span style="display:flex;"><span>optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(lr)     <span style="color:#75715e"># 随机梯度下降</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 迭代训练</span>
+</span></span><span style="display:flex;"><span>loss_list_train <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>loss_list_valid <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>total_step <span style="color:#f92672">=</span> int(x_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>batch_size)   <span style="color:#75715e"># 一轮有多少步：训练集个数/一个批次的个数</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(epochs):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(total_step):
+</span></span><span style="display:flex;"><span>        xs <span style="color:#f92672">=</span> x_train[step<span style="color:#f92672">*</span>batch_size:(step<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>batch_size,:]
+</span></span><span style="display:flex;"><span>        ys <span style="color:#f92672">=</span> y_train[step<span style="color:#f92672">*</span>batch_size:(step<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>batch_size]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        grads <span style="color:#f92672">=</span> grad(xs, ys, W, B)
+</span></span><span style="display:flex;"><span>        optimizer<span style="color:#f92672">.</span>apply_gradients(zip(grads, [W, B]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    loss_train <span style="color:#f92672">=</span> loss(x_train, y_train, W, B)<span style="color:#f92672">.</span>numpy()
+</span></span><span style="display:flex;"><span>    loss_valid <span style="color:#f92672">=</span> loss(x_valid, y_valid, W, B)<span style="color:#f92672">.</span>numpy()
+</span></span><span style="display:flex;"><span>    loss_list_train<span style="color:#f92672">.</span>append(loss_train)
+</span></span><span style="display:flex;"><span>    loss_list_valid<span style="color:#f92672">.</span>append(loss_valid)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;epoch=</span><span style="color:#e6db74">{:3d}</span><span style="color:#e6db74">,train_loss=</span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">,valid_loss=</span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, loss_train, loss_valid))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可视化loss</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;epochs&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;loss&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(loss_list_train, <span style="color:#e6db74">&#39;blue&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;train loss&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(loss_list_valid, <span style="color:#e6db74">&#39;red&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;valid loss&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试集</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Test_loss:</span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(loss(x_test, y_test, W, B)<span style="color:#f92672">.</span>numpy()))
+</span></span><span style="display:flex;"><span>test_house_id <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, x_test<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> y_test[test_house_id]
+</span></span><span style="display:flex;"><span>y_predict <span style="color:#f92672">=</span> model(x_test, W, B)[test_house_id]
+</span></span><span style="display:flex;"><span>y_predict<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>reshape(y_predict, ())<span style="color:#f92672">.</span>numpy()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;House id : &#34;</span>, test_house_id, <span style="color:#e6db74">&#34;Actual value : &#34;</span>, y, <span style="color:#e6db74">&#34;Predicted value : &#34;</span>, y_predict)
+</span></span></code></pre></div></li>
 </ol>
 
 
