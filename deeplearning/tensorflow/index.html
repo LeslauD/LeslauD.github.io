@@ -12,22 +12,22 @@
     <title>TensorFlow :: 刘顿的博客</title>
 
     
-    <link href="/css/nucleus.css?1655266018" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1655266018" rel="stylesheet">
-    <link href="/css/hybrid.css?1655266018" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1655266018" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1655266018" rel="stylesheet">
-    <link href="/css/auto-complete.css?1655266018" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1655266018" rel="stylesheet">
-    <link href="/css/theme.css?1655266018" rel="stylesheet">
-    <link href="/css/tabs.css?1655266018" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1655266018" rel="stylesheet">
+    <link href="/css/nucleus.css?1655382496" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655382496" rel="stylesheet">
+    <link href="/css/hybrid.css?1655382496" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655382496" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655382496" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655382496" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655382496" rel="stylesheet">
+    <link href="/css/theme.css?1655382496" rel="stylesheet">
+    <link href="/css/tabs.css?1655382496" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655382496" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1655266018" rel="stylesheet">
+    <link href="/css/theme-blue.css?1655382496" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1655266018"></script>
+    <script src="/js/jquery-3.3.1.min.js?1655382496"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -54,14 +54,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1655266018"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1655266018"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1655382496"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655382496"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/example.org\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1655266018"></script>
+<script type="text/javascript" src="/js/search.js?1655382496"></script>
 
     
   </div>
@@ -1067,6 +1067,8 @@
       <ul>
         <li><a href="#tensorflow安装">TensorFlow安装</a></li>
         <li><a href="#tensorflow实现线性回归预测波士顿房价">TensorFlow实现线性回归预测波士顿房价</a></li>
+        <li><a href="#tensorflow实现softmax回归来识别mnist手写数字">TensorFlow实现Softmax回归来识别MNIST手写数字</a></li>
+        <li><a href="#dnnmnist">DNN——MNIST</a></li>
       </ul>
     </li>
   </ul>
@@ -1136,6 +1138,8 @@
 </span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>list_physical_devices(<span style="color:#e6db74">&#39;GPU&#39;</span>)
 </span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;GPU&#39;</span>,tf<span style="color:#f92672">.</span>test<span style="color:#f92672">.</span>is_gpu_available())
 </span></span></code></pre></div><img src="/images/tf_gpu.png">
+</li>
+</ol>
 <br>
 <h3 id="tensorflow实现线性回归预测波士顿房价">TensorFlow实现线性回归预测波士顿房价</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
@@ -1259,9 +1263,159 @@
 </span></span><span style="display:flex;"><span>y_predict <span style="color:#f92672">=</span> model(x_test, W, B)[test_house_id]
 </span></span><span style="display:flex;"><span>y_predict<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>reshape(y_predict, ())<span style="color:#f92672">.</span>numpy()
 </span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;House id : &#34;</span>, test_house_id, <span style="color:#e6db74">&#34;Actual value : &#34;</span>, y, <span style="color:#e6db74">&#34;Predicted value : &#34;</span>, y_predict)
-</span></span></code></pre></div></li>
-</ol>
-
+</span></span></code></pre></div><h3 id="tensorflow实现softmax回归来识别mnist手写数字">TensorFlow实现Softmax回归来识别MNIST手写数字</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> OneHotEncoder
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>disable_eager_execution()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取数据</span>
+</span></span><span style="display:flex;"><span>mnist <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>mnist
+</span></span><span style="display:flex;"><span>(x_train, y_train), (x_test, y_test) <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>load_data()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(str(y_train[<span style="color:#ae81ff">0</span>]))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(x_train[<span style="color:#ae81ff">0</span>], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gray&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将图片数据压缩成一维的</span>
+</span></span><span style="display:flex;"><span>x_train_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((x_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">784</span>))
+</span></span><span style="display:flex;"><span>x_test_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((x_test<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">784</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(x_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+</span></span><span style="display:flex;"><span>    x_train_[i] <span style="color:#f92672">=</span> x_train[i]<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(x_test<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+</span></span><span style="display:flex;"><span>    x_test_[i]<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>x_train, x_test <span style="color:#f92672">=</span> x_train_, x_test_
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将label进行OneHot编码</span>
+</span></span><span style="display:flex;"><span>encoder <span style="color:#f92672">=</span> OneHotEncoder(sparse<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>y_train <span style="color:#f92672">=</span> encoder<span style="color:#f92672">.</span>fit_transform(y_train<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>y_test <span style="color:#f92672">=</span> encoder<span style="color:#f92672">.</span>fit_transform(y_test<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输入的是一堆图片，None表示不限输入条数，784表示每张图片都是一个784个像素值的一维向量</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 所以输入的矩阵是None乘以784二维矩阵</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>placeholder(dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32, shape<span style="color:#f92672">=</span>(<span style="color:#66d9ef">None</span>, <span style="color:#ae81ff">784</span>))    <span style="color:#75715e"># m*784</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化都是0，二维矩阵784乘以10个W值</span>
+</span></span><span style="display:flex;"><span>w <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>random_uniform([<span style="color:#ae81ff">784</span>, <span style="color:#ae81ff">10</span>]))             <span style="color:#75715e"># 784*10</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>zeros([<span style="color:#ae81ff">10</span>]))                                     <span style="color:#75715e"># 偏置项</span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>softmax(tf<span style="color:#f92672">.</span>matmul(x, w) <span style="color:#f92672">+</span> b)                         <span style="color:#75715e"># x*w+b,激活函数为softmax</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># labels是每张图片都对应一个one-hot的10个值的向量</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>placeholder(dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32, shape<span style="color:#f92672">=</span>(<span style="color:#66d9ef">None</span>, <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 多分类问题常用交叉熵损失函数</span>
+</span></span><span style="display:flex;"><span>cross_entropy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(<span style="color:#f92672">-</span>tf<span style="color:#f92672">.</span>reduce_sum(y<span style="color:#f92672">*</span>tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>log(y_pred), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>train_step <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>GradientDescentOptimizer(<span style="color:#ae81ff">0.01</span>)<span style="color:#f92672">.</span>minimize(cross_entropy)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 评估</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tf.argmax()是一个从tensor中寻找最大值的序号，tf.argmax就是求各个预测的数字中概率最大的那一个</span>
+</span></span><span style="display:flex;"><span>correct_prediction <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>equal(tf<span style="color:#f92672">.</span>argmax(y_pred, <span style="color:#ae81ff">1</span>), tf<span style="color:#f92672">.</span>argmax(y, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用tf.cast将之前correct_prediction输出的bool值转换为float32，再求平均</span>
+</span></span><span style="display:flex;"><span>accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(correct_prediction, tf<span style="color:#f92672">.</span>float32))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 划分训练集和验证集</span>
+</span></span><span style="display:flex;"><span>x_train, x_valid, y_train, y_valid <span style="color:#f92672">=</span> train_test_split(x_train, y_train, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.15</span>)
+</span></span><span style="display:flex;"><span>print(x_train<span style="color:#f92672">.</span>shape, y_train<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>print(x_valid<span style="color:#f92672">.</span>shape, y_valid<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>print(x_test<span style="color:#f92672">.</span>shape, y_test<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>Session() <span style="color:#66d9ef">as</span> sess:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>v1<span style="color:#f92672">.</span>global_variables_initializer()<span style="color:#f92672">.</span>run()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>        random_index <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>choice(x_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], batch_size)     <span style="color:#75715e"># 随机选择batch_size个数据</span>
+</span></span><span style="display:flex;"><span>        batch_xs, batch_ys <span style="color:#f92672">=</span> x_train[random_index], y_train[random_index]
+</span></span><span style="display:flex;"><span>        sess<span style="color:#f92672">.</span>run(train_step, feed_dict<span style="color:#f92672">=</span>{x: batch_xs, y: batch_ys})
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;TrainSet batch acc : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">  &#34;</span> <span style="color:#f92672">%</span> accuracy<span style="color:#f92672">.</span>eval({x: batch_xs, y: batch_ys}))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;ValidSet acc : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> accuracy<span style="color:#f92672">.</span>eval({x: x_valid, y: y_valid}))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;TestSet acc : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> accuracy<span style="color:#f92672">.</span>eval({x: x_test, y: y_test}))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 总结</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1，定义算法公式，也就是神经网络forward时的计算</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2，定义loss，选定优化器，并指定优化器优化loss</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3，迭代地对数据进行训练</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4，在测试集或验证集上对准确率进行评测</span>
+</span></span></code></pre></div><h3 id="dnnmnist">DNN——MNIST</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.examples.tutorials.mnist <span style="color:#f92672">import</span> input_data
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.contrib.layers <span style="color:#f92672">import</span> fully_connected
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.contrib.layers <span style="color:#f92672">import</span> conv2d
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.contrib.framework <span style="color:#f92672">import</span> arg_scope
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 构建图阶段</span>
+</span></span><span style="display:flex;"><span>n_inputs <span style="color:#f92672">=</span> <span style="color:#ae81ff">28</span><span style="color:#f92672">*</span><span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>n_hidden1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span>n_hidden2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>n_hidden3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>n_outputs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32, shape<span style="color:#f92672">=</span>(<span style="color:#66d9ef">None</span>, n_inputs), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;X&#39;</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>int64, shape<span style="color:#f92672">=</span>(<span style="color:#66d9ef">None</span>,), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 构建神经网络</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>name_scope(<span style="color:#e6db74">&#34;dnn&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> arg_scope([fully_connected],   				                                 weights_regularizer<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>contrib<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>l2_regularizer(scale<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># tensorflow使用这个函数帮助我们使用合适的初始化w和b的策略，默认使用ReLU激活函数</span>
+</span></span><span style="display:flex;"><span>        hidden1 <span style="color:#f92672">=</span> fully_connected(X, n_hidden1, scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hidden1&#34;</span>)
+</span></span><span style="display:flex;"><span>        hidden2 <span style="color:#f92672">=</span> fully_connected(hidden1, n_hidden2, scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hidden2&#34;</span>)
+</span></span><span style="display:flex;"><span>        hidden3 <span style="color:#f92672">=</span> fully_connected(hidden2, n_hidden3, scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hidden3&#34;</span>)
+</span></span><span style="display:flex;"><span>        logits <span style="color:#f92672">=</span> fully_connected(hidden3, n_outputs, scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;outputs&#34;</span>, activation_fn<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>name_scope(<span style="color:#e6db74">&#34;loss&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义交叉熵损失函数，并且求个样本平均</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 函数等价于先使用softmax损失函数，再接着计算交叉熵，并且更有效率</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 类似的softmax_cross_entropy_with_logits只会给one-hot编码，我们使用的会给0-9分类号</span>
+</span></span><span style="display:flex;"><span>    xentropy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>sparse_softmax_cross_entropy_with_logits(labels<span style="color:#f92672">=</span>y, logits<span style="color:#f92672">=</span>logits)
+</span></span><span style="display:flex;"><span>    loss <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(xentropy, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;loss&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># reg_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># total_loss = tf.add_n([loss] + reg_losses)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>name_scope(<span style="color:#e6db74">&#34;train&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># optimizer = tf.train.GradientDescentOptimizer(learning_rate)</span>
+</span></span><span style="display:flex;"><span>    optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>AdamOptimizer(learning_rate)
+</span></span><span style="display:flex;"><span>    training_op <span style="color:#f92672">=</span> optimizer<span style="color:#f92672">.</span>minimize(loss)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>name_scope(<span style="color:#e6db74">&#34;eval&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 获取logits里面最大的那1位和y比较类别好是否相同，返回True或者False一组值</span>
+</span></span><span style="display:flex;"><span>    correct <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>in_top_k(logits, y, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    accuracy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(correct, tf<span style="color:#f92672">.</span>float32))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>init <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>global_variables_initializer()
+</span></span><span style="display:flex;"><span>saver <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Saver()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 计算图阶段</span>
+</span></span><span style="display:flex;"><span>mnist <span style="color:#f92672">=</span> input_data<span style="color:#f92672">.</span>read_data_sets(<span style="color:#e6db74">&#34;MNIST_data_bak/&#34;</span>)
+</span></span><span style="display:flex;"><span>n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">400</span>
+</span></span><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Session() <span style="color:#66d9ef">as</span> sess:
+</span></span><span style="display:flex;"><span>    init<span style="color:#f92672">.</span>run()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(n_epochs):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> iteration <span style="color:#f92672">in</span> range(mnist<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>num_examples <span style="color:#f92672">//</span> batch_size):
+</span></span><span style="display:flex;"><span>            X_batch, y_batch <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>next_batch(batch_size)
+</span></span><span style="display:flex;"><span>            sess<span style="color:#f92672">.</span>run([training_op], feed_dict<span style="color:#f92672">=</span>{X: X_batch, y: y_batch})
+</span></span><span style="display:flex;"><span>        acc_train <span style="color:#f92672">=</span> accuracy<span style="color:#f92672">.</span>eval(feed_dict<span style="color:#f92672">=</span>{X: X_batch, y: y_batch})
+</span></span><span style="display:flex;"><span>        acc_test <span style="color:#f92672">=</span> accuracy<span style="color:#f92672">.</span>eval(feed_dict<span style="color:#f92672">=</span>{X: mnist<span style="color:#f92672">.</span>test<span style="color:#f92672">.</span>images,
+</span></span><span style="display:flex;"><span>                                            y: mnist<span style="color:#f92672">.</span>test<span style="color:#f92672">.</span>labels})
+</span></span><span style="display:flex;"><span>        print(epoch, <span style="color:#e6db74">&#34;Train accuracy:&#34;</span>, acc_train, <span style="color:#e6db74">&#34;Test accuracy:&#34;</span>, acc_test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    save_path <span style="color:#f92672">=</span> saver<span style="color:#f92672">.</span>save(sess, <span style="color:#e6db74">&#34;./my_dnn_model_final.ckpt&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用模型预测</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Session <span style="color:#66d9ef">as</span> sess:
+</span></span><span style="display:flex;"><span>    saver<span style="color:#f92672">.</span>restore(sess, <span style="color:#e6db74">&#34;./my_dnn_model_final.ckpt&#34;</span>)
+</span></span><span style="display:flex;"><span>    X_new_scaled <span style="color:#f92672">=</span> [<span style="color:#f92672">...</span>]
+</span></span><span style="display:flex;"><span>    Z <span style="color:#f92672">=</span> logits<span style="color:#f92672">.</span>eval(feed_dict<span style="color:#f92672">=</span>{X: X_new_scaled})
+</span></span><span style="display:flex;"><span>    y_pred <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(Z, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># 查看最大的类别是哪个</span>
+</span></span></code></pre></div>
 
 
 
