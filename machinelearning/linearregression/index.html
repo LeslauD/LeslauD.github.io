@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>摄影 :: 刘顿的博客</title>
+    <title>LinearRegression :: 刘顿的博客</title>
 
     
     <link href="/css/nucleus.css?1659416489" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/photograph/">
+  <body class="" data-url="/machinelearning/linearregression/">
     <nav id="sidebar" class="">
 
 
@@ -113,8 +113,8 @@
   
     
     <li data-nav-id="/photograph/" title="摄影" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/photograph/">
@@ -303,7 +303,7 @@
   
     
     <li data-nav-id="/machinelearning/" title="机器学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -332,8 +332,8 @@
   
     
     <li data-nav-id="/machinelearning/linearregression/" title="LinearRegression" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/machinelearning/linearregression/">
@@ -1058,6 +1058,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -1068,7 +1070,13 @@
             
           
           
-            <a href='/'></a> > 摄影
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/machinelearning/'>机器学习</a> > LinearRegression
+          
+        
           
         
           
@@ -1077,6 +1085,22 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#线性回归算法">线性回归算法</a></li>
+        <li><a href="#深入线性回归算法的推导">深入线性回归算法的推导</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -1084,16 +1108,52 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              LinearRegression
+            </h1>
           
 
         
 
 
 
-	<h3 id="摄影">摄影</h3>
+	<h3 id="线性回归算法">线性回归算法</h3>
+<p>回归问题主要关注确定一个唯一的因变量(dependent variable)(需要预测的值)和一个或多个数值型的自变量(independent variables)(预测变量)之间的关系</p>
+<p>需要预测的值：即目标变量，target，y，连续值</p>
+<p>预测变量：影响目标变量的因素，predictors，X1&hellip;Xn，</p>
+<p>可以是连续值也可以是离散值之间的关系：即模型，model，是我们要求解的</p>
+<br>
+<h4 id="连续值和离散值">连续值和离散值</h4>
+<img src="\images\discrete_continue.png">
+<br>
+<h4 id="简单线性回归">简单线性回归</h4>
+<p>y = a + b*x</p>
+<p>公式中的参数a,b及为要求得的模型</p>
+<br>
+<h4 id="最优解">最优解</h4>
+<p>真实值 y_true: 已知的y</p>
+<p>预测值 y_pred: 利用求出的a,b，将x代入模型求得的y_hat</p>
+<p>误差 error: y_true和y_pred之间的距离</p>
+<p>最优解：尽可能的找到一个模型使得整体的误差最小，整体的误差通常叫做损失 Loss</p>
+<p>Loss：整体的误差，loss 通过损失函数 loss function 计算得到</p>
+<br>
+<h4 id="多元线性回归">多元线性回归</h4>
+<p>简单线性回归中影响因素（特征）X只有一个</p>
+<img src="\images\signal_lr.png">
+<p>多元线性回归中，X有n个，即X1,X2,&hellip;,Xn</p>
+<img src="\images\multi_lr.png">
+<p>每一行对应一个样本，Y为真实结果，每一个样本有X1,X2,X3,&hellip;.共n列特征，为了计算模型的偏置项，设置X0为1，最后一列ε为误差error，β为每个特性x对应的权重w(weight)</p>
+<p>即 y = β0+β1X1+β2X2+&hellip;.+βnXn+ε
+$$
+y = W^TX+ε<br>
+$$</p>
+<p>$$
+y = XW+ε
+$$</p>
+<h3 id="深入线性回归算法的推导">深入线性回归算法的推导</h3>
 
 
 
